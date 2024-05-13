@@ -1,84 +1,84 @@
 // mocha@10.4.0 in javascript ES2018
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-      (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.mocha = factory());
+  typeof define === 'function' && define.amd ? define(factory) :
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.mocha = factory());
 })(this, (function () { 'use strict';
 
   var global$2 = (typeof global !== "undefined" ? global :
     typeof self !== "undefined" ? self :
-      typeof window !== "undefined" ? window : {});
+    typeof window !== "undefined" ? window : {});
 
   var global$1 = (typeof global$2 !== "undefined" ? global$2 :
-    typeof self !== "undefined" ? self :
-      typeof window !== "undefined" ? window : {});
+              typeof self !== "undefined" ? self :
+              typeof window !== "undefined" ? window : {});
 
   // shim for using process in browser
   // based off https://github.com/defunctzombie/node-process/blob/master/browser.js
 
   function defaultSetTimout$1() {
-    throw new Error('setTimeout has not been defined');
+      throw new Error('setTimeout has not been defined');
   }
   function defaultClearTimeout$1 () {
-    throw new Error('clearTimeout has not been defined');
+      throw new Error('clearTimeout has not been defined');
   }
   var cachedSetTimeout$1 = defaultSetTimout$1;
   var cachedClearTimeout$1 = defaultClearTimeout$1;
   if (typeof global$1.setTimeout === 'function') {
-    cachedSetTimeout$1 = setTimeout;
+      cachedSetTimeout$1 = setTimeout;
   }
   if (typeof global$1.clearTimeout === 'function') {
-    cachedClearTimeout$1 = clearTimeout;
+      cachedClearTimeout$1 = clearTimeout;
   }
 
   function runTimeout$1(fun) {
-    if (cachedSetTimeout$1 === setTimeout) {
-      //normal enviroments in sane situations
-      return setTimeout(fun, 0);
-    }
-    // if setTimeout wasn't available but was latter defined
-    if ((cachedSetTimeout$1 === defaultSetTimout$1 || !cachedSetTimeout$1) && setTimeout) {
-      cachedSetTimeout$1 = setTimeout;
-      return setTimeout(fun, 0);
-    }
-    try {
-      // when when somebody has screwed with setTimeout but no I.E. maddness
-      return cachedSetTimeout$1(fun, 0);
-    } catch(e){
-      try {
-        // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
-        return cachedSetTimeout$1.call(null, fun, 0);
-      } catch(e){
-        // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
-        return cachedSetTimeout$1.call(this, fun, 0);
+      if (cachedSetTimeout$1 === setTimeout) {
+          //normal enviroments in sane situations
+          return setTimeout(fun, 0);
       }
-    }
+      // if setTimeout wasn't available but was latter defined
+      if ((cachedSetTimeout$1 === defaultSetTimout$1 || !cachedSetTimeout$1) && setTimeout) {
+          cachedSetTimeout$1 = setTimeout;
+          return setTimeout(fun, 0);
+      }
+      try {
+          // when when somebody has screwed with setTimeout but no I.E. maddness
+          return cachedSetTimeout$1(fun, 0);
+      } catch(e){
+          try {
+              // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
+              return cachedSetTimeout$1.call(null, fun, 0);
+          } catch(e){
+              // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
+              return cachedSetTimeout$1.call(this, fun, 0);
+          }
+      }
 
 
   }
   function runClearTimeout$1(marker) {
-    if (cachedClearTimeout$1 === clearTimeout) {
-      //normal enviroments in sane situations
-      return clearTimeout(marker);
-    }
-    // if clearTimeout wasn't available but was latter defined
-    if ((cachedClearTimeout$1 === defaultClearTimeout$1 || !cachedClearTimeout$1) && clearTimeout) {
-      cachedClearTimeout$1 = clearTimeout;
-      return clearTimeout(marker);
-    }
-    try {
-      // when when somebody has screwed with setTimeout but no I.E. maddness
-      return cachedClearTimeout$1(marker);
-    } catch (e){
-      try {
-        // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
-        return cachedClearTimeout$1.call(null, marker);
-      } catch (e){
-        // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
-        // Some versions of I.E. have different rules for clearTimeout vs setTimeout
-        return cachedClearTimeout$1.call(this, marker);
+      if (cachedClearTimeout$1 === clearTimeout) {
+          //normal enviroments in sane situations
+          return clearTimeout(marker);
       }
-    }
+      // if clearTimeout wasn't available but was latter defined
+      if ((cachedClearTimeout$1 === defaultClearTimeout$1 || !cachedClearTimeout$1) && clearTimeout) {
+          cachedClearTimeout$1 = clearTimeout;
+          return clearTimeout(marker);
+      }
+      try {
+          // when when somebody has screwed with setTimeout but no I.E. maddness
+          return cachedClearTimeout$1(marker);
+      } catch (e){
+          try {
+              // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
+              return cachedClearTimeout$1.call(null, marker);
+          } catch (e){
+              // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
+              // Some versions of I.E. have different rules for clearTimeout vs setTimeout
+              return cachedClearTimeout$1.call(this, marker);
+          }
+      }
 
 
 
@@ -89,62 +89,62 @@
   var queueIndex$1 = -1;
 
   function cleanUpNextTick$1() {
-    if (!draining$1 || !currentQueue$1) {
-      return;
-    }
-    draining$1 = false;
-    if (currentQueue$1.length) {
-      queue$1 = currentQueue$1.concat(queue$1);
-    } else {
-      queueIndex$1 = -1;
-    }
-    if (queue$1.length) {
-      drainQueue$1();
-    }
+      if (!draining$1 || !currentQueue$1) {
+          return;
+      }
+      draining$1 = false;
+      if (currentQueue$1.length) {
+          queue$1 = currentQueue$1.concat(queue$1);
+      } else {
+          queueIndex$1 = -1;
+      }
+      if (queue$1.length) {
+          drainQueue$1();
+      }
   }
 
   function drainQueue$1() {
-    if (draining$1) {
-      return;
-    }
-    var timeout = runTimeout$1(cleanUpNextTick$1);
-    draining$1 = true;
-
-    var len = queue$1.length;
-    while(len) {
-      currentQueue$1 = queue$1;
-      queue$1 = [];
-      while (++queueIndex$1 < len) {
-        if (currentQueue$1) {
-          currentQueue$1[queueIndex$1].run();
-        }
+      if (draining$1) {
+          return;
       }
-      queueIndex$1 = -1;
-      len = queue$1.length;
-    }
-    currentQueue$1 = null;
-    draining$1 = false;
-    runClearTimeout$1(timeout);
+      var timeout = runTimeout$1(cleanUpNextTick$1);
+      draining$1 = true;
+
+      var len = queue$1.length;
+      while(len) {
+          currentQueue$1 = queue$1;
+          queue$1 = [];
+          while (++queueIndex$1 < len) {
+              if (currentQueue$1) {
+                  currentQueue$1[queueIndex$1].run();
+              }
+          }
+          queueIndex$1 = -1;
+          len = queue$1.length;
+      }
+      currentQueue$1 = null;
+      draining$1 = false;
+      runClearTimeout$1(timeout);
   }
   function nextTick$1(fun) {
-    var args = new Array(arguments.length - 1);
-    if (arguments.length > 1) {
-      for (var i = 1; i < arguments.length; i++) {
-        args[i - 1] = arguments[i];
+      var args = new Array(arguments.length - 1);
+      if (arguments.length > 1) {
+          for (var i = 1; i < arguments.length; i++) {
+              args[i - 1] = arguments[i];
+          }
       }
-    }
-    queue$1.push(new Item$1(fun, args));
-    if (queue$1.length === 1 && !draining$1) {
-      runTimeout$1(drainQueue$1);
-    }
+      queue$1.push(new Item$1(fun, args));
+      if (queue$1.length === 1 && !draining$1) {
+          runTimeout$1(drainQueue$1);
+      }
   }
   // v8 likes predictible objects
   function Item$1(fun, array) {
-    this.fun = fun;
-    this.array = array;
+      this.fun = fun;
+      this.array = array;
   }
   Item$1.prototype.run = function () {
-    this.fun.apply(null, this.array);
+      this.fun.apply(null, this.array);
   };
   var title$1 = 'browser';
   var platform$1 = 'browser';
@@ -167,12 +167,12 @@
   var emit$1 = noop$1;
 
   function binding$1(name) {
-    throw new Error('process.binding is not supported');
+      throw new Error('process.binding is not supported');
   }
 
   function cwd$1 () { return '/' }
   function chdir$1 (dir) {
-    throw new Error('process.chdir is not supported');
+      throw new Error('process.chdir is not supported');
   }function umask$1() { return 0; }
 
   // from https://github.com/kumavis/browser-process-hrtime/blob/master/index.js
@@ -455,7 +455,7 @@
       // adding it to the listeners, first emit "newListener".
       if (events.newListener) {
         target.emit('newListener', type,
-          listener.listener ? listener.listener : listener);
+                    listener.listener ? listener.listener : listener);
 
         // Re-assign `events` because a newListener handler could have caused the
         // this._events to be assigned to a new object
@@ -472,7 +472,7 @@
       if (typeof existing === 'function') {
         // Adding the second element, need to change to array.
         existing = events[type] = prepend ? [listener, existing] :
-          [existing, listener];
+                                            [existing, listener];
       } else {
         // If we've already got an array, just append.
         if (prepend) {
@@ -604,7 +604,7 @@
   // Alias for removeListener added in NodeJS 10.0
   // https://nodejs.org/api/events.html#events_emitter_off_eventname_listener
   EventEmitter$2.prototype.off = function(type, listener){
-    return this.removeListener(type, listener);
+      return this.removeListener(type, listener);
   };
 
   EventEmitter$2.prototype.removeAllListeners =
@@ -1827,8 +1827,8 @@
       var codePoint = null;
       var bytesPerSequence = (firstByte > 0xEF) ? 4
         : (firstByte > 0xDF) ? 3
-          : (firstByte > 0xBF) ? 2
-            : 1;
+        : (firstByte > 0xBF) ? 2
+        : 1;
 
       if (i + bytesPerSequence <= end) {
         var secondByte, thirdByte, fourthByte, tempCodePoint;
@@ -2711,68 +2711,68 @@
   // based off https://github.com/defunctzombie/node-process/blob/master/browser.js
 
   function defaultSetTimout() {
-    throw new Error('setTimeout has not been defined');
+      throw new Error('setTimeout has not been defined');
   }
   function defaultClearTimeout () {
-    throw new Error('clearTimeout has not been defined');
+      throw new Error('clearTimeout has not been defined');
   }
   var cachedSetTimeout = defaultSetTimout;
   var cachedClearTimeout = defaultClearTimeout;
   if (typeof global$2.setTimeout === 'function') {
-    cachedSetTimeout = setTimeout;
+      cachedSetTimeout = setTimeout;
   }
   if (typeof global$2.clearTimeout === 'function') {
-    cachedClearTimeout = clearTimeout;
+      cachedClearTimeout = clearTimeout;
   }
 
   function runTimeout(fun) {
-    if (cachedSetTimeout === setTimeout) {
-      //normal enviroments in sane situations
-      return setTimeout(fun, 0);
-    }
-    // if setTimeout wasn't available but was latter defined
-    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
-      cachedSetTimeout = setTimeout;
-      return setTimeout(fun, 0);
-    }
-    try {
-      // when when somebody has screwed with setTimeout but no I.E. maddness
-      return cachedSetTimeout(fun, 0);
-    } catch(e){
-      try {
-        // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
-        return cachedSetTimeout.call(null, fun, 0);
-      } catch(e){
-        // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
-        return cachedSetTimeout.call(this, fun, 0);
+      if (cachedSetTimeout === setTimeout) {
+          //normal enviroments in sane situations
+          return setTimeout(fun, 0);
       }
-    }
+      // if setTimeout wasn't available but was latter defined
+      if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
+          cachedSetTimeout = setTimeout;
+          return setTimeout(fun, 0);
+      }
+      try {
+          // when when somebody has screwed with setTimeout but no I.E. maddness
+          return cachedSetTimeout(fun, 0);
+      } catch(e){
+          try {
+              // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
+              return cachedSetTimeout.call(null, fun, 0);
+          } catch(e){
+              // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
+              return cachedSetTimeout.call(this, fun, 0);
+          }
+      }
 
 
   }
   function runClearTimeout(marker) {
-    if (cachedClearTimeout === clearTimeout) {
-      //normal enviroments in sane situations
-      return clearTimeout(marker);
-    }
-    // if clearTimeout wasn't available but was latter defined
-    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
-      cachedClearTimeout = clearTimeout;
-      return clearTimeout(marker);
-    }
-    try {
-      // when when somebody has screwed with setTimeout but no I.E. maddness
-      return cachedClearTimeout(marker);
-    } catch (e){
-      try {
-        // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
-        return cachedClearTimeout.call(null, marker);
-      } catch (e){
-        // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
-        // Some versions of I.E. have different rules for clearTimeout vs setTimeout
-        return cachedClearTimeout.call(this, marker);
+      if (cachedClearTimeout === clearTimeout) {
+          //normal enviroments in sane situations
+          return clearTimeout(marker);
       }
-    }
+      // if clearTimeout wasn't available but was latter defined
+      if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
+          cachedClearTimeout = clearTimeout;
+          return clearTimeout(marker);
+      }
+      try {
+          // when when somebody has screwed with setTimeout but no I.E. maddness
+          return cachedClearTimeout(marker);
+      } catch (e){
+          try {
+              // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
+              return cachedClearTimeout.call(null, marker);
+          } catch (e){
+              // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
+              // Some versions of I.E. have different rules for clearTimeout vs setTimeout
+              return cachedClearTimeout.call(this, marker);
+          }
+      }
 
 
 
@@ -2783,62 +2783,62 @@
   var queueIndex = -1;
 
   function cleanUpNextTick() {
-    if (!draining || !currentQueue) {
-      return;
-    }
-    draining = false;
-    if (currentQueue.length) {
-      queue = currentQueue.concat(queue);
-    } else {
-      queueIndex = -1;
-    }
-    if (queue.length) {
-      drainQueue();
-    }
+      if (!draining || !currentQueue) {
+          return;
+      }
+      draining = false;
+      if (currentQueue.length) {
+          queue = currentQueue.concat(queue);
+      } else {
+          queueIndex = -1;
+      }
+      if (queue.length) {
+          drainQueue();
+      }
   }
 
   function drainQueue() {
-    if (draining) {
-      return;
-    }
-    var timeout = runTimeout(cleanUpNextTick);
-    draining = true;
-
-    var len = queue.length;
-    while(len) {
-      currentQueue = queue;
-      queue = [];
-      while (++queueIndex < len) {
-        if (currentQueue) {
-          currentQueue[queueIndex].run();
-        }
+      if (draining) {
+          return;
       }
-      queueIndex = -1;
-      len = queue.length;
-    }
-    currentQueue = null;
-    draining = false;
-    runClearTimeout(timeout);
+      var timeout = runTimeout(cleanUpNextTick);
+      draining = true;
+
+      var len = queue.length;
+      while(len) {
+          currentQueue = queue;
+          queue = [];
+          while (++queueIndex < len) {
+              if (currentQueue) {
+                  currentQueue[queueIndex].run();
+              }
+          }
+          queueIndex = -1;
+          len = queue.length;
+      }
+      currentQueue = null;
+      draining = false;
+      runClearTimeout(timeout);
   }
   function nextTick(fun) {
-    var args = new Array(arguments.length - 1);
-    if (arguments.length > 1) {
-      for (var i = 1; i < arguments.length; i++) {
-        args[i - 1] = arguments[i];
+      var args = new Array(arguments.length - 1);
+      if (arguments.length > 1) {
+          for (var i = 1; i < arguments.length; i++) {
+              args[i - 1] = arguments[i];
+          }
       }
-    }
-    queue.push(new Item(fun, args));
-    if (queue.length === 1 && !draining) {
-      runTimeout(drainQueue);
-    }
+      queue.push(new Item(fun, args));
+      if (queue.length === 1 && !draining) {
+          runTimeout(drainQueue);
+      }
   }
   // v8 likes predictible objects
   function Item(fun, array) {
-    this.fun = fun;
-    this.array = array;
+      this.fun = fun;
+      this.array = array;
   }
   Item.prototype.run = function () {
-    this.fun.apply(null, this.array);
+      this.fun.apply(null, this.array);
   };
   var title = 'browser';
   var platform = 'browser';
@@ -2861,12 +2861,12 @@
   var emit = noop;
 
   function binding(name) {
-    throw new Error('process.binding is not supported');
+      throw new Error('process.binding is not supported');
   }
 
   function cwd () { return '/' }
   function chdir (dir) {
-    throw new Error('process.chdir is not supported');
+      throw new Error('process.chdir is not supported');
   }function umask() { return 0; }
 
   // from https://github.com/kumavis/browser-process-hrtime/blob/master/index.js
@@ -3256,8 +3256,8 @@
       return ctx.stylize('undefined', 'undefined');
     if (isString$1(value)) {
       var simple = '\'' + JSON.stringify(value).replace(/^"|"$/g, '')
-        .replace(/'/g, "\\'")
-        .replace(/\\"/g, '"') + '\'';
+                                               .replace(/'/g, "\\'")
+                                               .replace(/\\"/g, '"') + '\'';
       return ctx.stylize(simple, 'string');
     }
     if (isNumber(value))
@@ -3280,7 +3280,7 @@
     for (var i = 0, l = value.length; i < l; ++i) {
       if (hasOwnProperty(value, String(i))) {
         output.push(formatProperty(ctx, value, recurseTimes, visibleKeys,
-          String(i), true));
+            String(i), true));
       } else {
         output.push('');
       }
@@ -3288,7 +3288,7 @@
     keys.forEach(function(key) {
       if (!key.match(/^\d+$/)) {
         output.push(formatProperty(ctx, value, recurseTimes, visibleKeys,
-          key, true));
+            key, true));
       }
     });
     return output;
@@ -3344,8 +3344,8 @@
         name = ctx.stylize(name, 'name');
       } else {
         name = name.replace(/'/g, "\\'")
-          .replace(/\\"/g, '"')
-          .replace(/(^"|"$)/g, "'");
+                   .replace(/\\"/g, '"')
+                   .replace(/(^"|"$)/g, "'");
         name = ctx.stylize(name, 'string');
       }
     }
@@ -3452,14 +3452,14 @@
 
 
   var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep',
-    'Oct', 'Nov', 'Dec'];
+                'Oct', 'Nov', 'Dec'];
 
   // 26 Feb 16:19:34
   function timestamp() {
     var d = new Date();
     var time = [pad(d.getHours()),
-      pad(d.getMinutes()),
-      pad(d.getSeconds())].join(':');
+                pad(d.getMinutes()),
+                pad(d.getSeconds())].join(':');
     return [d.getDate(), months[d.getMonth()], time].join(' ');
   }
 
@@ -3595,11 +3595,11 @@
   // Copyright Joyent, Inc. and other Node contributors.
   var isBufferEncoding = Buffer$1.isEncoding
     || function(encoding) {
-      switch (encoding && encoding.toLowerCase()) {
-        case 'hex': case 'utf8': case 'utf-8': case 'ascii': case 'binary': case 'base64': case 'ucs2': case 'ucs-2': case 'utf16le': case 'utf-16le': case 'raw': return true;
-        default: return false;
-      }
-    };
+         switch (encoding && encoding.toLowerCase()) {
+           case 'hex': case 'utf8': case 'utf-8': case 'ascii': case 'binary': case 'base64': case 'ucs2': case 'ucs-2': case 'utf16le': case 'utf-16le': case 'raw': return true;
+           default: return false;
+         }
+       };
 
 
   function assertEncoding(encoding) {
@@ -3664,8 +3664,8 @@
     while (this.charLength) {
       // determine how many remaining bytes this buffer has to offer for this char
       var available = (buffer.length >= this.charLength - this.charReceived) ?
-        this.charLength - this.charReceived :
-        buffer.length;
+          this.charLength - this.charReceived :
+          buffer.length;
 
       // add the new bytes to the char buffer
       buffer.copy(this.charBuffer, this.charReceived, 0, available);
@@ -4978,11 +4978,11 @@
 
       if (sync) {
         /*<replacement>*/
-        nextTick(afterWrite, stream, state, finished, cb);
+          nextTick(afterWrite, stream, state, finished, cb);
         /*</replacement>*/
       } else {
-        afterWrite(stream, state, finished, cb);
-      }
+          afterWrite(stream, state, finished, cb);
+        }
     }
   }
 
@@ -5607,7 +5607,7 @@
   // posix version
   function resolve() {
     var resolvedPath = '',
-      resolvedAbsolute = false;
+        resolvedAbsolute = false;
 
     for (var i = arguments.length - 1; i >= -1 && !resolvedAbsolute; i--) {
       var path = (i >= 0) ? arguments[i] : '/';
@@ -5637,7 +5637,7 @@
   // posix version
   function normalize(path) {
     var isPathAbsolute = isAbsolute(path),
-      trailingSlash = substr(path, -1) === '/';
+        trailingSlash = substr(path, -1) === '/';
 
     // Normalize the path
     path = normalizeArray(filter(path.split('/'), function(p) {
@@ -5718,8 +5718,8 @@
 
   function dirname(path) {
     var result = splitPath(path),
-      root = result[0],
-      dir = result[1];
+        root = result[0],
+        dir = result[1];
 
     if (!root && !dir) {
       // No dirname whatsoever
@@ -5760,21 +5760,21 @@
     resolve: resolve
   };
   function filter (xs, f) {
-    if (xs.filter) return xs.filter(f);
-    var res = [];
-    for (var i = 0; i < xs.length; i++) {
-      if (f(xs[i], i, xs)) res.push(xs[i]);
-    }
-    return res;
+      if (xs.filter) return xs.filter(f);
+      var res = [];
+      for (var i = 0; i < xs.length; i++) {
+          if (f(xs[i], i, xs)) res.push(xs[i]);
+      }
+      return res;
   }
 
   // String.prototype.substr - negative index don't work in IE8
   var substr = 'ab'.substr(-1) === 'b' ?
-    function (str, start, len) { return str.substr(start, len) } :
-    function (str, start, len) {
-      if (start < 0) start = str.length + start;
-      return str.substr(start, len);
-    }
+      function (str, start, len) { return str.substr(start, len) } :
+      function (str, start, len) {
+          if (start < 0) start = str.length + start;
+          return str.substr(start, len);
+      }
   ;
 
   var _polyfillNode_path$1 = /*#__PURE__*/Object.freeze({
@@ -5806,306 +5806,306 @@
 
   (function (exports) {
 
-    Object.defineProperty(exports, "__esModule", {
-      value: true
-    });
-    exports["default"] = Diff;
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports["default"] = Diff;
 
-    /*istanbul ignore end*/
-    function Diff() {}
+  /*istanbul ignore end*/
+  function Diff() {}
 
-    Diff.prototype = {
+  Diff.prototype = {
     /*istanbul ignore start*/
 
-      /*istanbul ignore end*/
-      diff: function diff(oldString, newString) {
+    /*istanbul ignore end*/
+    diff: function diff(oldString, newString) {
       /*istanbul ignore start*/
-        var
-          /*istanbul ignore end*/
-          options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-        var callback = options.callback;
+      var
+      /*istanbul ignore end*/
+      options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+      var callback = options.callback;
 
-        if (typeof options === 'function') {
-          callback = options;
-          options = {};
+      if (typeof options === 'function') {
+        callback = options;
+        options = {};
+      }
+
+      this.options = options;
+      var self = this;
+
+      function done(value) {
+        if (callback) {
+          setTimeout(function () {
+            callback(undefined, value);
+          }, 0);
+          return true;
+        } else {
+          return value;
         }
-
-        this.options = options;
-        var self = this;
-
-        function done(value) {
-          if (callback) {
-            setTimeout(function () {
-              callback(undefined, value);
-            }, 0);
-            return true;
-          } else {
-            return value;
-          }
-        } // Allow subclasses to massage the input prior to running
+      } // Allow subclasses to massage the input prior to running
 
 
-        oldString = this.castInput(oldString);
-        newString = this.castInput(newString);
-        oldString = this.removeEmpty(this.tokenize(oldString));
-        newString = this.removeEmpty(this.tokenize(newString));
-        var newLen = newString.length,
+      oldString = this.castInput(oldString);
+      newString = this.castInput(newString);
+      oldString = this.removeEmpty(this.tokenize(oldString));
+      newString = this.removeEmpty(this.tokenize(newString));
+      var newLen = newString.length,
           oldLen = oldString.length;
-        var editLength = 1;
-        var maxEditLength = newLen + oldLen;
-        var bestPath = [{
-          newPos: -1,
-          components: []
-        }]; // Seed editLength = 0, i.e. the content starts with the same values
+      var editLength = 1;
+      var maxEditLength = newLen + oldLen;
+      var bestPath = [{
+        newPos: -1,
+        components: []
+      }]; // Seed editLength = 0, i.e. the content starts with the same values
 
-        var oldPos = this.extractCommon(bestPath[0], newString, oldString, 0);
+      var oldPos = this.extractCommon(bestPath[0], newString, oldString, 0);
 
-        if (bestPath[0].newPos + 1 >= newLen && oldPos + 1 >= oldLen) {
+      if (bestPath[0].newPos + 1 >= newLen && oldPos + 1 >= oldLen) {
         // Identity per the equality and tokenizer
-          return done([{
-            value: this.join(newString),
-            count: newString.length
-          }]);
-        } // Main worker method. checks all permutations of a given edit length for acceptance.
+        return done([{
+          value: this.join(newString),
+          count: newString.length
+        }]);
+      } // Main worker method. checks all permutations of a given edit length for acceptance.
 
 
-        function execEditLength() {
-          for (var diagonalPath = -1 * editLength; diagonalPath <= editLength; diagonalPath += 2) {
-            var basePath =
+      function execEditLength() {
+        for (var diagonalPath = -1 * editLength; diagonalPath <= editLength; diagonalPath += 2) {
+          var basePath =
           /*istanbul ignore start*/
           void 0
           /*istanbul ignore end*/
           ;
 
-            var addPath = bestPath[diagonalPath - 1],
+          var addPath = bestPath[diagonalPath - 1],
               removePath = bestPath[diagonalPath + 1],
               _oldPos = (removePath ? removePath.newPos : 0) - diagonalPath;
 
-            if (addPath) {
+          if (addPath) {
             // No one else is going to attempt to use this value, clear it
-              bestPath[diagonalPath - 1] = undefined;
-            }
+            bestPath[diagonalPath - 1] = undefined;
+          }
 
-            var canAdd = addPath && addPath.newPos + 1 < newLen,
+          var canAdd = addPath && addPath.newPos + 1 < newLen,
               canRemove = removePath && 0 <= _oldPos && _oldPos < oldLen;
 
-            if (!canAdd && !canRemove) {
+          if (!canAdd && !canRemove) {
             // If this path is a terminal then prune
-              bestPath[diagonalPath] = undefined;
-              continue;
-            } // Select the diagonal that we want to branch from. We select the prior
-            // path whose position in the new string is the farthest from the origin
-            // and does not pass the bounds of the diff graph
+            bestPath[diagonalPath] = undefined;
+            continue;
+          } // Select the diagonal that we want to branch from. We select the prior
+          // path whose position in the new string is the farthest from the origin
+          // and does not pass the bounds of the diff graph
 
 
-            if (!canAdd || canRemove && addPath.newPos < removePath.newPos) {
-              basePath = clonePath(removePath);
-              self.pushComponent(basePath.components, undefined, true);
-            } else {
-              basePath = addPath; // No need to clone, we've pulled it from the list
+          if (!canAdd || canRemove && addPath.newPos < removePath.newPos) {
+            basePath = clonePath(removePath);
+            self.pushComponent(basePath.components, undefined, true);
+          } else {
+            basePath = addPath; // No need to clone, we've pulled it from the list
 
-              basePath.newPos++;
-              self.pushComponent(basePath.components, true, undefined);
-            }
-
-            _oldPos = self.extractCommon(basePath, newString, oldString, diagonalPath); // If we have hit the end of both strings, then we are done
-
-            if (basePath.newPos + 1 >= newLen && _oldPos + 1 >= oldLen) {
-              return done(buildValues(self, basePath.components, newString, oldString, self.useLongestToken));
-            } else {
-            // Otherwise track this path as a potential candidate and continue.
-              bestPath[diagonalPath] = basePath;
-            }
+            basePath.newPos++;
+            self.pushComponent(basePath.components, true, undefined);
           }
 
-          editLength++;
-        } // Performs the length of edit iteration. Is a bit fugly as this has to support the
-        // sync and async mode which is never fun. Loops over execEditLength until a value
-        // is produced.
+          _oldPos = self.extractCommon(basePath, newString, oldString, diagonalPath); // If we have hit the end of both strings, then we are done
+
+          if (basePath.newPos + 1 >= newLen && _oldPos + 1 >= oldLen) {
+            return done(buildValues(self, basePath.components, newString, oldString, self.useLongestToken));
+          } else {
+            // Otherwise track this path as a potential candidate and continue.
+            bestPath[diagonalPath] = basePath;
+          }
+        }
+
+        editLength++;
+      } // Performs the length of edit iteration. Is a bit fugly as this has to support the
+      // sync and async mode which is never fun. Loops over execEditLength until a value
+      // is produced.
 
 
-        if (callback) {
-          (function exec() {
-            setTimeout(function () {
+      if (callback) {
+        (function exec() {
+          setTimeout(function () {
             // This should not happen, but we want to be safe.
 
-              /* istanbul ignore next */
-              if (editLength > maxEditLength) {
-                return callback();
-              }
-
-              if (!execEditLength()) {
-                exec();
-              }
-            }, 0);
-          })();
-        } else {
-          while (editLength <= maxEditLength) {
-            var ret = execEditLength();
-
-            if (ret) {
-              return ret;
+            /* istanbul ignore next */
+            if (editLength > maxEditLength) {
+              return callback();
             }
+
+            if (!execEditLength()) {
+              exec();
+            }
+          }, 0);
+        })();
+      } else {
+        while (editLength <= maxEditLength) {
+          var ret = execEditLength();
+
+          if (ret) {
+            return ret;
           }
         }
-      },
+      }
+    },
 
-      /*istanbul ignore start*/
+    /*istanbul ignore start*/
 
-      /*istanbul ignore end*/
-      pushComponent: function pushComponent(components, added, removed) {
-        var last = components[components.length - 1];
+    /*istanbul ignore end*/
+    pushComponent: function pushComponent(components, added, removed) {
+      var last = components[components.length - 1];
 
-        if (last && last.added === added && last.removed === removed) {
+      if (last && last.added === added && last.removed === removed) {
         // We need to clone here as the component clone operation is just
         // as shallow array clone
-          components[components.length - 1] = {
-            count: last.count + 1,
-            added: added,
-            removed: removed
-          };
-        } else {
-          components.push({
-            count: 1,
-            added: added,
-            removed: removed
-          });
-        }
-      },
+        components[components.length - 1] = {
+          count: last.count + 1,
+          added: added,
+          removed: removed
+        };
+      } else {
+        components.push({
+          count: 1,
+          added: added,
+          removed: removed
+        });
+      }
+    },
 
-      /*istanbul ignore start*/
+    /*istanbul ignore start*/
 
-      /*istanbul ignore end*/
-      extractCommon: function extractCommon(basePath, newString, oldString, diagonalPath) {
-        var newLen = newString.length,
+    /*istanbul ignore end*/
+    extractCommon: function extractCommon(basePath, newString, oldString, diagonalPath) {
+      var newLen = newString.length,
           oldLen = oldString.length,
           newPos = basePath.newPos,
           oldPos = newPos - diagonalPath,
           commonCount = 0;
 
-        while (newPos + 1 < newLen && oldPos + 1 < oldLen && this.equals(newString[newPos + 1], oldString[oldPos + 1])) {
-          newPos++;
-          oldPos++;
-          commonCount++;
-        }
-
-        if (commonCount) {
-          basePath.components.push({
-            count: commonCount
-          });
-        }
-
-        basePath.newPos = newPos;
-        return oldPos;
-      },
-
-      /*istanbul ignore start*/
-
-      /*istanbul ignore end*/
-      equals: function equals(left, right) {
-        if (this.options.comparator) {
-          return this.options.comparator(left, right);
-        } else {
-          return left === right || this.options.ignoreCase && left.toLowerCase() === right.toLowerCase();
-        }
-      },
-
-      /*istanbul ignore start*/
-
-      /*istanbul ignore end*/
-      removeEmpty: function removeEmpty(array) {
-        var ret = [];
-
-        for (var i = 0; i < array.length; i++) {
-          if (array[i]) {
-            ret.push(array[i]);
-          }
-        }
-
-        return ret;
-      },
-
-      /*istanbul ignore start*/
-
-      /*istanbul ignore end*/
-      castInput: function castInput(value) {
-        return value;
-      },
-
-      /*istanbul ignore start*/
-
-      /*istanbul ignore end*/
-      tokenize: function tokenize(value) {
-        return value.split('');
-      },
-
-      /*istanbul ignore start*/
-
-      /*istanbul ignore end*/
-      join: function join(chars) {
-        return chars.join('');
+      while (newPos + 1 < newLen && oldPos + 1 < oldLen && this.equals(newString[newPos + 1], oldString[oldPos + 1])) {
+        newPos++;
+        oldPos++;
+        commonCount++;
       }
-    };
 
-    function buildValues(diff, components, newString, oldString, useLongestToken) {
-      var componentPos = 0,
+      if (commonCount) {
+        basePath.components.push({
+          count: commonCount
+        });
+      }
+
+      basePath.newPos = newPos;
+      return oldPos;
+    },
+
+    /*istanbul ignore start*/
+
+    /*istanbul ignore end*/
+    equals: function equals(left, right) {
+      if (this.options.comparator) {
+        return this.options.comparator(left, right);
+      } else {
+        return left === right || this.options.ignoreCase && left.toLowerCase() === right.toLowerCase();
+      }
+    },
+
+    /*istanbul ignore start*/
+
+    /*istanbul ignore end*/
+    removeEmpty: function removeEmpty(array) {
+      var ret = [];
+
+      for (var i = 0; i < array.length; i++) {
+        if (array[i]) {
+          ret.push(array[i]);
+        }
+      }
+
+      return ret;
+    },
+
+    /*istanbul ignore start*/
+
+    /*istanbul ignore end*/
+    castInput: function castInput(value) {
+      return value;
+    },
+
+    /*istanbul ignore start*/
+
+    /*istanbul ignore end*/
+    tokenize: function tokenize(value) {
+      return value.split('');
+    },
+
+    /*istanbul ignore start*/
+
+    /*istanbul ignore end*/
+    join: function join(chars) {
+      return chars.join('');
+    }
+  };
+
+  function buildValues(diff, components, newString, oldString, useLongestToken) {
+    var componentPos = 0,
         componentLen = components.length,
         newPos = 0,
         oldPos = 0;
 
-      for (; componentPos < componentLen; componentPos++) {
-        var component = components[componentPos];
+    for (; componentPos < componentLen; componentPos++) {
+      var component = components[componentPos];
 
-        if (!component.removed) {
-          if (!component.added && useLongestToken) {
-            var value = newString.slice(newPos, newPos + component.count);
-            value = value.map(function (value, i) {
-              var oldValue = oldString[oldPos + i];
-              return oldValue.length > value.length ? oldValue : value;
-            });
-            component.value = diff.join(value);
-          } else {
-            component.value = diff.join(newString.slice(newPos, newPos + component.count));
-          }
-
-          newPos += component.count; // Common case
-
-          if (!component.added) {
-            oldPos += component.count;
-          }
+      if (!component.removed) {
+        if (!component.added && useLongestToken) {
+          var value = newString.slice(newPos, newPos + component.count);
+          value = value.map(function (value, i) {
+            var oldValue = oldString[oldPos + i];
+            return oldValue.length > value.length ? oldValue : value;
+          });
+          component.value = diff.join(value);
         } else {
-          component.value = diff.join(oldString.slice(oldPos, oldPos + component.count));
-          oldPos += component.count; // Reverse add and remove so removes are output first to match common convention
-          // The diffing algorithm is tied to add then remove output and this is the simplest
-          // route to get the desired output with minimal overhead.
-
-          if (componentPos && components[componentPos - 1].added) {
-            var tmp = components[componentPos - 1];
-            components[componentPos - 1] = components[componentPos];
-            components[componentPos] = tmp;
-          }
+          component.value = diff.join(newString.slice(newPos, newPos + component.count));
         }
-      } // Special case handle for when one terminal is ignored (i.e. whitespace).
-      // For this case we merge the terminal into the prior string and drop the change.
-      // This is only available for string mode.
 
+        newPos += component.count; // Common case
 
-      var lastComponent = components[componentLen - 1];
+        if (!component.added) {
+          oldPos += component.count;
+        }
+      } else {
+        component.value = diff.join(oldString.slice(oldPos, oldPos + component.count));
+        oldPos += component.count; // Reverse add and remove so removes are output first to match common convention
+        // The diffing algorithm is tied to add then remove output and this is the simplest
+        // route to get the desired output with minimal overhead.
 
-      if (componentLen > 1 && typeof lastComponent.value === 'string' && (lastComponent.added || lastComponent.removed) && diff.equals('', lastComponent.value)) {
-        components[componentLen - 2].value += lastComponent.value;
-        components.pop();
+        if (componentPos && components[componentPos - 1].added) {
+          var tmp = components[componentPos - 1];
+          components[componentPos - 1] = components[componentPos];
+          components[componentPos] = tmp;
+        }
       }
+    } // Special case handle for when one terminal is ignored (i.e. whitespace).
+    // For this case we merge the terminal into the prior string and drop the change.
+    // This is only available for string mode.
 
-      return components;
+
+    var lastComponent = components[componentLen - 1];
+
+    if (componentLen > 1 && typeof lastComponent.value === 'string' && (lastComponent.added || lastComponent.removed) && diff.equals('', lastComponent.value)) {
+      components[componentLen - 2].value += lastComponent.value;
+      components.pop();
     }
 
-    function clonePath(path) {
-      return {
-        newPos: path.newPos,
-        components: path.components.slice(0)
-      };
-    }
+    return components;
+  }
+
+  function clonePath(path) {
+    return {
+      newPos: path.newPos,
+      components: path.components.slice(0)
+    };
+  }
 
   }(base));
 
@@ -6122,7 +6122,7 @@
   /*istanbul ignore end*/
   var
   /*istanbul ignore start*/
-    _base$6 = _interopRequireDefault$7(base)
+  _base$6 = _interopRequireDefault$7(base)
   /*istanbul ignore end*/
   ;
 
@@ -6133,11 +6133,11 @@
   /*istanbul ignore start*/
   _base$6
   /*istanbul ignore end*/
-    [
+  [
   /*istanbul ignore start*/
-      "default"
+  "default"
   /*istanbul ignore end*/
-    ]();
+  ]();
 
   /*istanbul ignore start*/
   character.characterDiff = characterDiff;
@@ -6186,13 +6186,13 @@
   /*istanbul ignore end*/
   var
   /*istanbul ignore start*/
-    _base$5 = _interopRequireDefault$6(base)
+  _base$5 = _interopRequireDefault$6(base)
   /*istanbul ignore end*/
   ;
 
   var
   /*istanbul ignore start*/
-    _params$1 = params
+  _params$1 = params
   /*istanbul ignore end*/
   ;
 
@@ -6223,11 +6223,11 @@
   /*istanbul ignore start*/
   _base$5
   /*istanbul ignore end*/
-    [
+  [
   /*istanbul ignore start*/
-      "default"
+  "default"
   /*istanbul ignore end*/
-    ]();
+  ]();
 
   /*istanbul ignore start*/
   word.wordDiff = wordDiff;
@@ -6264,11 +6264,11 @@
     (/*istanbul ignore end*/
 
     /*istanbul ignore start*/
-      0, _params$1
-      /*istanbul ignore end*/
-        .
-      /*istanbul ignore start*/
-        generateOptions)
+    0, _params$1
+    /*istanbul ignore end*/
+    .
+    /*istanbul ignore start*/
+    generateOptions)
     /*istanbul ignore end*/
     (options, {
       ignoreWhitespace: true
@@ -6294,13 +6294,13 @@
   /*istanbul ignore end*/
   var
   /*istanbul ignore start*/
-    _base$4 = _interopRequireDefault$5(base)
+  _base$4 = _interopRequireDefault$5(base)
   /*istanbul ignore end*/
   ;
 
   var
   /*istanbul ignore start*/
-    _params = params
+  _params = params
   /*istanbul ignore end*/
   ;
 
@@ -6311,11 +6311,11 @@
   /*istanbul ignore start*/
   _base$4
   /*istanbul ignore end*/
-    [
+  [
   /*istanbul ignore start*/
-      "default"
+  "default"
   /*istanbul ignore end*/
-    ]();
+  ]();
 
   /*istanbul ignore start*/
   line.lineDiff = lineDiff;
@@ -6323,7 +6323,7 @@
   /*istanbul ignore end*/
   lineDiff.tokenize = function (value) {
     var retLines = [],
-      linesAndNewlines = value.split(/(\n|\r\n)/); // Ignore the final empty token that occurs if the string ends with a new line
+        linesAndNewlines = value.split(/(\n|\r\n)/); // Ignore the final empty token that occurs if the string ends with a new line
 
     if (!linesAndNewlines[linesAndNewlines.length - 1]) {
       linesAndNewlines.pop();
@@ -6357,11 +6357,11 @@
     (/*istanbul ignore end*/
 
     /*istanbul ignore start*/
-      0, _params
-      /*istanbul ignore end*/
-        .
-      /*istanbul ignore start*/
-        generateOptions)
+    0, _params
+    /*istanbul ignore end*/
+    .
+    /*istanbul ignore start*/
+    generateOptions)
     /*istanbul ignore end*/
     (callback, {
       ignoreWhitespace: true
@@ -6382,7 +6382,7 @@
   /*istanbul ignore end*/
   var
   /*istanbul ignore start*/
-    _base$3 = _interopRequireDefault$4(base)
+  _base$3 = _interopRequireDefault$4(base)
   /*istanbul ignore end*/
   ;
 
@@ -6393,11 +6393,11 @@
   /*istanbul ignore start*/
   _base$3
   /*istanbul ignore end*/
-    [
+  [
   /*istanbul ignore start*/
-      "default"
+  "default"
   /*istanbul ignore end*/
-    ]();
+  ]();
 
   /*istanbul ignore start*/
   sentence.sentenceDiff = sentenceDiff;
@@ -6424,7 +6424,7 @@
   /*istanbul ignore end*/
   var
   /*istanbul ignore start*/
-    _base$2 = _interopRequireDefault$3(base)
+  _base$2 = _interopRequireDefault$3(base)
   /*istanbul ignore end*/
   ;
 
@@ -6435,11 +6435,11 @@
   /*istanbul ignore start*/
   _base$2
   /*istanbul ignore end*/
-    [
+  [
   /*istanbul ignore start*/
-      "default"
+  "default"
   /*istanbul ignore end*/
-    ]();
+  ]();
 
   /*istanbul ignore start*/
   css.cssDiff = cssDiff;
@@ -6467,13 +6467,13 @@
   /*istanbul ignore end*/
   var
   /*istanbul ignore start*/
-    _base$1 = _interopRequireDefault$2(base)
+  _base$1 = _interopRequireDefault$2(base)
   /*istanbul ignore end*/
   ;
 
   var
   /*istanbul ignore start*/
-    _line$1 = line
+  _line$1 = line
   /*istanbul ignore end*/
   ;
 
@@ -6487,11 +6487,11 @@
   /*istanbul ignore start*/
   _base$1
   /*istanbul ignore end*/
-    [
+  [
   /*istanbul ignore start*/
-      "default"
+  "default"
   /*istanbul ignore end*/
-    ](); // Discriminate between two lines of pretty-printed, serialized JSON where one of them has a
+  ](); // Discriminate between two lines of pretty-printed, serialized JSON where one of them has a
   // dangling comma and the other doesn't. Turns out including the dangling comma yields the nicest output:
 
   /*istanbul ignore start*/
@@ -6503,27 +6503,27 @@
   /*istanbul ignore start*/
   _line$1
   /*istanbul ignore end*/
-    .
+  .
   /*istanbul ignore start*/
-    lineDiff
+  lineDiff
   /*istanbul ignore end*/
-    .tokenize;
+  .tokenize;
 
   jsonDiff.castInput = function (value) {
     /*istanbul ignore start*/
     var _this$options =
     /*istanbul ignore end*/
     this.options,
-      undefinedReplacement = _this$options.undefinedReplacement,
-      _this$options$stringi = _this$options.stringifyReplacer,
-      stringifyReplacer = _this$options$stringi === void 0 ? function (k, v)
-      /*istanbul ignore start*/
-      {
-        return (
+        undefinedReplacement = _this$options.undefinedReplacement,
+        _this$options$stringi = _this$options.stringifyReplacer,
+        stringifyReplacer = _this$options$stringi === void 0 ? function (k, v)
+    /*istanbul ignore start*/
+    {
+      return (
         /*istanbul ignore end*/
-          typeof v === 'undefined' ? undefinedReplacement : v
-        );
-      } : _this$options$stringi;
+        typeof v === 'undefined' ? undefinedReplacement : v
+      );
+    } : _this$options$stringi;
     return typeof value === 'string' ? value : JSON.stringify(canonicalize(value, null, null, stringifyReplacer), stringifyReplacer, '  ');
   };
 
@@ -6532,11 +6532,11 @@
       /*istanbul ignore start*/
       _base$1
       /*istanbul ignore end*/
-        [
+      [
       /*istanbul ignore start*/
-          "default"
+      "default"
       /*istanbul ignore end*/
-        ].prototype.equals.call(jsonDiff, left.replace(/,([\r\n])/g, '$1'), right.replace(/,([\r\n])/g, '$1'))
+      ].prototype.equals.call(jsonDiff, left.replace(/,([\r\n])/g, '$1'), right.replace(/,([\r\n])/g, '$1'))
     );
   };
 
@@ -6584,15 +6584,15 @@
 
     if (
     /*istanbul ignore start*/
-      _typeof(
-        /*istanbul ignore end*/
-        obj) === 'object' && obj !== null) {
+    _typeof(
+    /*istanbul ignore end*/
+    obj) === 'object' && obj !== null) {
       stack.push(obj);
       canonicalizedObj = {};
       replacementStack.push(canonicalizedObj);
 
       var sortedKeys = [],
-        _key;
+          _key;
 
       for (_key in obj) {
         /* istanbul ignore else */
@@ -6630,7 +6630,7 @@
   /*istanbul ignore end*/
   var
   /*istanbul ignore start*/
-    _base = _interopRequireDefault$1(base)
+  _base = _interopRequireDefault$1(base)
   /*istanbul ignore end*/
   ;
 
@@ -6641,11 +6641,11 @@
   /*istanbul ignore start*/
   _base
   /*istanbul ignore end*/
-    [
+  [
   /*istanbul ignore start*/
-      "default"
+  "default"
   /*istanbul ignore end*/
-    ]();
+  ]();
 
   /*istanbul ignore start*/
   array$1.arrayDiff = arrayDiff;
@@ -6679,11 +6679,11 @@
     /*istanbul ignore start*/
     var
     /*istanbul ignore end*/
-      options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
     var diffstr = uniDiff.split(/\r\n|[\n\v\f\r\x85]/),
-      delimiters = uniDiff.match(/\r\n|[\n\v\f\r\x85]/g) || [],
-      list = [],
-      i = 0;
+        delimiters = uniDiff.match(/\r\n|[\n\v\f\r\x85]/g) || [],
+        list = [],
+        i = 0;
 
     function parseIndex() {
       var index = {};
@@ -6753,8 +6753,8 @@
 
     function parseHunk() {
       var chunkHeaderIndex = i,
-        chunkHeaderLine = diffstr[i++],
-        chunkHeader = chunkHeaderLine.split(/@@ -(\d+)(?:,(\d+))? \+(\d+)(?:,(\d+))? @@/);
+          chunkHeaderLine = diffstr[i++],
+          chunkHeader = chunkHeaderLine.split(/@@ -(\d+)(?:,(\d+))? \+(\d+)(?:,(\d+))? @@/);
       var hunk = {
         oldStart: +chunkHeader[1],
         oldLines: typeof chunkHeader[2] === 'undefined' ? 1 : +chunkHeader[2],
@@ -6775,7 +6775,7 @@
       }
 
       var addCount = 0,
-        removeCount = 0;
+          removeCount = 0;
 
       for (; i < diffstr.length; i++) {
         // Lines starting with '---' could be mistaken for the "remove line" operation
@@ -6839,59 +6839,59 @@
 
   (function (exports) {
 
-    Object.defineProperty(exports, "__esModule", {
-      value: true
-    });
-    exports["default"] = _default;
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports["default"] = _default;
 
-    /*istanbul ignore end*/
-    // Iterator that traverses in the range of [min, max], stepping
-    // by distance from a given start position. I.e. for [0, 4], with
-    // start of 2, this will iterate 2, 3, 1, 4, 0.
-    function
-    /*istanbul ignore start*/
-    _default
-    /*istanbul ignore end*/
-    (start, minLine, maxLine) {
-      var wantForward = true,
+  /*istanbul ignore end*/
+  // Iterator that traverses in the range of [min, max], stepping
+  // by distance from a given start position. I.e. for [0, 4], with
+  // start of 2, this will iterate 2, 3, 1, 4, 0.
+  function
+  /*istanbul ignore start*/
+  _default
+  /*istanbul ignore end*/
+  (start, minLine, maxLine) {
+    var wantForward = true,
         backwardExhausted = false,
         forwardExhausted = false,
         localOffset = 1;
-      return function iterator() {
-        if (wantForward && !forwardExhausted) {
-          if (backwardExhausted) {
-            localOffset++;
-          } else {
-            wantForward = false;
-          } // Check if trying to fit beyond text length, and if not, check it fits
-          // after offset location (or desired location on first iteration)
+    return function iterator() {
+      if (wantForward && !forwardExhausted) {
+        if (backwardExhausted) {
+          localOffset++;
+        } else {
+          wantForward = false;
+        } // Check if trying to fit beyond text length, and if not, check it fits
+        // after offset location (or desired location on first iteration)
 
 
-          if (start + localOffset <= maxLine) {
-            return localOffset;
-          }
-
-          forwardExhausted = true;
+        if (start + localOffset <= maxLine) {
+          return localOffset;
         }
 
-        if (!backwardExhausted) {
-          if (!forwardExhausted) {
-            wantForward = true;
-          } // Check if trying to fit before text beginning, and if not, check it fits
-          // before offset location
+        forwardExhausted = true;
+      }
+
+      if (!backwardExhausted) {
+        if (!forwardExhausted) {
+          wantForward = true;
+        } // Check if trying to fit before text beginning, and if not, check it fits
+        // before offset location
 
 
-          if (minLine <= start - localOffset) {
-            return -localOffset++;
-          }
+        if (minLine <= start - localOffset) {
+          return -localOffset++;
+        }
 
-          backwardExhausted = true;
-          return iterator();
-        } // We tried to fit hunk before text beginning and beyond text length, then
-        // hunk can't fit on the text. Return undefined
+        backwardExhausted = true;
+        return iterator();
+      } // We tried to fit hunk before text beginning and beyond text length, then
+      // hunk can't fit on the text. Return undefined
 
-      };
-    }
+    };
+  }
 
   }(distanceIterator));
 
@@ -6906,13 +6906,13 @@
   /*istanbul ignore end*/
   var
   /*istanbul ignore start*/
-    _parse$1 = parse$2
+  _parse$1 = parse$2
   /*istanbul ignore end*/
   ;
 
   var
   /*istanbul ignore start*/
-    _distanceIterator = _interopRequireDefault(distanceIterator)
+  _distanceIterator = _interopRequireDefault(distanceIterator)
   /*istanbul ignore end*/
   ;
 
@@ -6923,7 +6923,7 @@
     /*istanbul ignore start*/
     var
     /*istanbul ignore end*/
-      options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+    options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 
     if (typeof uniDiff === 'string') {
       uniDiff =
@@ -6931,11 +6931,11 @@
       (/*istanbul ignore end*/
 
       /*istanbul ignore start*/
-        0, _parse$1
-        /*istanbul ignore end*/
-          .
-        /*istanbul ignore start*/
-          parsePatch)
+      0, _parse$1
+      /*istanbul ignore end*/
+      .
+      /*istanbul ignore start*/
+      parsePatch)
       /*istanbul ignore end*/
       (uniDiff);
     }
@@ -6950,22 +6950,22 @@
 
 
     var lines = source.split(/\r\n|[\n\v\f\r\x85]/),
-      delimiters = source.match(/\r\n|[\n\v\f\r\x85]/g) || [],
-      hunks = uniDiff.hunks,
-      compareLine = options.compareLine || function (lineNumber, line, operation, patchContent)
-      /*istanbul ignore start*/
-      {
-        return (
+        delimiters = source.match(/\r\n|[\n\v\f\r\x85]/g) || [],
+        hunks = uniDiff.hunks,
+        compareLine = options.compareLine || function (lineNumber, line, operation, patchContent)
+    /*istanbul ignore start*/
+    {
+      return (
         /*istanbul ignore end*/
-          line === patchContent
-        );
-      },
-      errorCount = 0,
-      fuzzFactor = options.fuzzFactor || 0,
-      minLine = 0,
-      offset = 0,
-      removeEOFNL,
-      addEOFNL;
+        line === patchContent
+      );
+    },
+        errorCount = 0,
+        fuzzFactor = options.fuzzFactor || 0,
+        minLine = 0,
+        offset = 0,
+        removeEOFNL,
+        addEOFNL;
     /**
      * Checks if the hunk exactly fits on the provided location
      */
@@ -6974,8 +6974,8 @@
     function hunkFits(hunk, toPos) {
       for (var j = 0; j < hunk.lines.length; j++) {
         var line = hunk.lines[j],
-          operation = line.length > 0 ? line[0] : ' ',
-          content = line.length > 0 ? line.substr(1) : line;
+            operation = line.length > 0 ? line[0] : ' ',
+            content = line.length > 0 ? line.substr(1) : line;
 
         if (operation === ' ' || operation === '-') {
           // Context sanity check
@@ -6997,21 +6997,21 @@
 
     for (var i = 0; i < hunks.length; i++) {
       var hunk = hunks[i],
-        maxLine = lines.length - hunk.oldLines,
-        localOffset = 0,
-        toPos = offset + hunk.oldStart - 1;
+          maxLine = lines.length - hunk.oldLines,
+          localOffset = 0,
+          toPos = offset + hunk.oldStart - 1;
       var iterator =
       /*istanbul ignore start*/
       (/*istanbul ignore end*/
 
       /*istanbul ignore start*/
-        0, _distanceIterator
-        /*istanbul ignore end*/
-          [
-        /*istanbul ignore start*/
-            "default"
-        /*istanbul ignore end*/
-          ])(toPos, minLine, maxLine);
+      0, _distanceIterator
+      /*istanbul ignore end*/
+      [
+      /*istanbul ignore start*/
+      "default"
+      /*istanbul ignore end*/
+      ])(toPos, minLine, maxLine);
 
       for (; localOffset !== undefined; localOffset = iterator()) {
         if (hunkFits(hunk, toPos + localOffset)) {
@@ -7034,15 +7034,15 @@
 
     for (var _i = 0; _i < hunks.length; _i++) {
       var _hunk = hunks[_i],
-        _toPos = _hunk.oldStart + _hunk.offset + diffOffset - 1;
+          _toPos = _hunk.oldStart + _hunk.offset + diffOffset - 1;
 
       diffOffset += _hunk.newLines - _hunk.oldLines;
 
       for (var j = 0; j < _hunk.lines.length; j++) {
         var line = _hunk.lines[j],
-          operation = line.length > 0 ? line[0] : ' ',
-          content = line.length > 0 ? line.substr(1) : line,
-          delimiter = _hunk.linedelimiters[j];
+            operation = line.length > 0 ? line[0] : ' ',
+            content = line.length > 0 ? line.substr(1) : line,
+            delimiter = _hunk.linedelimiters[j];
 
         if (operation === ' ') {
           _toPos++;
@@ -7092,11 +7092,11 @@
       (/*istanbul ignore end*/
 
       /*istanbul ignore start*/
-        0, _parse$1
-        /*istanbul ignore end*/
-          .
-        /*istanbul ignore start*/
-          parsePatch)
+      0, _parse$1
+      /*istanbul ignore end*/
+      .
+      /*istanbul ignore start*/
+      parsePatch)
       /*istanbul ignore end*/
       (uniDiff);
     }
@@ -7146,7 +7146,7 @@
   /*istanbul ignore end*/
   var
   /*istanbul ignore start*/
-    _line = line
+  _line = line
   /*istanbul ignore end*/
   ;
 
@@ -7177,11 +7177,11 @@
     (/*istanbul ignore end*/
 
     /*istanbul ignore start*/
-      0, _line
-      /*istanbul ignore end*/
-        .
-      /*istanbul ignore start*/
-        diffLines)
+    0, _line
+    /*istanbul ignore end*/
+    .
+    /*istanbul ignore start*/
+    diffLines)
     /*istanbul ignore end*/
     (oldStr, newStr, options);
     diff.push({
@@ -7197,17 +7197,17 @@
 
     var hunks = [];
     var oldRangeStart = 0,
-      newRangeStart = 0,
-      curRange = [],
-      oldLine = 1,
-      newLine = 1;
+        newRangeStart = 0,
+        curRange = [],
+        oldLine = 1,
+        newLine = 1;
 
     /*istanbul ignore start*/
     var _loop = function _loop(
     /*istanbul ignore end*/
-      i) {
+    i) {
       var current = diff[i],
-        lines = current.lines || current.value.replace(/\n$/, '').split('\n');
+          lines = current.lines || current.value.replace(/\n$/, '').split('\n');
       current.lines = lines;
 
       if (current.added || current.removed) {
@@ -7238,15 +7238,15 @@
         /*istanbul ignore end*/
         curRange).push.apply(
         /*istanbul ignore start*/
-          _curRange
-          /*istanbul ignore end*/
-          ,
-          /*istanbul ignore start*/
-          _toConsumableArray$1(
-            /*istanbul ignore end*/
-            lines.map(function (entry) {
-              return (current.added ? '+' : '-') + entry;
-            }))); // Track the updated file position
+        _curRange
+        /*istanbul ignore end*/
+        ,
+        /*istanbul ignore start*/
+        _toConsumableArray$1(
+        /*istanbul ignore end*/
+        lines.map(function (entry) {
+          return (current.added ? '+' : '-') + entry;
+        }))); // Track the updated file position
 
 
         if (current.added) {
@@ -7274,13 +7274,13 @@
             /*istanbul ignore end*/
             curRange).push.apply(
             /*istanbul ignore start*/
-              _curRange2
-              /*istanbul ignore end*/
-              ,
-              /*istanbul ignore start*/
-              _toConsumableArray$1(
-                /*istanbul ignore end*/
-                contextLines(lines)));
+            _curRange2
+            /*istanbul ignore end*/
+            ,
+            /*istanbul ignore start*/
+            _toConsumableArray$1(
+            /*istanbul ignore end*/
+            contextLines(lines)));
           } else {
             /*istanbul ignore start*/
             var _curRange3;
@@ -7298,13 +7298,13 @@
             /*istanbul ignore end*/
             curRange).push.apply(
             /*istanbul ignore start*/
-              _curRange3
-              /*istanbul ignore end*/
-              ,
-              /*istanbul ignore start*/
-              _toConsumableArray$1(
-                /*istanbul ignore end*/
-                contextLines(lines.slice(0, contextSize))));
+            _curRange3
+            /*istanbul ignore end*/
+            ,
+            /*istanbul ignore start*/
+            _toConsumableArray$1(
+            /*istanbul ignore end*/
+            contextLines(lines.slice(0, contextSize))));
 
             var hunk = {
               oldStart: oldRangeStart,
@@ -7347,7 +7347,7 @@
       /*istanbul ignore start*/
       _loop(
       /*istanbul ignore end*/
-        i);
+      i);
     }
 
     return {
@@ -7442,19 +7442,19 @@
   /*istanbul ignore end*/
   var
   /*istanbul ignore start*/
-    _create = create
+  _create = create
   /*istanbul ignore end*/
   ;
 
   var
   /*istanbul ignore start*/
-    _parse = parse$2
+  _parse = parse$2
   /*istanbul ignore end*/
   ;
 
   var
   /*istanbul ignore start*/
-    _array = array
+  _array = array
   /*istanbul ignore end*/
   ;
 
@@ -7476,8 +7476,8 @@
     var _calcOldNewLineCount =
     /*istanbul ignore end*/
     calcOldNewLineCount(hunk.lines),
-      oldLines = _calcOldNewLineCount.oldLines,
-      newLines = _calcOldNewLineCount.newLines;
+        oldLines = _calcOldNewLineCount.oldLines,
+        newLines = _calcOldNewLineCount.newLines;
 
     if (oldLines !== undefined) {
       hunk.oldLines = oldLines;
@@ -7527,17 +7527,17 @@
 
     ret.hunks = [];
     var mineIndex = 0,
-      theirsIndex = 0,
-      mineOffset = 0,
-      theirsOffset = 0;
+        theirsIndex = 0,
+        mineOffset = 0,
+        theirsOffset = 0;
 
     while (mineIndex < mine.hunks.length || theirsIndex < theirs.hunks.length) {
       var mineCurrent = mine.hunks[mineIndex] || {
-          oldStart: Infinity
-        },
-        theirsCurrent = theirs.hunks[theirsIndex] || {
-          oldStart: Infinity
-        };
+        oldStart: Infinity
+      },
+          theirsCurrent = theirs.hunks[theirsIndex] || {
+        oldStart: Infinity
+      };
 
       if (hunkBefore(mineCurrent, theirsCurrent)) {
         // This patch does not overlap with any of the others, yay.
@@ -7576,11 +7576,11 @@
           (/*istanbul ignore end*/
 
           /*istanbul ignore start*/
-            0, _parse
-            /*istanbul ignore end*/
-              .
-            /*istanbul ignore start*/
-              parsePatch)
+          0, _parse
+          /*istanbul ignore end*/
+          .
+          /*istanbul ignore start*/
+          parsePatch)
           /*istanbul ignore end*/
           (param)[0]
         );
@@ -7595,11 +7595,11 @@
         (/*istanbul ignore end*/
 
         /*istanbul ignore start*/
-          0, _create
-          /*istanbul ignore end*/
-            .
-          /*istanbul ignore start*/
-            structuredPatch)
+        0, _create
+        /*istanbul ignore end*/
+        .
+        /*istanbul ignore start*/
+        structuredPatch)
         /*istanbul ignore end*/
         (undefined, undefined, base, param)
       );
@@ -7642,22 +7642,22 @@
     // This will generally result in a conflicted hunk, but there are cases where the context
     // is the only overlap where we can successfully merge the content here.
     var mine = {
-        offset: mineOffset,
-        lines: mineLines,
-        index: 0
-      },
-      their = {
-        offset: theirOffset,
-        lines: theirLines,
-        index: 0
-      }; // Handle any leading content
+      offset: mineOffset,
+      lines: mineLines,
+      index: 0
+    },
+        their = {
+      offset: theirOffset,
+      lines: theirLines,
+      index: 0
+    }; // Handle any leading content
 
     insertLeading(hunk, mine, their);
     insertLeading(hunk, their, mine); // Now in the overlap content. Scan through and select the best changes from each.
 
     while (mine.index < mine.lines.length && their.index < their.lines.length) {
       var mineCurrent = mine.lines[mine.index],
-        theirCurrent = their.lines[their.index];
+          theirCurrent = their.lines[their.index];
 
       if ((mineCurrent[0] === '-' || mineCurrent[0] === '+') && (theirCurrent[0] === '-' || theirCurrent[0] === '+')) {
         // Both modified ...
@@ -7678,13 +7678,13 @@
         /*istanbul ignore end*/
         hunk.lines).push.apply(
         /*istanbul ignore start*/
-          _hunk$lines
-          /*istanbul ignore end*/
-          ,
-          /*istanbul ignore start*/
-          _toConsumableArray(
-            /*istanbul ignore end*/
-            collectChange(mine)));
+        _hunk$lines
+        /*istanbul ignore end*/
+        ,
+        /*istanbul ignore start*/
+        _toConsumableArray(
+        /*istanbul ignore end*/
+        collectChange(mine)));
       } else if (theirCurrent[0] === '+' && mineCurrent[0] === ' ') {
         /*istanbul ignore start*/
         var _hunk$lines2;
@@ -7701,13 +7701,13 @@
         /*istanbul ignore end*/
         hunk.lines).push.apply(
         /*istanbul ignore start*/
-          _hunk$lines2
-          /*istanbul ignore end*/
-          ,
-          /*istanbul ignore start*/
-          _toConsumableArray(
-            /*istanbul ignore end*/
-            collectChange(their)));
+        _hunk$lines2
+        /*istanbul ignore end*/
+        ,
+        /*istanbul ignore start*/
+        _toConsumableArray(
+        /*istanbul ignore end*/
+        collectChange(their)));
       } else if (mineCurrent[0] === '-' && theirCurrent[0] === ' ') {
         // Mine removed or edited
         removal(hunk, mine, their);
@@ -7733,22 +7733,22 @@
 
   function mutualChange(hunk, mine, their) {
     var myChanges = collectChange(mine),
-      theirChanges = collectChange(their);
+        theirChanges = collectChange(their);
 
     if (allRemoves(myChanges) && allRemoves(theirChanges)) {
       // Special case for remove changes that are supersets of one another
       if (
       /*istanbul ignore start*/
-        (/*istanbul ignore end*/
+      (/*istanbul ignore end*/
 
-        /*istanbul ignore start*/
-          0, _array
-          /*istanbul ignore end*/
-            .
-          /*istanbul ignore start*/
-            arrayStartsWith)
-        /*istanbul ignore end*/
-        (myChanges, theirChanges) && skipRemoveSuperset(their, myChanges, myChanges.length - theirChanges.length)) {
+      /*istanbul ignore start*/
+      0, _array
+      /*istanbul ignore end*/
+      .
+      /*istanbul ignore start*/
+      arrayStartsWith)
+      /*istanbul ignore end*/
+      (myChanges, theirChanges) && skipRemoveSuperset(their, myChanges, myChanges.length - theirChanges.length)) {
         /*istanbul ignore start*/
         var _hunk$lines3;
 
@@ -7763,27 +7763,27 @@
         /*istanbul ignore end*/
         hunk.lines).push.apply(
         /*istanbul ignore start*/
-          _hunk$lines3
-          /*istanbul ignore end*/
-          ,
-          /*istanbul ignore start*/
-          _toConsumableArray(
-            /*istanbul ignore end*/
-            myChanges));
+        _hunk$lines3
+        /*istanbul ignore end*/
+        ,
+        /*istanbul ignore start*/
+        _toConsumableArray(
+        /*istanbul ignore end*/
+        myChanges));
 
         return;
       } else if (
       /*istanbul ignore start*/
-        (/*istanbul ignore end*/
+      (/*istanbul ignore end*/
 
-        /*istanbul ignore start*/
-          0, _array
-          /*istanbul ignore end*/
-            .
-          /*istanbul ignore start*/
-            arrayStartsWith)
-        /*istanbul ignore end*/
-        (theirChanges, myChanges) && skipRemoveSuperset(mine, theirChanges, theirChanges.length - myChanges.length)) {
+      /*istanbul ignore start*/
+      0, _array
+      /*istanbul ignore end*/
+      .
+      /*istanbul ignore start*/
+      arrayStartsWith)
+      /*istanbul ignore end*/
+      (theirChanges, myChanges) && skipRemoveSuperset(mine, theirChanges, theirChanges.length - myChanges.length)) {
         /*istanbul ignore start*/
         var _hunk$lines4;
 
@@ -7798,28 +7798,28 @@
         /*istanbul ignore end*/
         hunk.lines).push.apply(
         /*istanbul ignore start*/
-          _hunk$lines4
-          /*istanbul ignore end*/
-          ,
-          /*istanbul ignore start*/
-          _toConsumableArray(
-            /*istanbul ignore end*/
-            theirChanges));
+        _hunk$lines4
+        /*istanbul ignore end*/
+        ,
+        /*istanbul ignore start*/
+        _toConsumableArray(
+        /*istanbul ignore end*/
+        theirChanges));
 
         return;
       }
     } else if (
     /*istanbul ignore start*/
-      (/*istanbul ignore end*/
+    (/*istanbul ignore end*/
 
-      /*istanbul ignore start*/
-        0, _array
-        /*istanbul ignore end*/
-          .
-        /*istanbul ignore start*/
-          arrayEqual)
-      /*istanbul ignore end*/
-      (myChanges, theirChanges)) {
+    /*istanbul ignore start*/
+    0, _array
+    /*istanbul ignore end*/
+    .
+    /*istanbul ignore start*/
+    arrayEqual)
+    /*istanbul ignore end*/
+    (myChanges, theirChanges)) {
       /*istanbul ignore start*/
       var _hunk$lines5;
 
@@ -7834,13 +7834,13 @@
       /*istanbul ignore end*/
       hunk.lines).push.apply(
       /*istanbul ignore start*/
-        _hunk$lines5
-        /*istanbul ignore end*/
-        ,
-        /*istanbul ignore start*/
-        _toConsumableArray(
-          /*istanbul ignore end*/
-          myChanges));
+      _hunk$lines5
+      /*istanbul ignore end*/
+      ,
+      /*istanbul ignore start*/
+      _toConsumableArray(
+      /*istanbul ignore end*/
+      myChanges));
 
       return;
     }
@@ -7850,7 +7850,7 @@
 
   function removal(hunk, mine, their, swap) {
     var myChanges = collectChange(mine),
-      theirChanges = collectContext(their, myChanges);
+        theirChanges = collectContext(their, myChanges);
 
     if (theirChanges.merged) {
       /*istanbul ignore start*/
@@ -7867,13 +7867,13 @@
       /*istanbul ignore end*/
       hunk.lines).push.apply(
       /*istanbul ignore start*/
-        _hunk$lines6
-        /*istanbul ignore end*/
-        ,
-        /*istanbul ignore start*/
-        _toConsumableArray(
-          /*istanbul ignore end*/
-          theirChanges.merged));
+      _hunk$lines6
+      /*istanbul ignore end*/
+      ,
+      /*istanbul ignore start*/
+      _toConsumableArray(
+      /*istanbul ignore end*/
+      theirChanges.merged));
     } else {
       conflict(hunk, swap ? theirChanges : myChanges, swap ? myChanges : theirChanges);
     }
@@ -7905,7 +7905,7 @@
 
   function collectChange(state) {
     var ret = [],
-      operation = state.lines[state.index][0];
+        operation = state.lines[state.index][0];
 
     while (state.index < state.lines.length) {
       var line = state.lines[state.index]; // Group additions that are immediately after subtractions and treat them as one "atomic" modify change.
@@ -7927,14 +7927,14 @@
 
   function collectContext(state, matchChanges) {
     var changes = [],
-      merged = [],
-      matchIndex = 0,
-      contextChanges = false,
-      conflicted = false;
+        merged = [],
+        matchIndex = 0,
+        contextChanges = false,
+        conflicted = false;
 
     while (matchIndex < matchChanges.length && state.index < state.lines.length) {
       var change = state.lines[state.index],
-        match = matchChanges[matchIndex]; // Once we've hit our add, then we are done
+          match = matchChanges[matchIndex]; // Once we've hit our add, then we are done
 
       if (match[0] === '+') {
         break;
@@ -8051,8 +8051,8 @@
   // See: http://code.google.com/p/google-diff-match-patch/wiki/API
   function convertChangesToDMP(changes) {
     var ret = [],
-      change,
-      operation;
+        change,
+        operation;
 
     for (var i = 0; i < changes.length; i++) {
       change = changes[i];
@@ -8118,218 +8118,218 @@
 
   (function (exports) {
 
-    Object.defineProperty(exports, "__esModule", {
-      value: true
-    });
-    Object.defineProperty(exports, "Diff", {
-      enumerable: true,
-      get: function get() {
-        return _base["default"];
-      }
-    });
-    Object.defineProperty(exports, "diffChars", {
-      enumerable: true,
-      get: function get() {
-        return _character.diffChars;
-      }
-    });
-    Object.defineProperty(exports, "diffWords", {
-      enumerable: true,
-      get: function get() {
-        return _word.diffWords;
-      }
-    });
-    Object.defineProperty(exports, "diffWordsWithSpace", {
-      enumerable: true,
-      get: function get() {
-        return _word.diffWordsWithSpace;
-      }
-    });
-    Object.defineProperty(exports, "diffLines", {
-      enumerable: true,
-      get: function get() {
-        return _line.diffLines;
-      }
-    });
-    Object.defineProperty(exports, "diffTrimmedLines", {
-      enumerable: true,
-      get: function get() {
-        return _line.diffTrimmedLines;
-      }
-    });
-    Object.defineProperty(exports, "diffSentences", {
-      enumerable: true,
-      get: function get() {
-        return _sentence.diffSentences;
-      }
-    });
-    Object.defineProperty(exports, "diffCss", {
-      enumerable: true,
-      get: function get() {
-        return _css.diffCss;
-      }
-    });
-    Object.defineProperty(exports, "diffJson", {
-      enumerable: true,
-      get: function get() {
-        return _json.diffJson;
-      }
-    });
-    Object.defineProperty(exports, "canonicalize", {
-      enumerable: true,
-      get: function get() {
-        return _json.canonicalize;
-      }
-    });
-    Object.defineProperty(exports, "diffArrays", {
-      enumerable: true,
-      get: function get() {
-        return _array.diffArrays;
-      }
-    });
-    Object.defineProperty(exports, "applyPatch", {
-      enumerable: true,
-      get: function get() {
-        return _apply.applyPatch;
-      }
-    });
-    Object.defineProperty(exports, "applyPatches", {
-      enumerable: true,
-      get: function get() {
-        return _apply.applyPatches;
-      }
-    });
-    Object.defineProperty(exports, "parsePatch", {
-      enumerable: true,
-      get: function get() {
-        return _parse.parsePatch;
-      }
-    });
-    Object.defineProperty(exports, "merge", {
-      enumerable: true,
-      get: function get() {
-        return _merge.merge;
-      }
-    });
-    Object.defineProperty(exports, "structuredPatch", {
-      enumerable: true,
-      get: function get() {
-        return _create.structuredPatch;
-      }
-    });
-    Object.defineProperty(exports, "createTwoFilesPatch", {
-      enumerable: true,
-      get: function get() {
-        return _create.createTwoFilesPatch;
-      }
-    });
-    Object.defineProperty(exports, "createPatch", {
-      enumerable: true,
-      get: function get() {
-        return _create.createPatch;
-      }
-    });
-    Object.defineProperty(exports, "convertChangesToDMP", {
-      enumerable: true,
-      get: function get() {
-        return _dmp.convertChangesToDMP;
-      }
-    });
-    Object.defineProperty(exports, "convertChangesToXML", {
-      enumerable: true,
-      get: function get() {
-        return _xml.convertChangesToXML;
-      }
-    });
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  Object.defineProperty(exports, "Diff", {
+    enumerable: true,
+    get: function get() {
+      return _base["default"];
+    }
+  });
+  Object.defineProperty(exports, "diffChars", {
+    enumerable: true,
+    get: function get() {
+      return _character.diffChars;
+    }
+  });
+  Object.defineProperty(exports, "diffWords", {
+    enumerable: true,
+    get: function get() {
+      return _word.diffWords;
+    }
+  });
+  Object.defineProperty(exports, "diffWordsWithSpace", {
+    enumerable: true,
+    get: function get() {
+      return _word.diffWordsWithSpace;
+    }
+  });
+  Object.defineProperty(exports, "diffLines", {
+    enumerable: true,
+    get: function get() {
+      return _line.diffLines;
+    }
+  });
+  Object.defineProperty(exports, "diffTrimmedLines", {
+    enumerable: true,
+    get: function get() {
+      return _line.diffTrimmedLines;
+    }
+  });
+  Object.defineProperty(exports, "diffSentences", {
+    enumerable: true,
+    get: function get() {
+      return _sentence.diffSentences;
+    }
+  });
+  Object.defineProperty(exports, "diffCss", {
+    enumerable: true,
+    get: function get() {
+      return _css.diffCss;
+    }
+  });
+  Object.defineProperty(exports, "diffJson", {
+    enumerable: true,
+    get: function get() {
+      return _json.diffJson;
+    }
+  });
+  Object.defineProperty(exports, "canonicalize", {
+    enumerable: true,
+    get: function get() {
+      return _json.canonicalize;
+    }
+  });
+  Object.defineProperty(exports, "diffArrays", {
+    enumerable: true,
+    get: function get() {
+      return _array.diffArrays;
+    }
+  });
+  Object.defineProperty(exports, "applyPatch", {
+    enumerable: true,
+    get: function get() {
+      return _apply.applyPatch;
+    }
+  });
+  Object.defineProperty(exports, "applyPatches", {
+    enumerable: true,
+    get: function get() {
+      return _apply.applyPatches;
+    }
+  });
+  Object.defineProperty(exports, "parsePatch", {
+    enumerable: true,
+    get: function get() {
+      return _parse.parsePatch;
+    }
+  });
+  Object.defineProperty(exports, "merge", {
+    enumerable: true,
+    get: function get() {
+      return _merge.merge;
+    }
+  });
+  Object.defineProperty(exports, "structuredPatch", {
+    enumerable: true,
+    get: function get() {
+      return _create.structuredPatch;
+    }
+  });
+  Object.defineProperty(exports, "createTwoFilesPatch", {
+    enumerable: true,
+    get: function get() {
+      return _create.createTwoFilesPatch;
+    }
+  });
+  Object.defineProperty(exports, "createPatch", {
+    enumerable: true,
+    get: function get() {
+      return _create.createPatch;
+    }
+  });
+  Object.defineProperty(exports, "convertChangesToDMP", {
+    enumerable: true,
+    get: function get() {
+      return _dmp.convertChangesToDMP;
+    }
+  });
+  Object.defineProperty(exports, "convertChangesToXML", {
+    enumerable: true,
+    get: function get() {
+      return _xml.convertChangesToXML;
+    }
+  });
 
-    /*istanbul ignore end*/
-    var
-      /*istanbul ignore start*/
-      _base = _interopRequireDefault(base)
+  /*istanbul ignore end*/
+  var
+  /*istanbul ignore start*/
+  _base = _interopRequireDefault(base)
   /*istanbul ignore end*/
   ;
 
-    var
-      /*istanbul ignore start*/
-      _character = character
+  var
+  /*istanbul ignore start*/
+  _character = character
   /*istanbul ignore end*/
   ;
 
-    var
-      /*istanbul ignore start*/
-      _word = word
+  var
+  /*istanbul ignore start*/
+  _word = word
   /*istanbul ignore end*/
   ;
 
-    var
-      /*istanbul ignore start*/
-      _line = line
+  var
+  /*istanbul ignore start*/
+  _line = line
   /*istanbul ignore end*/
   ;
 
-    var
-      /*istanbul ignore start*/
-      _sentence = sentence
+  var
+  /*istanbul ignore start*/
+  _sentence = sentence
   /*istanbul ignore end*/
   ;
 
-    var
-      /*istanbul ignore start*/
-      _css = css
+  var
+  /*istanbul ignore start*/
+  _css = css
   /*istanbul ignore end*/
   ;
 
-    var
-      /*istanbul ignore start*/
-      _json = json$1
+  var
+  /*istanbul ignore start*/
+  _json = json$1
   /*istanbul ignore end*/
   ;
 
-    var
-      /*istanbul ignore start*/
-      _array = array$1
+  var
+  /*istanbul ignore start*/
+  _array = array$1
   /*istanbul ignore end*/
   ;
 
-    var
-      /*istanbul ignore start*/
-      _apply = apply
+  var
+  /*istanbul ignore start*/
+  _apply = apply
   /*istanbul ignore end*/
   ;
 
-    var
-      /*istanbul ignore start*/
-      _parse = parse$2
+  var
+  /*istanbul ignore start*/
+  _parse = parse$2
   /*istanbul ignore end*/
   ;
 
-    var
-      /*istanbul ignore start*/
-      _merge = merge$1
+  var
+  /*istanbul ignore start*/
+  _merge = merge$1
   /*istanbul ignore end*/
   ;
 
-    var
-      /*istanbul ignore start*/
-      _create = create
+  var
+  /*istanbul ignore start*/
+  _create = create
   /*istanbul ignore end*/
   ;
 
-    var
-      /*istanbul ignore start*/
-      _dmp = dmp
+  var
+  /*istanbul ignore start*/
+  _dmp = dmp
   /*istanbul ignore end*/
   ;
 
-    var
-      /*istanbul ignore start*/
-      _xml = xml
+  var
+  /*istanbul ignore start*/
+  _xml = xml
   /*istanbul ignore end*/
   ;
 
-    /*istanbul ignore start*/ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+  /*istanbul ignore start*/ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-    /*istanbul ignore end*/
+  /*istanbul ignore end*/
 
   }(lib));
 
@@ -9584,8 +9584,8 @@
       var codePoint = null;
       var bytesPerSequence = (firstByte > 0xEF) ? 4
         : (firstByte > 0xDF) ? 3
-          : (firstByte > 0xBF) ? 2
-            : 1;
+        : (firstByte > 0xBF) ? 2
+        : 1;
 
       if (i + bytesPerSequence <= end) {
         var secondByte, thirdByte, fourthByte, tempCodePoint;
@@ -10473,7 +10473,7 @@
   /*! https://mths.be/he v1.2.0 by @mathias | MIT license */
 
   (function (module, exports) {
-    (function(root) {
+  (function(root) {
 
   	// Detect free variables `exports`.
   	var freeExports = exports;
@@ -10808,26 +10808,26 @@
   		root.he = he;
   	}
 
-    }(commonjsGlobal));
+  }(commonjsGlobal));
   }(he, he.exports));
 
   (function (exports) {
 
-    /**
+  /**
    * Various utility functions used throughout Mocha's codebase.
    * @module utils
    */
 
-    /**
+  /**
    * Module dependencies.
    */
-    var path = require$$1;
-    var util = require$$0$1;
-    var he$1 = he.exports;
+  var path = require$$1;
+  var util = require$$0$1;
+  var he$1 = he.exports;
 
-    const MOCHA_ID_PROP_NAME = '__mocha_id__';
+  const MOCHA_ID_PROP_NAME = '__mocha_id__';
 
-    /**
+  /**
    * Inherit the prototype methods from one constructor into another.
    *
    * @param {function} ctor - Constructor function which needs to inherit the
@@ -10836,74 +10836,74 @@
    * @throws {TypeError} if either constructor is null, or if super constructor
    *     lacks a prototype.
    */
-    exports.inherits = util.inherits;
+  exports.inherits = util.inherits;
 
-    /**
+  /**
    * Escape special characters in the given string of html.
    *
    * @private
    * @param  {string} html
    * @return {string}
    */
-    exports.escape = function (html) {
-      return he$1.encode(String(html), {useNamedReferences: false});
-    };
+  exports.escape = function (html) {
+    return he$1.encode(String(html), {useNamedReferences: false});
+  };
 
-    /**
+  /**
    * Test if the given obj is type of string.
    *
    * @private
    * @param {Object} obj
    * @return {boolean}
    */
-    exports.isString = function (obj) {
-      return typeof obj === 'string';
-    };
+  exports.isString = function (obj) {
+    return typeof obj === 'string';
+  };
 
-    /**
+  /**
    * Compute a slug from the given `str`.
    *
    * @private
    * @param {string} str
    * @return {string}
    */
-    exports.slug = function (str) {
-      return str
-        .toLowerCase()
-        .replace(/\s+/g, '-')
-        .replace(/[^-\w]/g, '')
-        .replace(/-{2,}/g, '-');
-    };
+  exports.slug = function (str) {
+    return str
+      .toLowerCase()
+      .replace(/\s+/g, '-')
+      .replace(/[^-\w]/g, '')
+      .replace(/-{2,}/g, '-');
+  };
 
-    /**
+  /**
    * Strip the function definition from `str`, and re-indent for pre whitespace.
    *
    * @param {string} str
    * @return {string}
    */
-    exports.clean = function (str) {
-      str = str
-        .replace(/\r\n?|[\n\u2028\u2029]/g, '\n')
-        .replace(/^\uFEFF/, '')
+  exports.clean = function (str) {
+    str = str
+      .replace(/\r\n?|[\n\u2028\u2029]/g, '\n')
+      .replace(/^\uFEFF/, '')
       // (traditional)->  space/name     parameters    body     (lambda)-> parameters       body   multi-statement/single          keep body content
-        .replace(
-          /^function(?:\s*|\s[^(]*)\([^)]*\)\s*\{((?:.|\n)*?)\}$|^\([^)]*\)\s*=>\s*(?:\{((?:.|\n)*?)\}|((?:.|\n)*))$/,
-          '$1$2$3'
-        );
-
-      var spaces = str.match(/^\n?( *)/)[1].length;
-      var tabs = str.match(/^\n?(\t*)/)[1].length;
-      var re = new RegExp(
-        '^\n?' + (tabs ? '\t' : ' ') + '{' + (tabs || spaces) + '}',
-        'gm'
+      .replace(
+        /^function(?:\s*|\s[^(]*)\([^)]*\)\s*\{((?:.|\n)*?)\}$|^\([^)]*\)\s*=>\s*(?:\{((?:.|\n)*?)\}|((?:.|\n)*))$/,
+        '$1$2$3'
       );
 
-      str = str.replace(re, '');
+    var spaces = str.match(/^\n?( *)/)[1].length;
+    var tabs = str.match(/^\n?(\t*)/)[1].length;
+    var re = new RegExp(
+      '^\n?' + (tabs ? '\t' : ' ') + '{' + (tabs || spaces) + '}',
+      'gm'
+    );
 
-      return str.trim();
-    };
+    str = str.replace(re, '');
 
-    /**
+    return str.trim();
+  };
+
+  /**
    * If a value could have properties, and has none, this function is called,
    * which returns a string representation of the empty value.
    *
@@ -10917,20 +10917,20 @@
    * @param {string} typeHint The type of the value
    * @returns {string}
    */
-    function emptyRepresentation(value, typeHint) {
-      switch (typeHint) {
-        case 'function':
-          return '[Function]';
-        case 'object':
-          return '{}';
-        case 'array':
-          return '[]';
-        default:
-          return value.toString();
-      }
+  function emptyRepresentation(value, typeHint) {
+    switch (typeHint) {
+      case 'function':
+        return '[Function]';
+      case 'object':
+        return '{}';
+      case 'array':
+        return '[]';
+      default:
+        return value.toString();
     }
+  }
 
-    /**
+  /**
    * Takes some variable and asks `Object.prototype.toString()` what it thinks it
    * is.
    *
@@ -10953,21 +10953,21 @@
    * canonicalType(async function() {}) // 'asyncfunction'
    * canonicalType(await import(name)) // 'module'
    */
-    var canonicalType = (exports.canonicalType = function canonicalType(value) {
-      if (value === undefined) {
-        return 'undefined';
-      } else if (value === null) {
-        return 'null';
-      } else if (isBuffer(value)) {
-        return 'buffer';
-      }
-      return Object.prototype.toString
-        .call(value)
-        .replace(/^\[.+\s(.+?)]$/, '$1')
-        .toLowerCase();
-    });
+  var canonicalType = (exports.canonicalType = function canonicalType(value) {
+    if (value === undefined) {
+      return 'undefined';
+    } else if (value === null) {
+      return 'null';
+    } else if (isBuffer(value)) {
+      return 'buffer';
+    }
+    return Object.prototype.toString
+      .call(value)
+      .replace(/^\[.+\s(.+?)]$/, '$1')
+      .toLowerCase();
+  });
 
-    /**
+  /**
    *
    * Returns a general type or data structure of a variable
    * @private
@@ -10987,28 +10987,28 @@
    * type(global) // 'object'
    * type(new String('foo') // 'string'
    */
-    exports.type = function type(value) {
+  exports.type = function type(value) {
     // Null is special
-      if (value === null) return 'null';
-      const primitives = new Set([
-        'undefined',
-        'boolean',
-        'number',
-        'string',
-        'bigint',
-        'symbol'
-      ]);
-      const _type = typeof value;
-      if (_type === 'function') return _type;
-      if (primitives.has(_type)) return _type;
-      if (value instanceof String) return 'string';
-      if (value instanceof Error) return 'error';
-      if (Array.isArray(value)) return 'array';
+    if (value === null) return 'null';
+    const primitives = new Set([
+      'undefined',
+      'boolean',
+      'number',
+      'string',
+      'bigint',
+      'symbol'
+    ]);
+    const _type = typeof value;
+    if (_type === 'function') return _type;
+    if (primitives.has(_type)) return _type;
+    if (value instanceof String) return 'string';
+    if (value instanceof Error) return 'error';
+    if (Array.isArray(value)) return 'array';
 
-      return _type;
-    };
+    return _type;
+  };
 
-    /**
+  /**
    * Stringify `value`. Different behavior depending on type of value:
    *
    * - If `value` is undefined or null, return `'[undefined]'` or `'[null]'`, respectively.
@@ -11023,45 +11023,45 @@
    * @param {*} value
    * @return {string}
    */
-    exports.stringify = function (value) {
-      var typeHint = canonicalType(value);
+  exports.stringify = function (value) {
+    var typeHint = canonicalType(value);
 
-      if (!~['object', 'array', 'function'].indexOf(typeHint)) {
-        if (typeHint === 'buffer') {
-          var json = Buffer.prototype.toJSON.call(value);
-          // Based on the toJSON result
-          return jsonStringify(
-            json.data && json.type ? json.data : json,
-            2
-          ).replace(/,(\n|$)/g, '$1');
-        }
-
-        // IE7/IE8 has a bizarre String constructor; needs to be coerced
-        // into an array and back to obj.
-        if (typeHint === 'string' && typeof value === 'object') {
-          value = value.split('').reduce(function (acc, char, idx) {
-            acc[idx] = char;
-            return acc;
-          }, {});
-          typeHint = 'object';
-        } else {
-          return jsonStringify(value);
-        }
+    if (!~['object', 'array', 'function'].indexOf(typeHint)) {
+      if (typeHint === 'buffer') {
+        var json = Buffer.prototype.toJSON.call(value);
+        // Based on the toJSON result
+        return jsonStringify(
+          json.data && json.type ? json.data : json,
+          2
+        ).replace(/,(\n|$)/g, '$1');
       }
 
-      for (var prop in value) {
-        if (Object.prototype.hasOwnProperty.call(value, prop)) {
-          return jsonStringify(
-            exports.canonicalize(value, null, typeHint),
-            2
-          ).replace(/,(\n|$)/g, '$1');
-        }
+      // IE7/IE8 has a bizarre String constructor; needs to be coerced
+      // into an array and back to obj.
+      if (typeHint === 'string' && typeof value === 'object') {
+        value = value.split('').reduce(function (acc, char, idx) {
+          acc[idx] = char;
+          return acc;
+        }, {});
+        typeHint = 'object';
+      } else {
+        return jsonStringify(value);
       }
+    }
 
-      return emptyRepresentation(value, typeHint);
-    };
+    for (var prop in value) {
+      if (Object.prototype.hasOwnProperty.call(value, prop)) {
+        return jsonStringify(
+          exports.canonicalize(value, null, typeHint),
+          2
+        ).replace(/,(\n|$)/g, '$1');
+      }
+    }
 
-    /**
+    return emptyRepresentation(value, typeHint);
+  };
+
+  /**
    * like JSON.stringify but more sense.
    *
    * @private
@@ -11070,87 +11070,87 @@
    * @param {number=} depth
    * @returns {*}
    */
-    function jsonStringify(object, spaces, depth) {
-      if (typeof spaces === 'undefined') {
+  function jsonStringify(object, spaces, depth) {
+    if (typeof spaces === 'undefined') {
       // primitive types
-        return _stringify(object);
-      }
+      return _stringify(object);
+    }
 
-      depth = depth || 1;
-      var space = spaces * depth;
-      var str = Array.isArray(object) ? '[' : '{';
-      var end = Array.isArray(object) ? ']' : '}';
-      var length =
+    depth = depth || 1;
+    var space = spaces * depth;
+    var str = Array.isArray(object) ? '[' : '{';
+    var end = Array.isArray(object) ? ']' : '}';
+    var length =
       typeof object.length === 'number'
         ? object.length
         : Object.keys(object).length;
-      // `.repeat()` polyfill
-      function repeat(s, n) {
-        return new Array(n).join(s);
-      }
+    // `.repeat()` polyfill
+    function repeat(s, n) {
+      return new Array(n).join(s);
+    }
 
-      function _stringify(val) {
-        switch (canonicalType(val)) {
-          case 'null':
-          case 'undefined':
-            val = '[' + val + ']';
-            break;
-          case 'array':
-          case 'object':
-            val = jsonStringify(val, spaces, depth + 1);
-            break;
-          case 'boolean':
-          case 'regexp':
-          case 'symbol':
-          case 'number':
-            val =
+    function _stringify(val) {
+      switch (canonicalType(val)) {
+        case 'null':
+        case 'undefined':
+          val = '[' + val + ']';
+          break;
+        case 'array':
+        case 'object':
+          val = jsonStringify(val, spaces, depth + 1);
+          break;
+        case 'boolean':
+        case 'regexp':
+        case 'symbol':
+        case 'number':
+          val =
             val === 0 && 1 / val === -Infinity // `-0`
               ? '-0'
               : val.toString();
-            break;
-          case 'bigint':
-            val = val.toString() + 'n';
-            break;
-          case 'date':
-            var sDate = isNaN(val.getTime()) ? val.toString() : val.toISOString();
-            val = '[Date: ' + sDate + ']';
-            break;
-          case 'buffer':
-            var json = val.toJSON();
-            // Based on the toJSON result
-            json = json.data && json.type ? json.data : json;
-            val = '[Buffer: ' + jsonStringify(json, 2, depth + 1) + ']';
-            break;
-          default:
-            val =
+          break;
+        case 'bigint':
+          val = val.toString() + 'n';
+          break;
+        case 'date':
+          var sDate = isNaN(val.getTime()) ? val.toString() : val.toISOString();
+          val = '[Date: ' + sDate + ']';
+          break;
+        case 'buffer':
+          var json = val.toJSON();
+          // Based on the toJSON result
+          json = json.data && json.type ? json.data : json;
+          val = '[Buffer: ' + jsonStringify(json, 2, depth + 1) + ']';
+          break;
+        default:
+          val =
             val === '[Function]' || val === '[Circular]'
               ? val
               : JSON.stringify(val); // string
-        }
-        return val;
       }
+      return val;
+    }
 
-      for (var i in object) {
-        if (!Object.prototype.hasOwnProperty.call(object, i)) {
-          continue; // not my business
-        }
-        --length;
-        str +=
+    for (var i in object) {
+      if (!Object.prototype.hasOwnProperty.call(object, i)) {
+        continue; // not my business
+      }
+      --length;
+      str +=
         '\n ' +
         repeat(' ', space) +
         (Array.isArray(object) ? '' : '"' + i + '": ') + // key
         _stringify(object[i]) + // value
         (length ? ',' : ''); // comma
-      }
-
-      return (
-        str +
-      // [], {}
-      (str.length !== 1 ? '\n' + repeat(' ', --space) + end : end)
-      );
     }
 
-    /**
+    return (
+      str +
+      // [], {}
+      (str.length !== 1 ? '\n' + repeat(' ', --space) + end : end)
+    );
+  }
+
+  /**
    * Return a new Thing that has the keys in sorted order. Recursive.
    *
    * If the Thing...
@@ -11169,74 +11169,74 @@
    * @param {string} [typeHint] Type hint
    * @return {(Object|Array|Function|string|undefined)}
    */
-    exports.canonicalize = function canonicalize(value, stack, typeHint) {
-      var canonicalizedObj;
-      /* eslint-disable no-unused-vars */
-      var prop;
-      /* eslint-enable no-unused-vars */
-      typeHint = typeHint || canonicalType(value);
-      function withStack(value, fn) {
-        stack.push(value);
-        fn();
-        stack.pop();
-      }
+  exports.canonicalize = function canonicalize(value, stack, typeHint) {
+    var canonicalizedObj;
+    /* eslint-disable no-unused-vars */
+    var prop;
+    /* eslint-enable no-unused-vars */
+    typeHint = typeHint || canonicalType(value);
+    function withStack(value, fn) {
+      stack.push(value);
+      fn();
+      stack.pop();
+    }
 
-      stack = stack || [];
+    stack = stack || [];
 
-      if (stack.indexOf(value) !== -1) {
-        return '[Circular]';
-      }
+    if (stack.indexOf(value) !== -1) {
+      return '[Circular]';
+    }
 
-      switch (typeHint) {
-        case 'undefined':
-        case 'buffer':
-        case 'null':
-          canonicalizedObj = value;
-          break;
-        case 'array':
-          withStack(value, function () {
-            canonicalizedObj = value.map(function (item) {
-              return exports.canonicalize(item, stack);
-            });
+    switch (typeHint) {
+      case 'undefined':
+      case 'buffer':
+      case 'null':
+        canonicalizedObj = value;
+        break;
+      case 'array':
+        withStack(value, function () {
+          canonicalizedObj = value.map(function (item) {
+            return exports.canonicalize(item, stack);
           });
-          break;
-        case 'function':
+        });
+        break;
+      case 'function':
         /* eslint-disable-next-line no-unused-vars, no-unreachable-loop */
-          for (prop in value) {
-            canonicalizedObj = {};
-            break;
-          }
-          /* eslint-enable guard-for-in */
-          if (!canonicalizedObj) {
-            canonicalizedObj = emptyRepresentation(value, typeHint);
-            break;
-          }
-          /* falls through */
-        case 'object':
-          canonicalizedObj = canonicalizedObj || {};
-          withStack(value, function () {
-            Object.keys(value)
-              .sort()
-              .forEach(function (key) {
-                canonicalizedObj[key] = exports.canonicalize(value[key], stack);
-              });
-          });
+        for (prop in value) {
+          canonicalizedObj = {};
           break;
-        case 'date':
-        case 'number':
-        case 'regexp':
-        case 'boolean':
-        case 'symbol':
-          canonicalizedObj = value;
+        }
+        /* eslint-enable guard-for-in */
+        if (!canonicalizedObj) {
+          canonicalizedObj = emptyRepresentation(value, typeHint);
           break;
-        default:
-          canonicalizedObj = value + '';
-      }
+        }
+      /* falls through */
+      case 'object':
+        canonicalizedObj = canonicalizedObj || {};
+        withStack(value, function () {
+          Object.keys(value)
+            .sort()
+            .forEach(function (key) {
+              canonicalizedObj[key] = exports.canonicalize(value[key], stack);
+            });
+        });
+        break;
+      case 'date':
+      case 'number':
+      case 'regexp':
+      case 'boolean':
+      case 'symbol':
+        canonicalizedObj = value;
+        break;
+      default:
+        canonicalizedObj = value + '';
+    }
 
-      return canonicalizedObj;
-    };
+    return canonicalizedObj;
+  };
 
-    /**
+  /**
    * @summary
    * This Filter based on `mocha-clean` module.(see: `github.com/rstacruz/mocha-clean`)
    * @description
@@ -11245,96 +11245,96 @@
    * (i.e: strip Mocha and internal node functions from stack trace).
    * @returns {Function}
    */
-    exports.stackTraceFilter = function () {
+  exports.stackTraceFilter = function () {
     // TODO: Replace with `process.browser`
-      var is = typeof document === 'undefined' ? {node: true} : {browser: true};
-      var slash = path.sep;
-      var cwd;
-      if (is.node) {
-        cwd = exports.cwd() + slash;
-      } else {
-        cwd = (
-          typeof location === 'undefined' ? window.location : location
-        ).href.replace(/\/[^/]*$/, '/');
-        slash = '/';
-      }
+    var is = typeof document === 'undefined' ? {node: true} : {browser: true};
+    var slash = path.sep;
+    var cwd;
+    if (is.node) {
+      cwd = exports.cwd() + slash;
+    } else {
+      cwd = (
+        typeof location === 'undefined' ? window.location : location
+      ).href.replace(/\/[^/]*$/, '/');
+      slash = '/';
+    }
 
-      function isMochaInternal(line) {
-        return (
-          ~line.indexOf('node_modules' + slash + 'mocha' + slash) ||
+    function isMochaInternal(line) {
+      return (
+        ~line.indexOf('node_modules' + slash + 'mocha' + slash) ||
         ~line.indexOf(slash + 'mocha.js') ||
         ~line.indexOf(slash + 'mocha.min.js')
-        );
-      }
+      );
+    }
 
-      function isNodeInternal(line) {
-        return (
-          ~line.indexOf('(timers.js:') ||
+    function isNodeInternal(line) {
+      return (
+        ~line.indexOf('(timers.js:') ||
         ~line.indexOf('(events.js:') ||
         ~line.indexOf('(node.js:') ||
         ~line.indexOf('(module.js:') ||
         ~line.indexOf('GeneratorFunctionPrototype.next (native)') ||
         false
-        );
-      }
+      );
+    }
 
-      return function (stack) {
-        stack = stack.split('\n');
+    return function (stack) {
+      stack = stack.split('\n');
 
-        stack = stack.reduce(function (list, line) {
-          if (isMochaInternal(line)) {
-            return list;
-          }
-
-          if (is.node && isNodeInternal(line)) {
-            return list;
-          }
-
-          // Clean up cwd(absolute)
-          if (/:\d+:\d+\)?$/.test(line)) {
-            line = line.replace('(' + cwd, '(');
-          }
-
-          list.push(line);
+      stack = stack.reduce(function (list, line) {
+        if (isMochaInternal(line)) {
           return list;
-        }, []);
+        }
 
-        return stack.join('\n');
-      };
+        if (is.node && isNodeInternal(line)) {
+          return list;
+        }
+
+        // Clean up cwd(absolute)
+        if (/:\d+:\d+\)?$/.test(line)) {
+          line = line.replace('(' + cwd, '(');
+        }
+
+        list.push(line);
+        return list;
+      }, []);
+
+      return stack.join('\n');
     };
+  };
 
-    /**
+  /**
    * Crude, but effective.
    * @public
    * @param {*} value
    * @returns {boolean} Whether or not `value` is a Promise
    */
-    exports.isPromise = function isPromise(value) {
-      return (
-        typeof value === 'object' &&
+  exports.isPromise = function isPromise(value) {
+    return (
+      typeof value === 'object' &&
       value !== null &&
       typeof value.then === 'function'
-      );
-    };
+    );
+  };
 
-    /**
+  /**
    * Clamps a numeric value to an inclusive range.
    *
    * @param {number} value - Value to be clamped.
    * @param {number[]} range - Two element array specifying [min, max] range.
    * @returns {number} clamped value
    */
-    exports.clamp = function clamp(value, range) {
-      return Math.min(Math.max(value, range[0]), range[1]);
-    };
+  exports.clamp = function clamp(value, range) {
+    return Math.min(Math.max(value, range[0]), range[1]);
+  };
 
-    /**
+  /**
    * It's a noop.
    * @public
    */
-    exports.noop = function () {};
+  exports.noop = function () {};
 
-    /**
+  /**
    * Creates a map-like object.
    *
    * @description
@@ -11349,14 +11349,14 @@
    * @param {...*} [obj] - Arguments to `Object.assign()`.
    * @returns {Object} An object with no prototype, having `...obj` properties
    */
-    exports.createMap = function (obj) {
-      return Object.assign.apply(
-        null,
-        [Object.create(null)].concat(Array.prototype.slice.call(arguments))
-      );
-    };
+  exports.createMap = function (obj) {
+    return Object.assign.apply(
+      null,
+      [Object.create(null)].concat(Array.prototype.slice.call(arguments))
+    );
+  };
 
-    /**
+  /**
    * Creates a read-only map-like object.
    *
    * @description
@@ -11368,34 +11368,34 @@
    * @returns {Object} A frozen object with no prototype, having `...obj` properties
    * @throws {TypeError} if argument is not a non-empty object.
    */
-    exports.defineConstants = function (obj) {
-      if (canonicalType(obj) !== 'object' || !Object.keys(obj).length) {
-        throw new TypeError('Invalid argument; expected a non-empty object');
-      }
-      return Object.freeze(exports.createMap(obj));
-    };
+  exports.defineConstants = function (obj) {
+    if (canonicalType(obj) !== 'object' || !Object.keys(obj).length) {
+      throw new TypeError('Invalid argument; expected a non-empty object');
+    }
+    return Object.freeze(exports.createMap(obj));
+  };
 
-    /**
+  /**
    * Returns current working directory
    *
    * Wrapper around `process.cwd()` for isolation
    * @private
    */
-    exports.cwd = function cwd() {
-      return process.cwd();
-    };
+  exports.cwd = function cwd() {
+    return process.cwd();
+  };
 
-    /**
+  /**
    * Returns `true` if Mocha is running in a browser.
    * Checks for `process.browser`.
    * @returns {boolean}
    * @private
    */
-    exports.isBrowser = function isBrowser() {
-      return Boolean(browser$2);
-    };
+  exports.isBrowser = function isBrowser() {
+    return Boolean(browser$2);
+  };
 
-    /*
+  /*
    * Casts `value` to an array; useful for optionally accepting array parameters
    *
    * It follows these rules, depending on `value`.  If `value` is...
@@ -11406,60 +11406,60 @@
    * @param {*} value - Something to cast to an Array
    * @returns {Array<*>}
    */
-    exports.castArray = function castArray(value) {
-      if (value === undefined) {
-        return [];
-      }
-      if (value === null) {
-        return [null];
-      }
-      if (
-        typeof value === 'object' &&
+  exports.castArray = function castArray(value) {
+    if (value === undefined) {
+      return [];
+    }
+    if (value === null) {
+      return [null];
+    }
+    if (
+      typeof value === 'object' &&
       (typeof value[Symbol.iterator] === 'function' || value.length !== undefined)
-      ) {
-        return Array.from(value);
-      }
-      return [value];
-    };
+    ) {
+      return Array.from(value);
+    }
+    return [value];
+  };
 
-    exports.constants = exports.defineConstants({
-      MOCHA_ID_PROP_NAME
-    });
+  exports.constants = exports.defineConstants({
+    MOCHA_ID_PROP_NAME
+  });
 
-    const uniqueIDBase =
+  const uniqueIDBase =
     'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_';
 
-    /**
+  /**
    * Creates a new unique identifier
    * Does not create cryptographically safe ids.
    * Trivial copy of nanoid/non-secure
    * @returns {string} Unique identifier
    */
-    exports.uniqueID = () => {
-      let id = '';
-      for (let i = 0; i < 21; i++) {
-        id += uniqueIDBase[(Math.random() * 64) | 0];
+  exports.uniqueID = () => {
+    let id = '';
+    for (let i = 0; i < 21; i++) {
+      id += uniqueIDBase[(Math.random() * 64) | 0];
+    }
+    return id;
+  };
+
+  exports.assignNewMochaID = obj => {
+    const id = exports.uniqueID();
+    Object.defineProperty(obj, MOCHA_ID_PROP_NAME, {
+      get() {
+        return id;
       }
-      return id;
-    };
+    });
+    return obj;
+  };
 
-    exports.assignNewMochaID = obj => {
-      const id = exports.uniqueID();
-      Object.defineProperty(obj, MOCHA_ID_PROP_NAME, {
-        get() {
-          return id;
-        }
-      });
-      return obj;
-    };
-
-    /**
+  /**
    * Retrieves a Mocha ID from an object, if present.
    * @param {*} [obj] - Object
    * @returns {string|void}
    */
-    exports.getMochaID = obj =>
-      obj && typeof obj === 'object' ? obj[MOCHA_ID_PROP_NAME] : undefined;
+  exports.getMochaID = obj =>
+    obj && typeof obj === 'object' ? obj[MOCHA_ID_PROP_NAME] : undefined;
   }(utils$3));
 
   var _nodeResolve_empty = {};
@@ -11939,12 +11939,12 @@
    * This is the web browser implementation of `debug()`.
    */
 
-    exports.formatArgs = formatArgs;
-    exports.save = save;
-    exports.load = load;
-    exports.useColors = useColors;
-    exports.storage = localstorage();
-    exports.destroy = (() => {
+  exports.formatArgs = formatArgs;
+  exports.save = save;
+  exports.load = load;
+  exports.useColors = useColors;
+  exports.storage = localstorage();
+  exports.destroy = (() => {
   	let warned = false;
 
   	return () => {
@@ -11953,13 +11953,13 @@
   			console.warn('Instance method `debug.destroy()` is deprecated and no longer does anything. It will be removed in the next major version of `debug`.');
   		}
   	};
-    })();
+  })();
 
-    /**
+  /**
    * Colors.
    */
 
-    exports.colors = [
+  exports.colors = [
   	'#0000CC',
   	'#0000FF',
   	'#0033CC',
@@ -12036,9 +12036,9 @@
   	'#FF9933',
   	'#FFCC00',
   	'#FFCC33'
-    ];
+  ];
 
-    /**
+  /**
    * Currently only WebKit-based Web Inspectors, Firefox >= v31,
    * and the Firebug extension (any Firefox version) are known
    * to support "%c" CSS customizations.
@@ -12046,8 +12046,8 @@
    * TODO: add a `localStorage` variable to explicitly enable/disable colors
    */
 
-    // eslint-disable-next-line complexity
-    function useColors() {
+  // eslint-disable-next-line complexity
+  function useColors() {
   	// NB: In an Electron preload script, document will be defined but not fully
   	// initialized. Since we know we're in Chrome, we'll just detect this case
   	// explicitly
@@ -12070,15 +12070,15 @@
   		(typeof navigator !== 'undefined' && navigator.userAgent && navigator.userAgent.toLowerCase().match(/firefox\/(\d+)/) && parseInt(RegExp.$1, 10) >= 31) ||
   		// Double check webkit in userAgent just in case we are in a worker
   		(typeof navigator !== 'undefined' && navigator.userAgent && navigator.userAgent.toLowerCase().match(/applewebkit\/(\d+)/));
-    }
+  }
 
-    /**
+  /**
    * Colorize log arguments if enabled.
    *
    * @api public
    */
 
-    function formatArgs(args) {
+  function formatArgs(args) {
   	args[0] = (this.useColors ? '%c' : '') +
   		this.namespace +
   		(this.useColors ? ' %c' : ' ') +
@@ -12111,9 +12111,9 @@
   	});
 
   	args.splice(lastC, 0, c);
-    }
+  }
 
-    /**
+  /**
    * Invokes `console.debug()` when available.
    * No-op when `console.debug` is not a "function".
    * If `console.debug` is not available, falls back
@@ -12121,15 +12121,15 @@
    *
    * @api public
    */
-    exports.log = console.debug || console.log || (() => {});
+  exports.log = console.debug || console.log || (() => {});
 
-    /**
+  /**
    * Save `namespaces`.
    *
    * @param {String} namespaces
    * @api private
    */
-    function save(namespaces) {
+  function save(namespaces) {
   	try {
   		if (namespaces) {
   			exports.storage.setItem('debug', namespaces);
@@ -12140,15 +12140,15 @@
   		// Swallow
   		// XXX (@Qix-) should we be logging these?
   	}
-    }
+  }
 
-    /**
+  /**
    * Load `namespaces`.
    *
    * @return {String} returns the previously persisted debug modes
    * @api private
    */
-    function load() {
+  function load() {
   	let r;
   	try {
   		r = exports.storage.getItem('debug');
@@ -12163,9 +12163,9 @@
   	}
 
   	return r;
-    }
+  }
 
-    /**
+  /**
    * Localstorage attempts to return the localstorage.
    *
    * This is necessary because safari throws
@@ -12176,7 +12176,7 @@
    * @api private
    */
 
-    function localstorage() {
+  function localstorage() {
   	try {
   		// TVMLKit (Apple TV JS Runtime) does not have a window object, just localStorage in the global context
   		// The Browser also has localStorage in the global context.
@@ -12185,23 +12185,23 @@
   		// Swallow
   		// XXX (@Qix-) should we be logging these?
   	}
-    }
+  }
 
-    module.exports = common$1(exports);
+  module.exports = common$1(exports);
 
-    const {formatters} = module.exports;
+  const {formatters} = module.exports;
 
-    /**
+  /**
    * Map %j to `JSON.stringify()`, since no Web Inspectors do that by default.
    */
 
-    formatters.j = function (v) {
+  formatters.j = function (v) {
   	try {
   		return JSON.stringify(v);
   	} catch (error) {
   		return '[UnexpectedJSONParseError]: ' + error.message;
   	}
-    };
+  };
   }(browser, browser.exports));
 
   const {format} = require$$0$1;
@@ -13303,11 +13303,11 @@
       ctx:
         this.ctx && this.ctx.currentTest
           ? {
-            currentTest: {
-              title: this.ctx.currentTest.title,
-              [MOCHA_ID_PROP_NAME$1]: this.ctx.currentTest.id
+              currentTest: {
+                title: this.ctx.currentTest.title,
+                [MOCHA_ID_PROP_NAME$1]: this.ctx.currentTest.id
+              }
             }
-          }
           : {},
       duration: this.duration,
       file: this.file,
@@ -13324,34 +13324,34 @@
 
   (function (module, exports) {
 
-    /**
+  /**
    * Module dependencies.
    * @private
    */
-    const {EventEmitter} = require$$0;
-    const Hook = hook;
-    var {
-      assignNewMochaID,
-      clamp,
-      constants: utilsConstants,
-      defineConstants,
-      getMochaID,
-      inherits,
-      isString
-    } = utils$3;
-    const debug = browser.exports('mocha:suite');
-    const milliseconds = ms$1;
-    const errors = errors$2;
+  const {EventEmitter} = require$$0;
+  const Hook = hook;
+  var {
+    assignNewMochaID,
+    clamp,
+    constants: utilsConstants,
+    defineConstants,
+    getMochaID,
+    inherits,
+    isString
+  } = utils$3;
+  const debug = browser.exports('mocha:suite');
+  const milliseconds = ms$1;
+  const errors = errors$2;
 
-    const {MOCHA_ID_PROP_NAME} = utilsConstants;
+  const {MOCHA_ID_PROP_NAME} = utilsConstants;
 
-    /**
+  /**
    * Expose `Suite`.
    */
 
-    module.exports = Suite;
+  module.exports = Suite;
 
-    /**
+  /**
    * Create a new `Suite` with the given `title` and parent `Suite`.
    *
    * @public
@@ -13359,15 +13359,15 @@
    * @param {string} title - Title
    * @return {Suite}
    */
-    Suite.create = function (parent, title) {
-      var suite = new Suite(title, parent.ctx);
-      suite.parent = parent;
-      title = suite.fullTitle();
-      parent.addSuite(suite);
-      return suite;
-    };
+  Suite.create = function (parent, title) {
+    var suite = new Suite(title, parent.ctx);
+    suite.parent = parent;
+    title = suite.fullTitle();
+    parent.addSuite(suite);
+    return suite;
+  };
 
-    /**
+  /**
    * Constructs a new `Suite` instance with the given `title`, `ctx`, and `isRoot`.
    *
    * @public
@@ -13378,85 +13378,85 @@
    * @param {Context} parentContext - Parent context instance.
    * @param {boolean} [isRoot=false] - Whether this is the root suite.
    */
-    function Suite(title, parentContext, isRoot) {
-      if (!isString(title)) {
-        throw errors.createInvalidArgumentTypeError(
-          'Suite argument "title" must be a string. Received type "' +
+  function Suite(title, parentContext, isRoot) {
+    if (!isString(title)) {
+      throw errors.createInvalidArgumentTypeError(
+        'Suite argument "title" must be a string. Received type "' +
           typeof title +
           '"',
-          'title',
-          'string'
-        );
-      }
-      this.title = title;
-      function Context() {}
-      Context.prototype = parentContext;
-      this.ctx = new Context();
-      this.suites = [];
-      this.tests = [];
-      this.root = isRoot === true;
-      this.pending = false;
-      this._retries = -1;
-      this._beforeEach = [];
-      this._beforeAll = [];
-      this._afterEach = [];
-      this._afterAll = [];
-      this._timeout = 2000;
-      this._slow = 75;
-      this._bail = false;
-      this._onlyTests = [];
-      this._onlySuites = [];
-      assignNewMochaID(this);
-
-      Object.defineProperty(this, 'id', {
-        get() {
-          return getMochaID(this);
-        }
-      });
-
-      this.reset();
+        'title',
+        'string'
+      );
     }
+    this.title = title;
+    function Context() {}
+    Context.prototype = parentContext;
+    this.ctx = new Context();
+    this.suites = [];
+    this.tests = [];
+    this.root = isRoot === true;
+    this.pending = false;
+    this._retries = -1;
+    this._beforeEach = [];
+    this._beforeAll = [];
+    this._afterEach = [];
+    this._afterAll = [];
+    this._timeout = 2000;
+    this._slow = 75;
+    this._bail = false;
+    this._onlyTests = [];
+    this._onlySuites = [];
+    assignNewMochaID(this);
 
-    /**
+    Object.defineProperty(this, 'id', {
+      get() {
+        return getMochaID(this);
+      }
+    });
+
+    this.reset();
+  }
+
+  /**
    * Inherit from `EventEmitter.prototype`.
    */
-    inherits(Suite, EventEmitter);
+  inherits(Suite, EventEmitter);
 
-    /**
+  /**
    * Resets the state initially or for a next run.
    */
-    Suite.prototype.reset = function () {
-      this.delayed = false;
-      function doReset(thingToReset) {
-        thingToReset.reset();
-      }
-      this.suites.forEach(doReset);
-      this.tests.forEach(doReset);
-      this._beforeEach.forEach(doReset);
-      this._afterEach.forEach(doReset);
-      this._beforeAll.forEach(doReset);
-      this._afterAll.forEach(doReset);
-    };
+  Suite.prototype.reset = function () {
+    this.delayed = false;
+    function doReset(thingToReset) {
+      thingToReset.reset();
+    }
+    this.suites.forEach(doReset);
+    this.tests.forEach(doReset);
+    this._beforeEach.forEach(doReset);
+    this._afterEach.forEach(doReset);
+    this._beforeAll.forEach(doReset);
+    this._afterAll.forEach(doReset);
+  };
 
-    /**
+  /**
    * Return a clone of this `Suite`.
    *
    * @private
    * @return {Suite}
    */
-    Suite.prototype.clone = function () {
-      var suite = new Suite(this.title);
-      debug('clone');
-      suite.ctx = this.ctx;
-      suite.root = this.root;
-      suite.timeout(this.timeout());
-      suite.retries(this.retries());
-      suite.slow(this.slow());
-      suite.bail(this.bail());
-      return suite;
-    };
+  Suite.prototype.clone = function () {
+    var suite = new Suite(this.title);
+    debug('clone');
+    suite.ctx = this.ctx;
+    suite.root = this.root;
+    suite.timeout(this.timeout());
+    suite.retries(this.retries());
+    suite.slow(this.slow());
+    suite.bail(this.bail());
+    return suite;
+  };
 
-    /**
+  /**
    * Set or get timeout `ms` or short-hand such as "2s".
    *
    * @private
@@ -13464,103 +13464,103 @@
    * @param {number|string} ms
    * @return {Suite|number} for chaining
    */
-    Suite.prototype.timeout = function (ms) {
-      if (!arguments.length) {
-        return this._timeout;
-      }
-      if (typeof ms === 'string') {
-        ms = milliseconds(ms);
-      }
+  Suite.prototype.timeout = function (ms) {
+    if (!arguments.length) {
+      return this._timeout;
+    }
+    if (typeof ms === 'string') {
+      ms = milliseconds(ms);
+    }
 
-      // Clamp to range
-      var INT_MAX = Math.pow(2, 31) - 1;
-      var range = [0, INT_MAX];
-      ms = clamp(ms, range);
+    // Clamp to range
+    var INT_MAX = Math.pow(2, 31) - 1;
+    var range = [0, INT_MAX];
+    ms = clamp(ms, range);
 
-      debug('timeout %d', ms);
-      this._timeout = parseInt(ms, 10);
-      return this;
-    };
+    debug('timeout %d', ms);
+    this._timeout = parseInt(ms, 10);
+    return this;
+  };
 
-    /**
+  /**
    * Set or get number of times to retry a failed test.
    *
    * @private
    * @param {number|string} n
    * @return {Suite|number} for chaining
    */
-    Suite.prototype.retries = function (n) {
-      if (!arguments.length) {
-        return this._retries;
-      }
-      debug('retries %d', n);
-      this._retries = parseInt(n, 10) || 0;
-      return this;
-    };
+  Suite.prototype.retries = function (n) {
+    if (!arguments.length) {
+      return this._retries;
+    }
+    debug('retries %d', n);
+    this._retries = parseInt(n, 10) || 0;
+    return this;
+  };
 
-    /**
+  /**
    * Set or get slow `ms` or short-hand such as "2s".
    *
    * @private
    * @param {number|string} ms
    * @return {Suite|number} for chaining
    */
-    Suite.prototype.slow = function (ms) {
-      if (!arguments.length) {
-        return this._slow;
-      }
-      if (typeof ms === 'string') {
-        ms = milliseconds(ms);
-      }
-      debug('slow %d', ms);
-      this._slow = ms;
-      return this;
-    };
+  Suite.prototype.slow = function (ms) {
+    if (!arguments.length) {
+      return this._slow;
+    }
+    if (typeof ms === 'string') {
+      ms = milliseconds(ms);
+    }
+    debug('slow %d', ms);
+    this._slow = ms;
+    return this;
+  };
 
-    /**
+  /**
    * Set or get whether to bail after first error.
    *
    * @private
    * @param {boolean} bail
    * @return {Suite|number} for chaining
    */
-    Suite.prototype.bail = function (bail) {
-      if (!arguments.length) {
-        return this._bail;
-      }
-      debug('bail %s', bail);
-      this._bail = bail;
-      return this;
-    };
+  Suite.prototype.bail = function (bail) {
+    if (!arguments.length) {
+      return this._bail;
+    }
+    debug('bail %s', bail);
+    this._bail = bail;
+    return this;
+  };
 
-    /**
+  /**
    * Check if this suite or its parent suite is marked as pending.
    *
    * @private
    */
-    Suite.prototype.isPending = function () {
-      return this.pending || (this.parent && this.parent.isPending());
-    };
+  Suite.prototype.isPending = function () {
+    return this.pending || (this.parent && this.parent.isPending());
+  };
 
-    /**
+  /**
    * Generic hook-creator.
    * @private
    * @param {string} title - Title of hook
    * @param {Function} fn - Hook callback
    * @returns {Hook} A new hook
    */
-    Suite.prototype._createHook = function (title, fn) {
-      var hook = new Hook(title, fn);
-      hook.parent = this;
-      hook.timeout(this.timeout());
-      hook.retries(this.retries());
-      hook.slow(this.slow());
-      hook.ctx = this.ctx;
-      hook.file = this.file;
-      return hook;
-    };
+  Suite.prototype._createHook = function (title, fn) {
+    var hook = new Hook(title, fn);
+    hook.parent = this;
+    hook.timeout(this.timeout());
+    hook.retries(this.retries());
+    hook.slow(this.slow());
+    hook.ctx = this.ctx;
+    hook.file = this.file;
+    return hook;
+  };
 
-    /**
+  /**
    * Run `fn(test[, done])` before running tests.
    *
    * @private
@@ -13568,23 +13568,23 @@
    * @param {Function} fn
    * @return {Suite} for chaining
    */
-    Suite.prototype.beforeAll = function (title, fn) {
-      if (this.isPending()) {
-        return this;
-      }
-      if (typeof title === 'function') {
-        fn = title;
-        title = fn.name;
-      }
-      title = '"before all" hook' + (title ? ': ' + title : '');
-
-      var hook = this._createHook(title, fn);
-      this._beforeAll.push(hook);
-      this.emit(constants.EVENT_SUITE_ADD_HOOK_BEFORE_ALL, hook);
+  Suite.prototype.beforeAll = function (title, fn) {
+    if (this.isPending()) {
       return this;
-    };
+    }
+    if (typeof title === 'function') {
+      fn = title;
+      title = fn.name;
+    }
+    title = '"before all" hook' + (title ? ': ' + title : '');
 
-    /**
+    var hook = this._createHook(title, fn);
+    this._beforeAll.push(hook);
+    this.emit(constants.EVENT_SUITE_ADD_HOOK_BEFORE_ALL, hook);
+    return this;
+  };
+
+  /**
    * Run `fn(test[, done])` after running tests.
    *
    * @private
@@ -13592,23 +13592,23 @@
    * @param {Function} fn
    * @return {Suite} for chaining
    */
-    Suite.prototype.afterAll = function (title, fn) {
-      if (this.isPending()) {
-        return this;
-      }
-      if (typeof title === 'function') {
-        fn = title;
-        title = fn.name;
-      }
-      title = '"after all" hook' + (title ? ': ' + title : '');
-
-      var hook = this._createHook(title, fn);
-      this._afterAll.push(hook);
-      this.emit(constants.EVENT_SUITE_ADD_HOOK_AFTER_ALL, hook);
+  Suite.prototype.afterAll = function (title, fn) {
+    if (this.isPending()) {
       return this;
-    };
+    }
+    if (typeof title === 'function') {
+      fn = title;
+      title = fn.name;
+    }
+    title = '"after all" hook' + (title ? ': ' + title : '');
 
-    /**
+    var hook = this._createHook(title, fn);
+    this._afterAll.push(hook);
+    this.emit(constants.EVENT_SUITE_ADD_HOOK_AFTER_ALL, hook);
+    return this;
+  };
+
+  /**
    * Run `fn(test[, done])` before each test case.
    *
    * @private
@@ -13616,23 +13616,23 @@
    * @param {Function} fn
    * @return {Suite} for chaining
    */
-    Suite.prototype.beforeEach = function (title, fn) {
-      if (this.isPending()) {
-        return this;
-      }
-      if (typeof title === 'function') {
-        fn = title;
-        title = fn.name;
-      }
-      title = '"before each" hook' + (title ? ': ' + title : '');
-
-      var hook = this._createHook(title, fn);
-      this._beforeEach.push(hook);
-      this.emit(constants.EVENT_SUITE_ADD_HOOK_BEFORE_EACH, hook);
+  Suite.prototype.beforeEach = function (title, fn) {
+    if (this.isPending()) {
       return this;
-    };
+    }
+    if (typeof title === 'function') {
+      fn = title;
+      title = fn.name;
+    }
+    title = '"before each" hook' + (title ? ': ' + title : '');
 
-    /**
+    var hook = this._createHook(title, fn);
+    this._beforeEach.push(hook);
+    this.emit(constants.EVENT_SUITE_ADD_HOOK_BEFORE_EACH, hook);
+    return this;
+  };
+
+  /**
    * Run `fn(test[, done])` after each test case.
    *
    * @private
@@ -13640,60 +13640,60 @@
    * @param {Function} fn
    * @return {Suite} for chaining
    */
-    Suite.prototype.afterEach = function (title, fn) {
-      if (this.isPending()) {
-        return this;
-      }
-      if (typeof title === 'function') {
-        fn = title;
-        title = fn.name;
-      }
-      title = '"after each" hook' + (title ? ': ' + title : '');
-
-      var hook = this._createHook(title, fn);
-      this._afterEach.push(hook);
-      this.emit(constants.EVENT_SUITE_ADD_HOOK_AFTER_EACH, hook);
+  Suite.prototype.afterEach = function (title, fn) {
+    if (this.isPending()) {
       return this;
-    };
+    }
+    if (typeof title === 'function') {
+      fn = title;
+      title = fn.name;
+    }
+    title = '"after each" hook' + (title ? ': ' + title : '');
 
-    /**
+    var hook = this._createHook(title, fn);
+    this._afterEach.push(hook);
+    this.emit(constants.EVENT_SUITE_ADD_HOOK_AFTER_EACH, hook);
+    return this;
+  };
+
+  /**
    * Add a test `suite`.
    *
    * @private
    * @param {Suite} suite
    * @return {Suite} for chaining
    */
-    Suite.prototype.addSuite = function (suite) {
-      suite.parent = this;
-      suite.root = false;
-      suite.timeout(this.timeout());
-      suite.retries(this.retries());
-      suite.slow(this.slow());
-      suite.bail(this.bail());
-      this.suites.push(suite);
-      this.emit(constants.EVENT_SUITE_ADD_SUITE, suite);
-      return this;
-    };
+  Suite.prototype.addSuite = function (suite) {
+    suite.parent = this;
+    suite.root = false;
+    suite.timeout(this.timeout());
+    suite.retries(this.retries());
+    suite.slow(this.slow());
+    suite.bail(this.bail());
+    this.suites.push(suite);
+    this.emit(constants.EVENT_SUITE_ADD_SUITE, suite);
+    return this;
+  };
 
-    /**
+  /**
    * Add a `test` to this suite.
    *
    * @private
    * @param {Test} test
    * @return {Suite} for chaining
    */
-    Suite.prototype.addTest = function (test) {
-      test.parent = this;
-      test.timeout(this.timeout());
-      test.retries(this.retries());
-      test.slow(this.slow());
-      test.ctx = this.ctx;
-      this.tests.push(test);
-      this.emit(constants.EVENT_SUITE_ADD_TEST, test);
-      return this;
-    };
+  Suite.prototype.addTest = function (test) {
+    test.parent = this;
+    test.timeout(this.timeout());
+    test.retries(this.retries());
+    test.slow(this.slow());
+    test.ctx = this.ctx;
+    this.tests.push(test);
+    this.emit(constants.EVENT_SUITE_ADD_TEST, test);
+    return this;
+  };
 
-    /**
+  /**
    * Return the full title generated by recursively concatenating the parent's
    * full title.
    *
@@ -13701,11 +13701,11 @@
    * @public
    * @return {string}
    */
-    Suite.prototype.fullTitle = function () {
-      return this.titlePath().join(' ');
-    };
+  Suite.prototype.fullTitle = function () {
+    return this.titlePath().join(' ');
+  };
 
-    /**
+  /**
    * Return the title path generated by recursively concatenating the parent's
    * title path.
    *
@@ -13713,33 +13713,33 @@
    * @public
    * @return {string[]}
    */
-    Suite.prototype.titlePath = function () {
-      var result = [];
-      if (this.parent) {
-        result = result.concat(this.parent.titlePath());
-      }
-      if (!this.root) {
-        result.push(this.title);
-      }
-      return result;
-    };
+  Suite.prototype.titlePath = function () {
+    var result = [];
+    if (this.parent) {
+      result = result.concat(this.parent.titlePath());
+    }
+    if (!this.root) {
+      result.push(this.title);
+    }
+    return result;
+  };
 
-    /**
+  /**
    * Return the total number of tests.
    *
    * @memberof Suite
    * @public
    * @return {number}
    */
-    Suite.prototype.total = function () {
-      return (
-        this.suites.reduce(function (sum, suite) {
-          return sum + suite.total();
-        }, 0) + this.tests.length
-      );
-    };
+  Suite.prototype.total = function () {
+    return (
+      this.suites.reduce(function (sum, suite) {
+        return sum + suite.total();
+      }, 0) + this.tests.length
+    );
+  };
 
-    /**
+  /**
    * Iterates through each suite recursively to find all tests. Applies a
    * function in the format `fn(test)`.
    *
@@ -13747,119 +13747,119 @@
    * @param {Function} fn
    * @return {Suite}
    */
-    Suite.prototype.eachTest = function (fn) {
-      this.tests.forEach(fn);
-      this.suites.forEach(function (suite) {
-        suite.eachTest(fn);
-      });
-      return this;
-    };
+  Suite.prototype.eachTest = function (fn) {
+    this.tests.forEach(fn);
+    this.suites.forEach(function (suite) {
+      suite.eachTest(fn);
+    });
+    return this;
+  };
 
-    /**
+  /**
    * This will run the root suite if we happen to be running in delayed mode.
    * @private
    */
-    Suite.prototype.run = function run() {
-      if (this.root) {
-        this.emit(constants.EVENT_ROOT_SUITE_RUN);
-      }
-    };
+  Suite.prototype.run = function run() {
+    if (this.root) {
+      this.emit(constants.EVENT_ROOT_SUITE_RUN);
+    }
+  };
 
-    /**
+  /**
    * Determines whether a suite has an `only` test or suite as a descendant.
    *
    * @private
    * @returns {Boolean}
    */
-    Suite.prototype.hasOnly = function hasOnly() {
-      return (
-        this._onlyTests.length > 0 ||
+  Suite.prototype.hasOnly = function hasOnly() {
+    return (
+      this._onlyTests.length > 0 ||
       this._onlySuites.length > 0 ||
       this.suites.some(function (suite) {
         return suite.hasOnly();
       })
-      );
-    };
+    );
+  };
 
-    /**
+  /**
    * Filter suites based on `isOnly` logic.
    *
    * @private
    * @returns {Boolean}
    */
-    Suite.prototype.filterOnly = function filterOnly() {
-      if (this._onlyTests.length) {
+  Suite.prototype.filterOnly = function filterOnly() {
+    if (this._onlyTests.length) {
       // If the suite contains `only` tests, run those and ignore any nested suites.
-        this.tests = this._onlyTests;
-        this.suites = [];
-      } else {
+      this.tests = this._onlyTests;
+      this.suites = [];
+    } else {
       // Otherwise, do not run any of the tests in this suite.
-        this.tests = [];
-        this._onlySuites.forEach(function (onlySuite) {
+      this.tests = [];
+      this._onlySuites.forEach(function (onlySuite) {
         // If there are other `only` tests/suites nested in the current `only` suite, then filter that `only` suite.
         // Otherwise, all of the tests on this `only` suite should be run, so don't filter it.
-          if (onlySuite.hasOnly()) {
-            onlySuite.filterOnly();
-          }
-        });
-        // Run the `only` suites, as well as any other suites that have `only` tests/suites as descendants.
-        var onlySuites = this._onlySuites;
-        this.suites = this.suites.filter(function (childSuite) {
-          return onlySuites.indexOf(childSuite) !== -1 || childSuite.filterOnly();
-        });
-      }
-      // Keep the suite only if there is something to run
-      return this.tests.length > 0 || this.suites.length > 0;
-    };
+        if (onlySuite.hasOnly()) {
+          onlySuite.filterOnly();
+        }
+      });
+      // Run the `only` suites, as well as any other suites that have `only` tests/suites as descendants.
+      var onlySuites = this._onlySuites;
+      this.suites = this.suites.filter(function (childSuite) {
+        return onlySuites.indexOf(childSuite) !== -1 || childSuite.filterOnly();
+      });
+    }
+    // Keep the suite only if there is something to run
+    return this.tests.length > 0 || this.suites.length > 0;
+  };
 
-    /**
+  /**
    * Adds a suite to the list of subsuites marked `only`.
    *
    * @private
    * @param {Suite} suite
    */
-    Suite.prototype.appendOnlySuite = function (suite) {
-      this._onlySuites.push(suite);
-    };
+  Suite.prototype.appendOnlySuite = function (suite) {
+    this._onlySuites.push(suite);
+  };
 
-    /**
+  /**
    * Marks a suite to be `only`.
    *
    * @private
    */
-    Suite.prototype.markOnly = function () {
-      this.parent && this.parent.appendOnlySuite(this);
-    };
+  Suite.prototype.markOnly = function () {
+    this.parent && this.parent.appendOnlySuite(this);
+  };
 
-    /**
+  /**
    * Adds a test to the list of tests marked `only`.
    *
    * @private
    * @param {Test} test
    */
-    Suite.prototype.appendOnlyTest = function (test) {
-      this._onlyTests.push(test);
-    };
+  Suite.prototype.appendOnlyTest = function (test) {
+    this._onlyTests.push(test);
+  };
 
-    /**
+  /**
    * Returns the array of hooks by hook name; see `HOOK_TYPE_*` constants.
    * @private
    */
-    Suite.prototype.getHooks = function getHooks(name) {
-      return this['_' + name];
-    };
+  Suite.prototype.getHooks = function getHooks(name) {
+    return this['_' + name];
+  };
 
-    /**
+  /**
    * cleans all references from this suite and all child suites.
    */
-    Suite.prototype.dispose = function () {
-      this.suites.forEach(function (suite) {
-        suite.dispose();
-      });
-      this.cleanReferences();
-    };
+  Suite.prototype.dispose = function () {
+    this.suites.forEach(function (suite) {
+      suite.dispose();
+    });
+    this.cleanReferences();
+  };
 
-    /**
+  /**
    * Cleans up the references to all the deferred functions
    * (before/after/beforeEach/afterEach) and tests of a Suite.
    * These must be deleted otherwise a memory leak can happen,
@@ -13869,53 +13869,53 @@
    *
    * @private
    */
-    Suite.prototype.cleanReferences = function cleanReferences() {
-      function cleanArrReferences(arr) {
-        for (var i = 0; i < arr.length; i++) {
-          delete arr[i].fn;
-        }
+  Suite.prototype.cleanReferences = function cleanReferences() {
+    function cleanArrReferences(arr) {
+      for (var i = 0; i < arr.length; i++) {
+        delete arr[i].fn;
       }
+    }
 
-      if (Array.isArray(this._beforeAll)) {
-        cleanArrReferences(this._beforeAll);
-      }
+    if (Array.isArray(this._beforeAll)) {
+      cleanArrReferences(this._beforeAll);
+    }
 
-      if (Array.isArray(this._beforeEach)) {
-        cleanArrReferences(this._beforeEach);
-      }
+    if (Array.isArray(this._beforeEach)) {
+      cleanArrReferences(this._beforeEach);
+    }
 
-      if (Array.isArray(this._afterAll)) {
-        cleanArrReferences(this._afterAll);
-      }
+    if (Array.isArray(this._afterAll)) {
+      cleanArrReferences(this._afterAll);
+    }
 
-      if (Array.isArray(this._afterEach)) {
-        cleanArrReferences(this._afterEach);
-      }
+    if (Array.isArray(this._afterEach)) {
+      cleanArrReferences(this._afterEach);
+    }
 
-      for (var i = 0; i < this.tests.length; i++) {
-        delete this.tests[i].fn;
-      }
-    };
+    for (var i = 0; i < this.tests.length; i++) {
+      delete this.tests[i].fn;
+    }
+  };
 
-    /**
+  /**
    * Returns an object suitable for IPC.
    * Functions are represented by keys beginning with `$$`.
    * @private
    * @returns {Object}
    */
-    Suite.prototype.serialize = function serialize() {
-      return {
-        _bail: this._bail,
-        $$fullTitle: this.fullTitle(),
-        $$isPending: Boolean(this.isPending()),
-        root: this.root,
-        title: this.title,
-        [MOCHA_ID_PROP_NAME]: this.id,
-        parent: this.parent ? {[MOCHA_ID_PROP_NAME]: this.parent.id} : null
-      };
+  Suite.prototype.serialize = function serialize() {
+    return {
+      _bail: this._bail,
+      $$fullTitle: this.fullTitle(),
+      $$isPending: Boolean(this.isPending()),
+      root: this.root,
+      title: this.title,
+      [MOCHA_ID_PROP_NAME]: this.id,
+      parent: this.parent ? {[MOCHA_ID_PROP_NAME]: this.parent.id} : null
     };
+  };
 
-    var constants = defineConstants(
+  var constants = defineConstants(
     /**
      * {@link Suite}-related constants.
      * @public
@@ -13925,69 +13925,69 @@
      * @static
      * @enum {string}
      */
-      {
+    {
       /**
        * Event emitted after a test file has been loaded. Not emitted in browser.
        */
-        EVENT_FILE_POST_REQUIRE: 'post-require',
-        /**
+      EVENT_FILE_POST_REQUIRE: 'post-require',
+      /**
        * Event emitted before a test file has been loaded. In browser, this is emitted once an interface has been selected.
        */
-        EVENT_FILE_PRE_REQUIRE: 'pre-require',
-        /**
+      EVENT_FILE_PRE_REQUIRE: 'pre-require',
+      /**
        * Event emitted immediately after a test file has been loaded. Not emitted in browser.
        */
-        EVENT_FILE_REQUIRE: 'require',
-        /**
+      EVENT_FILE_REQUIRE: 'require',
+      /**
        * Event emitted when `global.run()` is called (use with `delay` option).
        */
-        EVENT_ROOT_SUITE_RUN: 'run',
+      EVENT_ROOT_SUITE_RUN: 'run',
 
-        /**
+      /**
        * Namespace for collection of a `Suite`'s "after all" hooks.
        */
-        HOOK_TYPE_AFTER_ALL: 'afterAll',
-        /**
+      HOOK_TYPE_AFTER_ALL: 'afterAll',
+      /**
        * Namespace for collection of a `Suite`'s "after each" hooks.
        */
-        HOOK_TYPE_AFTER_EACH: 'afterEach',
-        /**
+      HOOK_TYPE_AFTER_EACH: 'afterEach',
+      /**
        * Namespace for collection of a `Suite`'s "before all" hooks.
        */
-        HOOK_TYPE_BEFORE_ALL: 'beforeAll',
-        /**
+      HOOK_TYPE_BEFORE_ALL: 'beforeAll',
+      /**
        * Namespace for collection of a `Suite`'s "before each" hooks.
        */
-        HOOK_TYPE_BEFORE_EACH: 'beforeEach',
+      HOOK_TYPE_BEFORE_EACH: 'beforeEach',
 
-        /**
+      /**
        * Emitted after a child `Suite` has been added to a `Suite`.
        */
-        EVENT_SUITE_ADD_SUITE: 'suite',
-        /**
+      EVENT_SUITE_ADD_SUITE: 'suite',
+      /**
        * Emitted after an "after all" `Hook` has been added to a `Suite`.
        */
-        EVENT_SUITE_ADD_HOOK_AFTER_ALL: 'afterAll',
-        /**
+      EVENT_SUITE_ADD_HOOK_AFTER_ALL: 'afterAll',
+      /**
        * Emitted after an "after each" `Hook` has been added to a `Suite`.
        */
-        EVENT_SUITE_ADD_HOOK_AFTER_EACH: 'afterEach',
-        /**
+      EVENT_SUITE_ADD_HOOK_AFTER_EACH: 'afterEach',
+      /**
        * Emitted after an "before all" `Hook` has been added to a `Suite`.
        */
-        EVENT_SUITE_ADD_HOOK_BEFORE_ALL: 'beforeAll',
-        /**
+      EVENT_SUITE_ADD_HOOK_BEFORE_ALL: 'beforeAll',
+      /**
        * Emitted after an "before each" `Hook` has been added to a `Suite`.
        */
-        EVENT_SUITE_ADD_HOOK_BEFORE_EACH: 'beforeEach',
-        /**
+      EVENT_SUITE_ADD_HOOK_BEFORE_EACH: 'beforeEach',
+      /**
        * Emitted after a `Test` has been added to a `Suite`.
        */
-        EVENT_SUITE_ADD_TEST: 'test'
-      }
-    );
+      EVENT_SUITE_ADD_TEST: 'test'
+    }
+  );
 
-    Suite.constants = constants;
+  Suite.constants = constants;
   }(suite));
 
   /**
@@ -15241,8 +15241,8 @@
   function thrown2Error(err) {
     return new Error(
       `the ${utils$1.canonicalType(err)} ${stringify(
-        err
-      )} was thrown, throw an Error :)`
+      err
+    )} was thrown, throw an Error :)`
     );
   }
 
@@ -15260,106 +15260,106 @@
   /**
    * @module Base
    */
-    /**
+  /**
    * Module dependencies.
    */
 
-    var diff = lib;
-    var milliseconds = ms$1;
-    var utils = utils$3;
-    var supportsColor = require$$18;
-    var symbols = browser$1;
-    var constants = runner.constants;
-    var EVENT_TEST_PASS = constants.EVENT_TEST_PASS;
-    var EVENT_TEST_FAIL = constants.EVENT_TEST_FAIL;
+  var diff = lib;
+  var milliseconds = ms$1;
+  var utils = utils$3;
+  var supportsColor = require$$18;
+  var symbols = browser$1;
+  var constants = runner.constants;
+  var EVENT_TEST_PASS = constants.EVENT_TEST_PASS;
+  var EVENT_TEST_FAIL = constants.EVENT_TEST_FAIL;
 
-    const isBrowser = utils.isBrowser();
+  const isBrowser = utils.isBrowser();
 
-    function getBrowserWindowSize() {
-      if ('innerHeight' in commonjsGlobal) {
-        return [commonjsGlobal.innerHeight, commonjsGlobal.innerWidth];
-      }
-      // In a Web Worker, the DOM Window is not available.
-      return [640, 480];
+  function getBrowserWindowSize() {
+    if ('innerHeight' in commonjsGlobal) {
+      return [commonjsGlobal.innerHeight, commonjsGlobal.innerWidth];
     }
+    // In a Web Worker, the DOM Window is not available.
+    return [640, 480];
+  }
 
-    /**
+  /**
    * Expose `Base`.
    */
 
-    exports = module.exports = Base;
+  exports = module.exports = Base;
 
-    /**
+  /**
    * Check if both stdio streams are associated with a tty.
    */
 
-    var isatty = isBrowser || (process.stdout.isTTY && process.stderr.isTTY);
+  var isatty = isBrowser || (process.stdout.isTTY && process.stderr.isTTY);
 
-    /**
+  /**
    * Save log references to avoid tests interfering (see GH-3604).
    */
-    var consoleLog = console.log;
+  var consoleLog = console.log;
 
-    /**
+  /**
    * Enable coloring by default, except in the browser interface.
    */
 
-    exports.useColors =
+  exports.useColors =
     !isBrowser &&
     (supportsColor.stdout || process.env.MOCHA_COLORS !== undefined);
 
-    /**
+  /**
    * Inline diffs instead of +/-
    */
 
-    exports.inlineDiffs = false;
+  exports.inlineDiffs = false;
 
-    /**
+  /**
    * Truncate diffs longer than this value to avoid slow performance
    */
-    exports.maxDiffSize = 8192;
+  exports.maxDiffSize = 8192;
 
-    /**
+  /**
    * Default color map.
    */
 
-    exports.colors = {
-      pass: 90,
-      fail: 31,
-      'bright pass': 92,
-      'bright fail': 91,
-      'bright yellow': 93,
-      pending: 36,
-      suite: 0,
-      'error title': 0,
-      'error message': 31,
-      'error stack': 90,
-      checkmark: 32,
-      fast: 90,
-      medium: 33,
-      slow: 31,
-      green: 32,
-      light: 90,
-      'diff gutter': 90,
-      'diff added': 32,
-      'diff removed': 31,
-      'diff added inline': '30;42',
-      'diff removed inline': '30;41'
-    };
+  exports.colors = {
+    pass: 90,
+    fail: 31,
+    'bright pass': 92,
+    'bright fail': 91,
+    'bright yellow': 93,
+    pending: 36,
+    suite: 0,
+    'error title': 0,
+    'error message': 31,
+    'error stack': 90,
+    checkmark: 32,
+    fast: 90,
+    medium: 33,
+    slow: 31,
+    green: 32,
+    light: 90,
+    'diff gutter': 90,
+    'diff added': 32,
+    'diff removed': 31,
+    'diff added inline': '30;42',
+    'diff removed inline': '30;41'
+  };
 
-    /**
+  /**
    * Default symbol map.
    */
 
-    exports.symbols = {
-      ok: symbols.success,
-      err: symbols.error,
-      dot: '.',
-      comma: ',',
-      bang: '!'
-    };
+  exports.symbols = {
+    ok: symbols.success,
+    err: symbols.error,
+    dot: '.',
+    comma: ',',
+    bang: '!'
+  };
 
-    /**
+  /**
    * Color `str` with the given `type`,
    * allowing colors to be disabled,
    * as well as user-defined color
@@ -15370,77 +15370,77 @@
    * @param {string} str
    * @return {string}
    */
-    var color = (exports.color = function (type, str) {
-      if (!exports.useColors) {
-        return String(str);
-      }
-      return '\u001b[' + exports.colors[type] + 'm' + str + '\u001b[0m';
-    });
+  var color = (exports.color = function (type, str) {
+    if (!exports.useColors) {
+      return String(str);
+    }
+    return '\u001b[' + exports.colors[type] + 'm' + str + '\u001b[0m';
+  });
 
-    /**
+  /**
    * Expose term window size, with some defaults for when stderr is not a tty.
    */
 
-    exports.window = {
-      width: 75
-    };
+  exports.window = {
+    width: 75
+  };
 
-    if (isatty) {
-      if (isBrowser) {
-        exports.window.width = getBrowserWindowSize()[1];
-      } else {
-        exports.window.width = process.stdout.getWindowSize(1)[0];
-      }
+  if (isatty) {
+    if (isBrowser) {
+      exports.window.width = getBrowserWindowSize()[1];
+    } else {
+      exports.window.width = process.stdout.getWindowSize(1)[0];
     }
+  }
 
-    /**
+  /**
    * Expose some basic cursor interactions that are common among reporters.
    */
 
-    exports.cursor = {
-      hide: function () {
-        isatty && process.stdout.write('\u001b[?25l');
-      },
+  exports.cursor = {
+    hide: function () {
+      isatty && process.stdout.write('\u001b[?25l');
+    },
 
-      show: function () {
-        isatty && process.stdout.write('\u001b[?25h');
-      },
+    show: function () {
+      isatty && process.stdout.write('\u001b[?25h');
+    },
 
-      deleteLine: function () {
-        isatty && process.stdout.write('\u001b[2K');
-      },
+    deleteLine: function () {
+      isatty && process.stdout.write('\u001b[2K');
+    },
 
-      beginningOfLine: function () {
-        isatty && process.stdout.write('\u001b[0G');
-      },
+    beginningOfLine: function () {
+      isatty && process.stdout.write('\u001b[0G');
+    },
 
-      CR: function () {
-        if (isatty) {
-          exports.cursor.deleteLine();
-          exports.cursor.beginningOfLine();
-        } else {
-          process.stdout.write('\r');
-        }
+    CR: function () {
+      if (isatty) {
+        exports.cursor.deleteLine();
+        exports.cursor.beginningOfLine();
+      } else {
+        process.stdout.write('\r');
       }
-    };
+    }
+  };
 
-    var showDiff = (exports.showDiff = function (err) {
-      return (
-        err &&
+  var showDiff = (exports.showDiff = function (err) {
+    return (
+      err &&
       err.showDiff !== false &&
       sameType(err.actual, err.expected) &&
       err.expected !== undefined
-      );
-    });
+    );
+  });
 
-    function stringifyDiffObjs(err) {
-      if (!utils.isString(err.actual) || !utils.isString(err.expected)) {
-        err.actual = utils.stringify(err.actual);
-        err.expected = utils.stringify(err.expected);
-      }
+  function stringifyDiffObjs(err) {
+    if (!utils.isString(err.actual) || !utils.isString(err.expected)) {
+      err.actual = utils.stringify(err.actual);
+      err.expected = utils.stringify(err.expected);
     }
+  }
 
-    /**
+  /**
    * Returns a diff between 2 strings with coloured ANSI output.
    *
    * @description
@@ -15452,34 +15452,34 @@
    * @return {string} Diff
    */
 
-    var generateDiff = (exports.generateDiff = function (actual, expected) {
-      try {
-        var maxLen = exports.maxDiffSize;
-        var skipped = 0;
-        if (maxLen > 0) {
-          skipped = Math.max(actual.length - maxLen, expected.length - maxLen);
-          actual = actual.slice(0, maxLen);
-          expected = expected.slice(0, maxLen);
-        }
-        let result = exports.inlineDiffs
-          ? inlineDiff(actual, expected)
-          : unifiedDiff(actual, expected);
-        if (skipped > 0) {
-          result = `${result}\n      [mocha] output truncated to ${maxLen} characters, see "maxDiffSize" reporter-option\n`;
-        }
-        return result;
-      } catch (err) {
-        var msg =
+  var generateDiff = (exports.generateDiff = function (actual, expected) {
+    try {
+      var maxLen = exports.maxDiffSize;
+      var skipped = 0;
+      if (maxLen > 0) {
+        skipped = Math.max(actual.length - maxLen, expected.length - maxLen);
+        actual = actual.slice(0, maxLen);
+        expected = expected.slice(0, maxLen);
+      }
+      let result = exports.inlineDiffs
+        ? inlineDiff(actual, expected)
+        : unifiedDiff(actual, expected);
+      if (skipped > 0) {
+        result = `${result}\n      [mocha] output truncated to ${maxLen} characters, see "maxDiffSize" reporter-option\n`;
+      }
+      return result;
+    } catch (err) {
+      var msg =
         '\n      ' +
         color('diff added', '+ expected') +
         ' ' +
         color('diff removed', '- actual:  failed to generate Mocha diff') +
         '\n';
-        return msg;
-      }
-    });
+      return msg;
+    }
+  });
 
-    /**
+  /**
    * Traverses err.cause and returns all stack traces
    *
    * @private
@@ -15487,49 +15487,49 @@
    * @param {Set<Error>} [seen]
    * @return {FullErrorStack}
    */
-    var getFullErrorStack = function (err, seen) {
-      if (seen && seen.has(err)) {
-        return { message: '', msg: '<circular>', stack: '' };
+  var getFullErrorStack = function (err, seen) {
+    if (seen && seen.has(err)) {
+      return { message: '', msg: '<circular>', stack: '' };
+    }
+
+    var message;
+
+    if (typeof err.inspect === 'function') {
+      message = err.inspect() + '';
+    } else if (err.message && typeof err.message.toString === 'function') {
+      message = err.message + '';
+    } else {
+      message = '';
+    }
+
+    var msg;
+    var stack = err.stack || message;
+    var index = message ? stack.indexOf(message) : -1;
+
+    if (index === -1) {
+      msg = message;
+    } else {
+      index += message.length;
+      msg = stack.slice(0, index);
+      // remove msg from stack
+      stack = stack.slice(index + 1);
+
+      if (err.cause) {
+        seen = seen || new Set();
+        seen.add(err);
+        const causeStack = getFullErrorStack(err.cause, seen);
+        stack += '\n   Caused by: ' + causeStack.msg + (causeStack.stack ? '\n' + causeStack.stack : '');
       }
+    }
 
-      var message;
-
-      if (typeof err.inspect === 'function') {
-        message = err.inspect() + '';
-      } else if (err.message && typeof err.message.toString === 'function') {
-        message = err.message + '';
-      } else {
-        message = '';
-      }
-
-      var msg;
-      var stack = err.stack || message;
-      var index = message ? stack.indexOf(message) : -1;
-
-      if (index === -1) {
-        msg = message;
-      } else {
-        index += message.length;
-        msg = stack.slice(0, index);
-        // remove msg from stack
-        stack = stack.slice(index + 1);
-
-        if (err.cause) {
-          seen = seen || new Set();
-          seen.add(err);
-          const causeStack = getFullErrorStack(err.cause, seen);
-          stack += '\n   Caused by: ' + causeStack.msg + (causeStack.stack ? '\n' + causeStack.stack : '');
-        }
-      }
-
-      return {
-        message,
-        msg,
-        stack
-      };
+    return {
+      message,
+      msg,
+      stack
     };
+  };
 
-    /**
+  /**
    * Outputs the given `failures` as a list.
    *
    * @public
@@ -15538,65 +15538,65 @@
    * @param {Object[]} failures - Each is Test instance with corresponding
    *     Error property
    */
-    exports.list = function (failures) {
-      var multipleErr, multipleTest;
-      Base.consoleLog();
-      failures.forEach(function (test, i) {
+  exports.list = function (failures) {
+    var multipleErr, multipleTest;
+    Base.consoleLog();
+    failures.forEach(function (test, i) {
       // format
-        var fmt =
+      var fmt =
         color('error title', '  %s) %s:\n') +
         color('error message', '     %s') +
         color('error stack', '\n%s\n');
 
-        // msg
-        var err;
-        if (test.err && test.err.multiple) {
-          if (multipleTest !== test) {
-            multipleTest = test;
-            multipleErr = [test.err].concat(test.err.multiple);
-          }
-          err = multipleErr.shift();
-        } else {
-          err = test.err;
+      // msg
+      var err;
+      if (test.err && test.err.multiple) {
+        if (multipleTest !== test) {
+          multipleTest = test;
+          multipleErr = [test.err].concat(test.err.multiple);
         }
+        err = multipleErr.shift();
+      } else {
+        err = test.err;
+      }
 
-        var { message, msg, stack } = getFullErrorStack(err);
+      var { message, msg, stack } = getFullErrorStack(err);
 
-        // uncaught
-        if (err.uncaught) {
-          msg = 'Uncaught ' + msg;
-        }
-        // explicitly show diff
-        if (!exports.hideDiff && showDiff(err)) {
-          stringifyDiffObjs(err);
-          fmt =
+      // uncaught
+      if (err.uncaught) {
+        msg = 'Uncaught ' + msg;
+      }
+      // explicitly show diff
+      if (!exports.hideDiff && showDiff(err)) {
+        stringifyDiffObjs(err);
+        fmt =
           color('error title', '  %s) %s:\n%s') + color('error stack', '\n%s\n');
-          var match = message.match(/^([^:]+): expected/);
-          msg = '\n      ' + color('error message', match ? match[1] : msg);
+        var match = message.match(/^([^:]+): expected/);
+        msg = '\n      ' + color('error message', match ? match[1] : msg);
 
-          msg += generateDiff(err.actual, err.expected);
+        msg += generateDiff(err.actual, err.expected);
+      }
+
+      // indent stack trace
+      stack = stack.replace(/^/gm, '  ');
+
+      // indented test title
+      var testTitle = '';
+      test.titlePath().forEach(function (str, index) {
+        if (index !== 0) {
+          testTitle += '\n     ';
         }
-
-        // indent stack trace
-        stack = stack.replace(/^/gm, '  ');
-
-        // indented test title
-        var testTitle = '';
-        test.titlePath().forEach(function (str, index) {
-          if (index !== 0) {
-            testTitle += '\n     ';
-          }
-          for (var i = 0; i < index; i++) {
-            testTitle += '  ';
-          }
-          testTitle += str;
-        });
-
-        Base.consoleLog(fmt, i + 1, testTitle, msg, stack);
+        for (var i = 0; i < index; i++) {
+          testTitle += '  ';
+        }
+        testTitle += str;
       });
-    };
 
-    /**
+      Base.consoleLog(fmt, i + 1, testTitle, msg, stack);
+    });
+  };
+
+  /**
    * Constructs a new `Base` reporter instance.
    *
    * @description
@@ -15608,87 +15608,87 @@
    * @param {Runner} runner - Instance triggers reporter actions.
    * @param {Object} [options] - runner options
    */
-    function Base(runner, options) {
-      var failures = (this.failures = []);
+  function Base(runner, options) {
+    var failures = (this.failures = []);
 
-      if (!runner) {
-        throw new TypeError('Missing runner argument');
-      }
-      this.options = options || {};
-      this.runner = runner;
-      this.stats = runner.stats; // assigned so Reporters keep a closer reference
+    if (!runner) {
+      throw new TypeError('Missing runner argument');
+    }
+    this.options = options || {};
+    this.runner = runner;
+    this.stats = runner.stats; // assigned so Reporters keep a closer reference
 
-      var maxDiffSizeOpt =
+    var maxDiffSizeOpt =
       this.options.reporterOption && this.options.reporterOption.maxDiffSize;
-      if (maxDiffSizeOpt !== undefined && !isNaN(Number(maxDiffSizeOpt))) {
-        exports.maxDiffSize = Number(maxDiffSizeOpt);
-      }
-
-      runner.on(EVENT_TEST_PASS, function (test) {
-        if (test.duration > test.slow()) {
-          test.speed = 'slow';
-        } else if (test.duration > test.slow() / 2) {
-          test.speed = 'medium';
-        } else {
-          test.speed = 'fast';
-        }
-      });
-
-      runner.on(EVENT_TEST_FAIL, function (test, err) {
-        if (showDiff(err)) {
-          stringifyDiffObjs(err);
-        }
-        // more than one error per test
-        if (test.err && err instanceof Error) {
-          test.err.multiple = (test.err.multiple || []).concat(err);
-        } else {
-          test.err = err;
-        }
-        failures.push(test);
-      });
+    if (maxDiffSizeOpt !== undefined && !isNaN(Number(maxDiffSizeOpt))) {
+      exports.maxDiffSize = Number(maxDiffSizeOpt);
     }
 
-    /**
+    runner.on(EVENT_TEST_PASS, function (test) {
+      if (test.duration > test.slow()) {
+        test.speed = 'slow';
+      } else if (test.duration > test.slow() / 2) {
+        test.speed = 'medium';
+      } else {
+        test.speed = 'fast';
+      }
+    });
+
+    runner.on(EVENT_TEST_FAIL, function (test, err) {
+      if (showDiff(err)) {
+        stringifyDiffObjs(err);
+      }
+      // more than one error per test
+      if (test.err && err instanceof Error) {
+        test.err.multiple = (test.err.multiple || []).concat(err);
+      } else {
+        test.err = err;
+      }
+      failures.push(test);
+    });
+  }
+
+  /**
    * Outputs common epilogue used by many of the bundled reporters.
    *
    * @public
    * @memberof Mocha.reporters
    */
-    Base.prototype.epilogue = function () {
-      var stats = this.stats;
-      var fmt;
+  Base.prototype.epilogue = function () {
+    var stats = this.stats;
+    var fmt;
 
-      Base.consoleLog();
+    Base.consoleLog();
 
-      // passes
-      fmt =
+    // passes
+    fmt =
       color('bright pass', ' ') +
       color('green', ' %d passing') +
       color('light', ' (%s)');
 
-      Base.consoleLog(fmt, stats.passes || 0, milliseconds(stats.duration));
+    Base.consoleLog(fmt, stats.passes || 0, milliseconds(stats.duration));
 
-      // pending
-      if (stats.pending) {
-        fmt = color('pending', ' ') + color('pending', ' %d pending');
+    // pending
+    if (stats.pending) {
+      fmt = color('pending', ' ') + color('pending', ' %d pending');
 
-        Base.consoleLog(fmt, stats.pending);
-      }
+      Base.consoleLog(fmt, stats.pending);
+    }
 
-      // failures
-      if (stats.failures) {
-        fmt = color('fail', '  %d failing');
+    // failures
+    if (stats.failures) {
+      fmt = color('fail', '  %d failing');
 
-        Base.consoleLog(fmt, stats.failures);
+      Base.consoleLog(fmt, stats.failures);
 
-        Base.list(this.failures);
-        Base.consoleLog();
-      }
-
+      Base.list(this.failures);
       Base.consoleLog();
-    };
+    }
 
-    /**
+    Base.consoleLog();
+  };
+
+  /**
    * Pads the given `str` to `len`.
    *
    * @private
@@ -15696,12 +15696,12 @@
    * @param {string} len
    * @return {string}
    */
-    function pad(str, len) {
-      str = String(str);
-      return Array(len - str.length + 1).join(' ') + str;
-    }
+  function pad(str, len) {
+    str = String(str);
+    return Array(len - str.length + 1).join(' ') + str;
+  }
 
-    /**
+  /**
    * Returns inline diff between 2 strings with coloured ANSI output.
    *
    * @private
@@ -15709,22 +15709,22 @@
    * @param {String} expected
    * @return {string} Diff
    */
-    function inlineDiff(actual, expected) {
-      var msg = errorDiff(actual, expected);
+  function inlineDiff(actual, expected) {
+    var msg = errorDiff(actual, expected);
 
-      // linenos
-      var lines = msg.split('\n');
-      if (lines.length > 4) {
-        var width = String(lines.length).length;
-        msg = lines
-          .map(function (str, i) {
-            return pad(++i, width) + ' |' + ' ' + str;
-          })
-          .join('\n');
-      }
+    // linenos
+    var lines = msg.split('\n');
+    if (lines.length > 4) {
+      var width = String(lines.length).length;
+      msg = lines
+        .map(function (str, i) {
+          return pad(++i, width) + ' |' + ' ' + str;
+        })
+        .join('\n');
+    }
 
-      // legend
-      msg =
+    // legend
+    msg =
       '\n' +
       color('diff removed inline', 'actual') +
       ' ' +
@@ -15733,12 +15733,12 @@
       msg +
       '\n';
 
-      // indent
-      msg = msg.replace(/^/gm, '      ');
-      return msg;
-    }
+    // indent
+    msg = msg.replace(/^/gm, '      ');
+    return msg;
+  }
 
-    /**
+  /**
    * Returns unified diff between two strings with coloured ANSI output.
    *
    * @private
@@ -15746,39 +15746,39 @@
    * @param {String} expected
    * @return {string} The diff.
    */
-    function unifiedDiff(actual, expected) {
-      var indent = '      ';
-      function cleanUp(line) {
-        if (line[0] === '+') {
-          return indent + colorLines('diff added', line);
-        }
-        if (line[0] === '-') {
-          return indent + colorLines('diff removed', line);
-        }
-        if (line.match(/@@/)) {
-          return '--';
-        }
-        if (line.match(/\\ No newline/)) {
-          return null;
-        }
-        return indent + line;
+  function unifiedDiff(actual, expected) {
+    var indent = '      ';
+    function cleanUp(line) {
+      if (line[0] === '+') {
+        return indent + colorLines('diff added', line);
       }
-      function notBlank(line) {
-        return typeof line !== 'undefined' && line !== null;
+      if (line[0] === '-') {
+        return indent + colorLines('diff removed', line);
       }
-      var msg = diff.createPatch('string', actual, expected);
-      var lines = msg.split('\n').splice(5);
-      return (
-        '\n      ' +
+      if (line.match(/@@/)) {
+        return '--';
+      }
+      if (line.match(/\\ No newline/)) {
+        return null;
+      }
+      return indent + line;
+    }
+    function notBlank(line) {
+      return typeof line !== 'undefined' && line !== null;
+    }
+    var msg = diff.createPatch('string', actual, expected);
+    var lines = msg.split('\n').splice(5);
+    return (
+      '\n      ' +
       colorLines('diff added', '+ expected') +
       ' ' +
       colorLines('diff removed', '- actual') +
       '\n\n' +
       lines.map(cleanUp).filter(notBlank).join('\n')
-      );
-    }
+    );
+  }
 
-    /**
+  /**
    * Returns character diff for `err`.
    *
    * @private
@@ -15786,22 +15786,22 @@
    * @param {String} expected
    * @return {string} the diff
    */
-    function errorDiff(actual, expected) {
-      return diff
-        .diffWordsWithSpace(actual, expected)
-        .map(function (str) {
-          if (str.added) {
-            return colorLines('diff added inline', str.value);
-          }
-          if (str.removed) {
-            return colorLines('diff removed inline', str.value);
-          }
-          return str.value;
-        })
-        .join('');
-    }
+  function errorDiff(actual, expected) {
+    return diff
+      .diffWordsWithSpace(actual, expected)
+      .map(function (str) {
+        if (str.added) {
+          return colorLines('diff added inline', str.value);
+        }
+        if (str.removed) {
+          return colorLines('diff removed inline', str.value);
+        }
+        return str.value;
+      })
+      .join('');
+  }
 
-    /**
+  /**
    * Colors lines for `str`, using the color `name`.
    *
    * @private
@@ -15809,21 +15809,21 @@
    * @param {string} str
    * @return {string}
    */
-    function colorLines(name, str) {
-      return str
-        .split('\n')
-        .map(function (str) {
-          return color(name, str);
-        })
-        .join('\n');
-    }
+  function colorLines(name, str) {
+    return str
+      .split('\n')
+      .map(function (str) {
+        return color(name, str);
+      })
+      .join('\n');
+  }
 
-    /**
+  /**
    * Object#toString reference.
    */
-    var objToString = Object.prototype.toString;
+  var objToString = Object.prototype.toString;
 
-    /**
+  /**
    * Checks that a / b have the same type.
    *
    * @private
@@ -15831,13 +15831,13 @@
    * @param {Object} b
    * @return {boolean}
    */
-    function sameType(a, b) {
-      return objToString.call(a) === objToString.call(b);
-    }
+  function sameType(a, b) {
+    return objToString.call(a) === objToString.call(b);
+  }
 
-    Base.consoleLog = consoleLog;
+  Base.consoleLog = consoleLog;
 
-    Base.abstract = true;
+  Base.abstract = true;
 
   /**
    * An object with all stack traces recursively mounted from each err.cause
@@ -15855,26 +15855,26 @@
   /**
    * @module Dot
    */
-    /**
+  /**
    * Module dependencies.
    */
 
-    var Base = base$1.exports;
-    var inherits = utils$3.inherits;
-    var constants = runner.constants;
-    var EVENT_TEST_PASS = constants.EVENT_TEST_PASS;
-    var EVENT_TEST_FAIL = constants.EVENT_TEST_FAIL;
-    var EVENT_RUN_BEGIN = constants.EVENT_RUN_BEGIN;
-    var EVENT_TEST_PENDING = constants.EVENT_TEST_PENDING;
-    var EVENT_RUN_END = constants.EVENT_RUN_END;
+  var Base = base$1.exports;
+  var inherits = utils$3.inherits;
+  var constants = runner.constants;
+  var EVENT_TEST_PASS = constants.EVENT_TEST_PASS;
+  var EVENT_TEST_FAIL = constants.EVENT_TEST_FAIL;
+  var EVENT_RUN_BEGIN = constants.EVENT_RUN_BEGIN;
+  var EVENT_TEST_PENDING = constants.EVENT_TEST_PENDING;
+  var EVENT_RUN_END = constants.EVENT_RUN_END;
 
-    /**
+  /**
    * Expose `Dot`.
    */
 
-    module.exports = Dot;
+  module.exports = Dot;
 
-    /**
+  /**
    * Constructs a new `Dot` reporter instance.
    *
    * @public
@@ -15884,54 +15884,54 @@
    * @param {Runner} runner - Instance triggers reporter actions.
    * @param {Object} [options] - runner options
    */
-    function Dot(runner, options) {
-      Base.call(this, runner, options);
+  function Dot(runner, options) {
+    Base.call(this, runner, options);
 
-      var self = this;
-      var width = (Base.window.width * 0.75) | 0;
-      var n = -1;
+    var self = this;
+    var width = (Base.window.width * 0.75) | 0;
+    var n = -1;
 
-      runner.on(EVENT_RUN_BEGIN, function () {
-        process.stdout.write('\n');
-      });
+    runner.on(EVENT_RUN_BEGIN, function () {
+      process.stdout.write('\n');
+    });
 
-      runner.on(EVENT_TEST_PENDING, function () {
-        if (++n % width === 0) {
-          process.stdout.write('\n  ');
-        }
-        process.stdout.write(Base.color('pending', Base.symbols.comma));
-      });
+    runner.on(EVENT_TEST_PENDING, function () {
+      if (++n % width === 0) {
+        process.stdout.write('\n  ');
+      }
+      process.stdout.write(Base.color('pending', Base.symbols.comma));
+    });
 
-      runner.on(EVENT_TEST_PASS, function (test) {
-        if (++n % width === 0) {
-          process.stdout.write('\n  ');
-        }
-        if (test.speed === 'slow') {
-          process.stdout.write(Base.color('bright yellow', Base.symbols.dot));
-        } else {
-          process.stdout.write(Base.color(test.speed, Base.symbols.dot));
-        }
-      });
+    runner.on(EVENT_TEST_PASS, function (test) {
+      if (++n % width === 0) {
+        process.stdout.write('\n  ');
+      }
+      if (test.speed === 'slow') {
+        process.stdout.write(Base.color('bright yellow', Base.symbols.dot));
+      } else {
+        process.stdout.write(Base.color(test.speed, Base.symbols.dot));
+      }
+    });
 
-      runner.on(EVENT_TEST_FAIL, function () {
-        if (++n % width === 0) {
-          process.stdout.write('\n  ');
-        }
-        process.stdout.write(Base.color('fail', Base.symbols.bang));
-      });
+    runner.on(EVENT_TEST_FAIL, function () {
+      if (++n % width === 0) {
+        process.stdout.write('\n  ');
+      }
+      process.stdout.write(Base.color('fail', Base.symbols.bang));
+    });
 
-      runner.once(EVENT_RUN_END, function () {
-        process.stdout.write('\n');
-        self.epilogue();
-      });
-    }
+    runner.once(EVENT_RUN_END, function () {
+      process.stdout.write('\n');
+      self.epilogue();
+    });
+  }
 
-    /**
+  /**
    * Inherit from `Base.prototype`.
    */
-    inherits(Dot, Base);
+  inherits(Dot, Base);
 
-    Dot.description = 'dot matrix representation';
+  Dot.description = 'dot matrix representation';
   }(dot));
 
   var doc = {exports: {}};
@@ -15940,25 +15940,25 @@
   /**
    * @module Doc
    */
-    /**
+  /**
    * Module dependencies.
    */
 
-    var Base = base$1.exports;
-    var utils = utils$3;
-    var constants = runner.constants;
-    var EVENT_TEST_PASS = constants.EVENT_TEST_PASS;
-    var EVENT_TEST_FAIL = constants.EVENT_TEST_FAIL;
-    var EVENT_SUITE_BEGIN = constants.EVENT_SUITE_BEGIN;
-    var EVENT_SUITE_END = constants.EVENT_SUITE_END;
+  var Base = base$1.exports;
+  var utils = utils$3;
+  var constants = runner.constants;
+  var EVENT_TEST_PASS = constants.EVENT_TEST_PASS;
+  var EVENT_TEST_FAIL = constants.EVENT_TEST_FAIL;
+  var EVENT_SUITE_BEGIN = constants.EVENT_SUITE_BEGIN;
+  var EVENT_SUITE_END = constants.EVENT_SUITE_END;
 
-    /**
+  /**
    * Expose `Doc`.
    */
 
-    module.exports = Doc;
+  module.exports = Doc;
 
-    /**
+  /**
    * Constructs a new `Doc` reporter instance.
    *
    * @public
@@ -15968,69 +15968,69 @@
    * @param {Runner} runner - Instance triggers reporter actions.
    * @param {Object} [options] - runner options
    */
-    function Doc(runner, options) {
-      Base.call(this, runner, options);
+  function Doc(runner, options) {
+    Base.call(this, runner, options);
 
-      var indents = 2;
+    var indents = 2;
 
-      function indent() {
-        return Array(indents).join('  ');
-      }
-
-      runner.on(EVENT_SUITE_BEGIN, function (suite) {
-        if (suite.root) {
-          return;
-        }
-        ++indents;
-        Base.consoleLog('%s<section class="suite">', indent());
-        ++indents;
-        Base.consoleLog('%s<h1>%s</h1>', indent(), utils.escape(suite.title));
-        Base.consoleLog('%s<dl>', indent());
-      });
-
-      runner.on(EVENT_SUITE_END, function (suite) {
-        if (suite.root) {
-          return;
-        }
-        Base.consoleLog('%s</dl>', indent());
-        --indents;
-        Base.consoleLog('%s</section>', indent());
-        --indents;
-      });
-
-      runner.on(EVENT_TEST_PASS, function (test) {
-        Base.consoleLog('%s  <dt>%s</dt>', indent(), utils.escape(test.title));
-        Base.consoleLog('%s  <dt>%s</dt>', indent(), utils.escape(test.file));
-        var code = utils.escape(utils.clean(test.body));
-        Base.consoleLog('%s  <dd><pre><code>%s</code></pre></dd>', indent(), code);
-      });
-
-      runner.on(EVENT_TEST_FAIL, function (test, err) {
-        Base.consoleLog(
-          '%s  <dt class="error">%s</dt>',
-          indent(),
-          utils.escape(test.title)
-        );
-        Base.consoleLog(
-          '%s  <dt class="error">%s</dt>',
-          indent(),
-          utils.escape(test.file)
-        );
-        var code = utils.escape(utils.clean(test.body));
-        Base.consoleLog(
-          '%s  <dd class="error"><pre><code>%s</code></pre></dd>',
-          indent(),
-          code
-        );
-        Base.consoleLog(
-          '%s  <dd class="error">%s</dd>',
-          indent(),
-          utils.escape(err)
-        );
-      });
+    function indent() {
+      return Array(indents).join('  ');
     }
 
-    Doc.description = 'HTML documentation';
+    runner.on(EVENT_SUITE_BEGIN, function (suite) {
+      if (suite.root) {
+        return;
+      }
+      ++indents;
+      Base.consoleLog('%s<section class="suite">', indent());
+      ++indents;
+      Base.consoleLog('%s<h1>%s</h1>', indent(), utils.escape(suite.title));
+      Base.consoleLog('%s<dl>', indent());
+    });
+
+    runner.on(EVENT_SUITE_END, function (suite) {
+      if (suite.root) {
+        return;
+      }
+      Base.consoleLog('%s</dl>', indent());
+      --indents;
+      Base.consoleLog('%s</section>', indent());
+      --indents;
+    });
+
+    runner.on(EVENT_TEST_PASS, function (test) {
+      Base.consoleLog('%s  <dt>%s</dt>', indent(), utils.escape(test.title));
+      Base.consoleLog('%s  <dt>%s</dt>', indent(), utils.escape(test.file));
+      var code = utils.escape(utils.clean(test.body));
+      Base.consoleLog('%s  <dd><pre><code>%s</code></pre></dd>', indent(), code);
+    });
+
+    runner.on(EVENT_TEST_FAIL, function (test, err) {
+      Base.consoleLog(
+        '%s  <dt class="error">%s</dt>',
+        indent(),
+        utils.escape(test.title)
+      );
+      Base.consoleLog(
+        '%s  <dt class="error">%s</dt>',
+        indent(),
+        utils.escape(test.file)
+      );
+      var code = utils.escape(utils.clean(test.body));
+      Base.consoleLog(
+        '%s  <dd class="error"><pre><code>%s</code></pre></dd>',
+        indent(),
+        code
+      );
+      Base.consoleLog(
+        '%s  <dd class="error">%s</dd>',
+        indent(),
+        utils.escape(err)
+      );
+    });
+  }
+
+  Doc.description = 'HTML documentation';
   }(doc));
 
   var tap = {exports: {}};
@@ -16039,29 +16039,29 @@
   /**
    * @module TAP
    */
-    /**
+  /**
    * Module dependencies.
    */
 
-    var util = require$$0$1;
-    var Base = base$1.exports;
-    var constants = runner.constants;
-    var EVENT_TEST_PASS = constants.EVENT_TEST_PASS;
-    var EVENT_TEST_FAIL = constants.EVENT_TEST_FAIL;
-    var EVENT_RUN_BEGIN = constants.EVENT_RUN_BEGIN;
-    var EVENT_RUN_END = constants.EVENT_RUN_END;
-    var EVENT_TEST_PENDING = constants.EVENT_TEST_PENDING;
-    var EVENT_TEST_END = constants.EVENT_TEST_END;
-    var inherits = utils$3.inherits;
-    var sprintf = util.format;
+  var util = require$$0$1;
+  var Base = base$1.exports;
+  var constants = runner.constants;
+  var EVENT_TEST_PASS = constants.EVENT_TEST_PASS;
+  var EVENT_TEST_FAIL = constants.EVENT_TEST_FAIL;
+  var EVENT_RUN_BEGIN = constants.EVENT_RUN_BEGIN;
+  var EVENT_RUN_END = constants.EVENT_RUN_END;
+  var EVENT_TEST_PENDING = constants.EVENT_TEST_PENDING;
+  var EVENT_TEST_END = constants.EVENT_TEST_END;
+  var inherits = utils$3.inherits;
+  var sprintf = util.format;
 
-    /**
+  /**
    * Expose `TAP`.
    */
 
-    module.exports = TAP;
+  module.exports = TAP;
 
-    /**
+  /**
    * Constructs a new `TAP` reporter instance.
    *
    * @public
@@ -16071,76 +16071,76 @@
    * @param {Runner} runner - Instance triggers reporter actions.
    * @param {Object} [options] - runner options
    */
-    function TAP(runner, options) {
-      Base.call(this, runner, options);
+  function TAP(runner, options) {
+    Base.call(this, runner, options);
 
-      var self = this;
-      var n = 1;
+    var self = this;
+    var n = 1;
 
-      var tapVersion = '12';
-      if (options && options.reporterOptions) {
-        if (options.reporterOptions.tapVersion) {
-          tapVersion = options.reporterOptions.tapVersion.toString();
-        }
+    var tapVersion = '12';
+    if (options && options.reporterOptions) {
+      if (options.reporterOptions.tapVersion) {
+        tapVersion = options.reporterOptions.tapVersion.toString();
       }
-
-      this._producer = createProducer(tapVersion);
-
-      runner.once(EVENT_RUN_BEGIN, function () {
-        self._producer.writeVersion();
-      });
-
-      runner.on(EVENT_TEST_END, function () {
-        ++n;
-      });
-
-      runner.on(EVENT_TEST_PENDING, function (test) {
-        self._producer.writePending(n, test);
-      });
-
-      runner.on(EVENT_TEST_PASS, function (test) {
-        self._producer.writePass(n, test);
-      });
-
-      runner.on(EVENT_TEST_FAIL, function (test, err) {
-        self._producer.writeFail(n, test, err);
-      });
-
-      runner.once(EVENT_RUN_END, function () {
-        self._producer.writeEpilogue(runner.stats);
-      });
     }
 
-    /**
+    this._producer = createProducer(tapVersion);
+
+    runner.once(EVENT_RUN_BEGIN, function () {
+      self._producer.writeVersion();
+    });
+
+    runner.on(EVENT_TEST_END, function () {
+      ++n;
+    });
+
+    runner.on(EVENT_TEST_PENDING, function (test) {
+      self._producer.writePending(n, test);
+    });
+
+    runner.on(EVENT_TEST_PASS, function (test) {
+      self._producer.writePass(n, test);
+    });
+
+    runner.on(EVENT_TEST_FAIL, function (test, err) {
+      self._producer.writeFail(n, test, err);
+    });
+
+    runner.once(EVENT_RUN_END, function () {
+      self._producer.writeEpilogue(runner.stats);
+    });
+  }
+
+  /**
    * Inherit from `Base.prototype`.
    */
-    inherits(TAP, Base);
+  inherits(TAP, Base);
 
-    /**
+  /**
    * Returns a TAP-safe title of `test`.
    *
    * @private
    * @param {Test} test - Test instance.
    * @return {String} title with any hash character removed
    */
-    function title(test) {
-      return test.fullTitle().replace(/#/g, '');
-    }
+  function title(test) {
+    return test.fullTitle().replace(/#/g, '');
+  }
 
-    /**
+  /**
    * Writes newline-terminated formatted string to reporter output stream.
    *
    * @private
    * @param {string} format - `printf`-like format string
    * @param {...*} [varArgs] - Format string arguments
    */
-    function println(format, varArgs) {
-      var vargs = Array.from(arguments);
-      vargs[0] += '\n';
-      process.stdout.write(sprintf.apply(null, vargs));
-    }
+  function println(format, varArgs) {
+    var vargs = Array.from(arguments);
+    vargs[0] += '\n';
+    process.stdout.write(sprintf.apply(null, vargs));
+  }
 
-    /**
+  /**
    * Returns a `tapVersion`-appropriate TAP producer instance, if possible.
    *
    * @private
@@ -16148,23 +16148,23 @@
    * @returns {TAPProducer} specification-appropriate instance
    * @throws {Error} if specification version has no associated producer.
    */
-    function createProducer(tapVersion) {
-      var producers = {
-        12: new TAP12Producer(),
-        13: new TAP13Producer()
-      };
-      var producer = producers[tapVersion];
+  function createProducer(tapVersion) {
+    var producers = {
+      12: new TAP12Producer(),
+      13: new TAP13Producer()
+    };
+    var producer = producers[tapVersion];
 
-      if (!producer) {
-        throw new Error(
-          'invalid or unsupported TAP version: ' + JSON.stringify(tapVersion)
-        );
-      }
-
-      return producer;
+    if (!producer) {
+      throw new Error(
+        'invalid or unsupported TAP version: ' + JSON.stringify(tapVersion)
+      );
     }
 
-    /**
+    return producer;
+  }
+
+  /**
    * @summary
    * Constructs a new TAPProducer.
    *
@@ -16174,48 +16174,48 @@
    * @private
    * @constructor
    */
-    function TAPProducer() {}
+  function TAPProducer() {}
 
-    /**
+  /**
    * Writes the TAP version to reporter output stream.
    *
    * @abstract
    */
-    TAPProducer.prototype.writeVersion = function () {};
+  TAPProducer.prototype.writeVersion = function () {};
 
-    /**
+  /**
    * Writes the plan to reporter output stream.
    *
    * @abstract
    * @param {number} ntests - Number of tests that are planned to run.
    */
-    TAPProducer.prototype.writePlan = function (ntests) {
-      println('%d..%d', 1, ntests);
-    };
+  TAPProducer.prototype.writePlan = function (ntests) {
+    println('%d..%d', 1, ntests);
+  };
 
-    /**
+  /**
    * Writes that test passed to reporter output stream.
    *
    * @abstract
    * @param {number} n - Index of test that passed.
    * @param {Test} test - Instance containing test information.
    */
-    TAPProducer.prototype.writePass = function (n, test) {
-      println('ok %d %s', n, title(test));
-    };
+  TAPProducer.prototype.writePass = function (n, test) {
+    println('ok %d %s', n, title(test));
+  };
 
-    /**
+  /**
    * Writes that test was skipped to reporter output stream.
    *
    * @abstract
    * @param {number} n - Index of test that was skipped.
    * @param {Test} test - Instance containing test information.
    */
-    TAPProducer.prototype.writePending = function (n, test) {
-      println('ok %d %s # SKIP -', n, title(test));
-    };
+  TAPProducer.prototype.writePending = function (n, test) {
+    println('ok %d %s # SKIP -', n, title(test));
+  };
 
-    /**
+  /**
    * Writes that test failed to reporter output stream.
    *
    * @abstract
@@ -16223,26 +16223,26 @@
    * @param {Test} test - Instance containing test information.
    * @param {Error} err - Reason the test failed.
    */
-    TAPProducer.prototype.writeFail = function (n, test, err) {
-      println('not ok %d %s', n, title(test));
-    };
+  TAPProducer.prototype.writeFail = function (n, test, err) {
+    println('not ok %d %s', n, title(test));
+  };
 
-    /**
+  /**
    * Writes the summary epilogue to reporter output stream.
    *
    * @abstract
    * @param {Object} stats - Object containing run statistics.
    */
-    TAPProducer.prototype.writeEpilogue = function (stats) {
+  TAPProducer.prototype.writeEpilogue = function (stats) {
     // :TBD: Why is this not counting pending tests?
-      println('# tests ' + (stats.passes + stats.failures));
-      println('# pass ' + stats.passes);
-      // :TBD: Why are we not showing pending results?
-      println('# fail ' + stats.failures);
-      this.writePlan(stats.passes + stats.failures + stats.pending);
-    };
+    println('# tests ' + (stats.passes + stats.failures));
+    println('# pass ' + stats.passes);
+    // :TBD: Why are we not showing pending results?
+    println('# fail ' + stats.failures);
+    this.writePlan(stats.passes + stats.failures + stats.pending);
+  };
 
-    /**
+  /**
    * @summary
    * Constructs a new TAP12Producer.
    *
@@ -16254,28 +16254,28 @@
    * @extends TAPProducer
    * @see {@link https://testanything.org/tap-specification.html|Specification}
    */
-    function TAP12Producer() {
+  function TAP12Producer() {
     /**
      * Writes that test failed to reporter output stream, with error formatting.
      * @override
      */
-      this.writeFail = function (n, test, err) {
-        TAPProducer.prototype.writeFail.call(this, n, test, err);
-        if (err.message) {
-          println(err.message.replace(/^/gm, '  '));
-        }
-        if (err.stack) {
-          println(err.stack.replace(/^/gm, '  '));
-        }
-      };
-    }
+    this.writeFail = function (n, test, err) {
+      TAPProducer.prototype.writeFail.call(this, n, test, err);
+      if (err.message) {
+        println(err.message.replace(/^/gm, '  '));
+      }
+      if (err.stack) {
+        println(err.stack.replace(/^/gm, '  '));
+      }
+    };
+  }
 
-    /**
+  /**
    * Inherit from `TAPProducer.prototype`.
    */
-    inherits(TAP12Producer, TAPProducer);
+  inherits(TAP12Producer, TAPProducer);
 
-    /**
+  /**
    * @summary
    * Constructs a new TAP13Producer.
    *
@@ -16287,47 +16287,47 @@
    * @extends TAPProducer
    * @see {@link https://testanything.org/tap-version-13-specification.html|Specification}
    */
-    function TAP13Producer() {
+  function TAP13Producer() {
     /**
      * Writes the TAP version to reporter output stream.
      * @override
      */
-      this.writeVersion = function () {
-        println('TAP version 13');
-      };
+    this.writeVersion = function () {
+      println('TAP version 13');
+    };
 
-      /**
+    /**
      * Writes that test failed to reporter output stream, with error formatting.
      * @override
      */
-      this.writeFail = function (n, test, err) {
-        TAPProducer.prototype.writeFail.call(this, n, test, err);
-        var emitYamlBlock = err.message != null || err.stack != null;
-        if (emitYamlBlock) {
-          println(indent(1) + '---');
-          if (err.message) {
-            println(indent(2) + 'message: |-');
-            println(err.message.replace(/^/gm, indent(3)));
-          }
-          if (err.stack) {
-            println(indent(2) + 'stack: |-');
-            println(err.stack.replace(/^/gm, indent(3)));
-          }
-          println(indent(1) + '...');
+    this.writeFail = function (n, test, err) {
+      TAPProducer.prototype.writeFail.call(this, n, test, err);
+      var emitYamlBlock = err.message != null || err.stack != null;
+      if (emitYamlBlock) {
+        println(indent(1) + '---');
+        if (err.message) {
+          println(indent(2) + 'message: |-');
+          println(err.message.replace(/^/gm, indent(3)));
         }
-      };
-
-      function indent(level) {
-        return Array(level + 1).join('  ');
+        if (err.stack) {
+          println(indent(2) + 'stack: |-');
+          println(err.stack.replace(/^/gm, indent(3)));
+        }
+        println(indent(1) + '...');
       }
-    }
+    };
 
-    /**
+    function indent(level) {
+      return Array(level + 1).join('  ');
+    }
+  }
+
+  /**
    * Inherit from `TAPProducer.prototype`.
    */
-    inherits(TAP13Producer, TAPProducer);
+  inherits(TAP13Producer, TAPProducer);
 
-    TAP.description = 'TAP-compatible output';
+  TAP.description = 'TAP-compatible output';
   }(tap));
 
   var json = {exports: {}};
@@ -16345,29 +16345,29 @@
   /**
    * @module JSON
    */
-    /**
+  /**
    * Module dependencies.
    */
 
-    var Base = base$1.exports;
-    var fs = require$$2;
-    var path = require$$1;
-    const createUnsupportedError = errors$2.createUnsupportedError;
-    const utils = utils$3;
-    var constants = runner.constants;
-    var EVENT_TEST_PASS = constants.EVENT_TEST_PASS;
-    var EVENT_TEST_PENDING = constants.EVENT_TEST_PENDING;
-    var EVENT_TEST_FAIL = constants.EVENT_TEST_FAIL;
-    var EVENT_TEST_END = constants.EVENT_TEST_END;
-    var EVENT_RUN_END = constants.EVENT_RUN_END;
+  var Base = base$1.exports;
+  var fs = require$$2;
+  var path = require$$1;
+  const createUnsupportedError = errors$2.createUnsupportedError;
+  const utils = utils$3;
+  var constants = runner.constants;
+  var EVENT_TEST_PASS = constants.EVENT_TEST_PASS;
+  var EVENT_TEST_PENDING = constants.EVENT_TEST_PENDING;
+  var EVENT_TEST_FAIL = constants.EVENT_TEST_FAIL;
+  var EVENT_TEST_END = constants.EVENT_TEST_END;
+  var EVENT_RUN_END = constants.EVENT_RUN_END;
 
-    /**
+  /**
    * Expose `JSON`.
    */
 
-    module.exports = JSONReporter;
+  module.exports = JSONReporter;
 
-    /**
+  /**
    * Constructs a new `JSON` reporter instance.
    *
    * @public
@@ -16377,68 +16377,68 @@
    * @param {Runner} runner - Instance triggers reporter actions.
    * @param {Object} [options] - runner options
    */
-    function JSONReporter(runner, options = {}) {
-      Base.call(this, runner, options);
+  function JSONReporter(runner, options = {}) {
+    Base.call(this, runner, options);
 
-      var self = this;
-      var tests = [];
-      var pending = [];
-      var failures = [];
-      var passes = [];
-      var output;
+    var self = this;
+    var tests = [];
+    var pending = [];
+    var failures = [];
+    var passes = [];
+    var output;
 
-      if (options.reporterOption && options.reporterOption.output) {
-        if (utils.isBrowser()) {
-          throw createUnsupportedError('file output not supported in browser');
-        }
-        output = options.reporterOption.output;
+    if (options.reporterOption && options.reporterOption.output) {
+      if (utils.isBrowser()) {
+        throw createUnsupportedError('file output not supported in browser');
       }
-
-      runner.on(EVENT_TEST_END, function (test) {
-        tests.push(test);
-      });
-
-      runner.on(EVENT_TEST_PASS, function (test) {
-        passes.push(test);
-      });
-
-      runner.on(EVENT_TEST_FAIL, function (test) {
-        failures.push(test);
-      });
-
-      runner.on(EVENT_TEST_PENDING, function (test) {
-        pending.push(test);
-      });
-
-      runner.once(EVENT_RUN_END, function () {
-        var obj = {
-          stats: self.stats,
-          tests: tests.map(clean),
-          pending: pending.map(clean),
-          failures: failures.map(clean),
-          passes: passes.map(clean)
-        };
-
-        runner.testResults = obj;
-
-        var json = JSON.stringify(obj, null, 2);
-        if (output) {
-          try {
-            fs.mkdirSync(path.dirname(output), {recursive: true});
-            fs.writeFileSync(output, json);
-          } catch (err) {
-            console.error(
-              `${Base.symbols.err} [mocha] writing output to "${output}" failed: ${err.message}\n`
-            );
-            process.stdout.write(json);
-          }
-        } else {
-          process.stdout.write(json);
-        }
-      });
+      output = options.reporterOption.output;
     }
 
-    /**
+    runner.on(EVENT_TEST_END, function (test) {
+      tests.push(test);
+    });
+
+    runner.on(EVENT_TEST_PASS, function (test) {
+      passes.push(test);
+    });
+
+    runner.on(EVENT_TEST_FAIL, function (test) {
+      failures.push(test);
+    });
+
+    runner.on(EVENT_TEST_PENDING, function (test) {
+      pending.push(test);
+    });
+
+    runner.once(EVENT_RUN_END, function () {
+      var obj = {
+        stats: self.stats,
+        tests: tests.map(clean),
+        pending: pending.map(clean),
+        failures: failures.map(clean),
+        passes: passes.map(clean)
+      };
+
+      runner.testResults = obj;
+
+      var json = JSON.stringify(obj, null, 2);
+      if (output) {
+        try {
+          fs.mkdirSync(path.dirname(output), {recursive: true});
+          fs.writeFileSync(output, json);
+        } catch (err) {
+          console.error(
+            `${Base.symbols.err} [mocha] writing output to "${output}" failed: ${err.message}\n`
+          );
+          process.stdout.write(json);
+        }
+      } else {
+        process.stdout.write(json);
+      }
+    });
+  }
+
+  /**
    * Return a plain-object representation of `test`
    * free of cyclic properties etc.
    *
@@ -16446,63 +16446,63 @@
    * @param {Object} test
    * @return {Object}
    */
-    function clean(test) {
-      var err = test.err || {};
-      if (err instanceof Error) {
-        err = errorJSON(err);
-      }
-
-      return {
-        title: test.title,
-        fullTitle: test.fullTitle(),
-        file: test.file,
-        duration: test.duration,
-        currentRetry: test.currentRetry(),
-        speed: test.speed,
-        err: cleanCycles(err)
-      };
+  function clean(test) {
+    var err = test.err || {};
+    if (err instanceof Error) {
+      err = errorJSON(err);
     }
 
-    /**
+    return {
+      title: test.title,
+      fullTitle: test.fullTitle(),
+      file: test.file,
+      duration: test.duration,
+      currentRetry: test.currentRetry(),
+      speed: test.speed,
+      err: cleanCycles(err)
+    };
+  }
+
+  /**
    * Replaces any circular references inside `obj` with '[object Object]'
    *
    * @private
    * @param {Object} obj
    * @return {Object}
    */
-    function cleanCycles(obj) {
-      var cache = [];
-      return JSON.parse(
-        JSON.stringify(obj, function (key, value) {
-          if (typeof value === 'object' && value !== null) {
-            if (cache.indexOf(value) !== -1) {
+  function cleanCycles(obj) {
+    var cache = [];
+    return JSON.parse(
+      JSON.stringify(obj, function (key, value) {
+        if (typeof value === 'object' && value !== null) {
+          if (cache.indexOf(value) !== -1) {
             // Instead of going in a circle, we'll print [object Object]
-              return '' + value;
-            }
-            cache.push(value);
+            return '' + value;
           }
+          cache.push(value);
+        }
 
-          return value;
-        })
-      );
-    }
+        return value;
+      })
+    );
+  }
 
-    /**
+  /**
    * Transform an Error object into a JSON object.
    *
    * @private
    * @param {Error} err
    * @return {Object}
    */
-    function errorJSON(err) {
-      var res = {};
-      Object.getOwnPropertyNames(err).forEach(function (key) {
-        res[key] = err[key];
-      }, err);
-      return res;
-    }
+  function errorJSON(err) {
+    var res = {};
+    Object.getOwnPropertyNames(err).forEach(function (key) {
+      res[key] = err[key];
+    }, err);
+    return res;
+  }
 
-    JSONReporter.description = 'single JSON object';
+  JSONReporter.description = 'single JSON object';
   }(json));
 
   var html = {exports: {}};
@@ -16646,43 +16646,43 @@
 
   (function (module, exports) {
 
-    /* eslint-env browser */
-    /**
+  /* eslint-env browser */
+  /**
    * @module HTML
    */
-    /**
+  /**
    * Module dependencies.
    */
 
-    var Base = base$1.exports;
-    var utils = utils$3;
-    var Progress = progress$1;
-    var escapeRe = escapeStringRegexp;
-    var constants = runner.constants;
-    var EVENT_TEST_PASS = constants.EVENT_TEST_PASS;
-    var EVENT_TEST_FAIL = constants.EVENT_TEST_FAIL;
-    var EVENT_SUITE_BEGIN = constants.EVENT_SUITE_BEGIN;
-    var EVENT_SUITE_END = constants.EVENT_SUITE_END;
-    var EVENT_TEST_PENDING = constants.EVENT_TEST_PENDING;
-    var escape = utils.escape;
+  var Base = base$1.exports;
+  var utils = utils$3;
+  var Progress = progress$1;
+  var escapeRe = escapeStringRegexp;
+  var constants = runner.constants;
+  var EVENT_TEST_PASS = constants.EVENT_TEST_PASS;
+  var EVENT_TEST_FAIL = constants.EVENT_TEST_FAIL;
+  var EVENT_SUITE_BEGIN = constants.EVENT_SUITE_BEGIN;
+  var EVENT_SUITE_END = constants.EVENT_SUITE_END;
+  var EVENT_TEST_PENDING = constants.EVENT_TEST_PENDING;
+  var escape = utils.escape;
 
-    /**
+  /**
    * Save timer references to avoid Sinon interfering (see GH-237).
    */
 
-    var Date = commonjsGlobal.Date;
+  var Date = commonjsGlobal.Date;
 
-    /**
+  /**
    * Expose `HTML`.
    */
 
-    module.exports = HTML;
+  module.exports = HTML;
 
-    /**
+  /**
    * Stats template.
    */
 
-    var statsTemplate =
+  var statsTemplate =
     '<ul id="mocha-stats">' +
     '<li class="progress"><canvas width="40" height="40"></canvas></li>' +
     '<li class="passes"><a href="javascript:void(0);">passes:</a> <em>0</em></li>' +
@@ -16690,9 +16690,9 @@
     '<li class="duration">duration: <em>0</em>s</li>' +
     '</ul>';
 
-    var playIcon = '&#x2023;';
+  var playIcon = '&#x2023;';
 
-    /**
+  /**
    * Constructs a new `HTML` reporter instance.
    *
    * @public
@@ -16702,338 +16702,338 @@
    * @param {Runner} runner - Instance triggers reporter actions.
    * @param {Object} [options] - runner options
    */
-    function HTML(runner, options) {
-      Base.call(this, runner, options);
+  function HTML(runner, options) {
+    Base.call(this, runner, options);
 
-      var self = this;
-      var stats = this.stats;
-      var stat = fragment(statsTemplate);
-      var items = stat.getElementsByTagName('li');
-      var passes = items[1].getElementsByTagName('em')[0];
-      var passesLink = items[1].getElementsByTagName('a')[0];
-      var failures = items[2].getElementsByTagName('em')[0];
-      var failuresLink = items[2].getElementsByTagName('a')[0];
-      var duration = items[3].getElementsByTagName('em')[0];
-      var canvas = stat.getElementsByTagName('canvas')[0];
-      var report = fragment('<ul id="mocha-report"></ul>');
-      var stack = [report];
-      var progress;
-      var ctx;
-      var root = document.getElementById('mocha');
+    var self = this;
+    var stats = this.stats;
+    var stat = fragment(statsTemplate);
+    var items = stat.getElementsByTagName('li');
+    var passes = items[1].getElementsByTagName('em')[0];
+    var passesLink = items[1].getElementsByTagName('a')[0];
+    var failures = items[2].getElementsByTagName('em')[0];
+    var failuresLink = items[2].getElementsByTagName('a')[0];
+    var duration = items[3].getElementsByTagName('em')[0];
+    var canvas = stat.getElementsByTagName('canvas')[0];
+    var report = fragment('<ul id="mocha-report"></ul>');
+    var stack = [report];
+    var progress;
+    var ctx;
+    var root = document.getElementById('mocha');
 
-      if (canvas.getContext) {
-        var ratio = window.devicePixelRatio || 1;
-        canvas.style.width = canvas.width;
-        canvas.style.height = canvas.height;
-        canvas.width *= ratio;
-        canvas.height *= ratio;
-        ctx = canvas.getContext('2d');
-        ctx.scale(ratio, ratio);
-        progress = new Progress();
+    if (canvas.getContext) {
+      var ratio = window.devicePixelRatio || 1;
+      canvas.style.width = canvas.width;
+      canvas.style.height = canvas.height;
+      canvas.width *= ratio;
+      canvas.height *= ratio;
+      ctx = canvas.getContext('2d');
+      ctx.scale(ratio, ratio);
+      progress = new Progress();
+    }
+
+    if (!root) {
+      return error('#mocha div missing, add it to your document');
+    }
+
+    // pass toggle
+    on(passesLink, 'click', function (evt) {
+      evt.preventDefault();
+      unhide();
+      var name = /pass/.test(report.className) ? '' : ' pass';
+      report.className = report.className.replace(/fail|pass/g, '') + name;
+      if (report.className.trim()) {
+        hideSuitesWithout('test pass');
+      }
+    });
+
+    // failure toggle
+    on(failuresLink, 'click', function (evt) {
+      evt.preventDefault();
+      unhide();
+      var name = /fail/.test(report.className) ? '' : ' fail';
+      report.className = report.className.replace(/fail|pass/g, '') + name;
+      if (report.className.trim()) {
+        hideSuitesWithout('test fail');
+      }
+    });
+
+    root.appendChild(stat);
+    root.appendChild(report);
+
+    if (progress) {
+      progress.size(40);
+    }
+
+    runner.on(EVENT_SUITE_BEGIN, function (suite) {
+      if (suite.root) {
+        return;
       }
 
-      if (!root) {
-        return error('#mocha div missing, add it to your document');
+      // suite
+      var url = self.suiteURL(suite);
+      var el = fragment(
+        '<li class="suite"><h1><a href="%s">%s</a></h1></li>',
+        url,
+        escape(suite.title)
+      );
+
+      // container
+      stack[0].appendChild(el);
+      stack.unshift(document.createElement('ul'));
+      el.appendChild(stack[0]);
+    });
+
+    runner.on(EVENT_SUITE_END, function (suite) {
+      if (suite.root) {
+        updateStats();
+        return;
       }
+      stack.shift();
+    });
 
-      // pass toggle
-      on(passesLink, 'click', function (evt) {
-        evt.preventDefault();
-        unhide();
-        var name = /pass/.test(report.className) ? '' : ' pass';
-        report.className = report.className.replace(/fail|pass/g, '') + name;
-        if (report.className.trim()) {
-          hideSuitesWithout('test pass');
-        }
-      });
-
-      // failure toggle
-      on(failuresLink, 'click', function (evt) {
-        evt.preventDefault();
-        unhide();
-        var name = /fail/.test(report.className) ? '' : ' fail';
-        report.className = report.className.replace(/fail|pass/g, '') + name;
-        if (report.className.trim()) {
-          hideSuitesWithout('test fail');
-        }
-      });
-
-      root.appendChild(stat);
-      root.appendChild(report);
-
-      if (progress) {
-        progress.size(40);
-      }
-
-      runner.on(EVENT_SUITE_BEGIN, function (suite) {
-        if (suite.root) {
-          return;
-        }
-
-        // suite
-        var url = self.suiteURL(suite);
-        var el = fragment(
-          '<li class="suite"><h1><a href="%s">%s</a></h1></li>',
-          url,
-          escape(suite.title)
-        );
-
-        // container
-        stack[0].appendChild(el);
-        stack.unshift(document.createElement('ul'));
-        el.appendChild(stack[0]);
-      });
-
-      runner.on(EVENT_SUITE_END, function (suite) {
-        if (suite.root) {
-          updateStats();
-          return;
-        }
-        stack.shift();
-      });
-
-      runner.on(EVENT_TEST_PASS, function (test) {
-        var url = self.testURL(test);
-        var markup =
+    runner.on(EVENT_TEST_PASS, function (test) {
+      var url = self.testURL(test);
+      var markup =
         '<li class="test pass %e"><h2>%e<span class="duration">%ems</span> ' +
         '<a href="%s" class="replay">' +
         playIcon +
         '</a></h2></li>';
-        var el = fragment(markup, test.speed, test.title, test.duration, url);
-        self.addCodeToggle(el, test.body);
-        appendToStack(el);
-        updateStats();
-      });
+      var el = fragment(markup, test.speed, test.title, test.duration, url);
+      self.addCodeToggle(el, test.body);
+      appendToStack(el);
+      updateStats();
+    });
 
-      runner.on(EVENT_TEST_FAIL, function (test) {
-        var el = fragment(
-          '<li class="test fail"><h2>%e <a href="%e" class="replay">' +
+    runner.on(EVENT_TEST_FAIL, function (test) {
+      var el = fragment(
+        '<li class="test fail"><h2>%e <a href="%e" class="replay">' +
           playIcon +
           '</a></h2></li>',
-          test.title,
-          self.testURL(test)
-        );
-        var stackString; // Note: Includes leading newline
-        var message = test.err.toString();
+        test.title,
+        self.testURL(test)
+      );
+      var stackString; // Note: Includes leading newline
+      var message = test.err.toString();
 
-        // <=IE7 stringifies to [Object Error]. Since it can be overloaded, we
-        // check for the result of the stringifying.
-        if (message === '[object Error]') {
-          message = test.err.message;
-        }
-
-        if (test.err.stack) {
-          var indexOfMessage = test.err.stack.indexOf(test.err.message);
-          if (indexOfMessage === -1) {
-            stackString = test.err.stack;
-          } else {
-            stackString = test.err.stack.slice(
-              test.err.message.length + indexOfMessage
-            );
-          }
-        } else if (test.err.sourceURL && test.err.line !== undefined) {
-        // Safari doesn't give you a stack. Let's at least provide a source line.
-          stackString = '\n(' + test.err.sourceURL + ':' + test.err.line + ')';
-        }
-
-        stackString = stackString || '';
-
-        if (test.err.htmlMessage && stackString) {
-          el.appendChild(
-            fragment(
-              '<div class="html-error">%s\n<pre class="error">%e</pre></div>',
-              test.err.htmlMessage,
-              stackString
-            )
-          );
-        } else if (test.err.htmlMessage) {
-          el.appendChild(
-            fragment('<div class="html-error">%s</div>', test.err.htmlMessage)
-          );
-        } else {
-          el.appendChild(
-            fragment('<pre class="error">%e%e</pre>', message, stackString)
-          );
-        }
-
-        self.addCodeToggle(el, test.body);
-        appendToStack(el);
-        updateStats();
-      });
-
-      runner.on(EVENT_TEST_PENDING, function (test) {
-        var el = fragment(
-          '<li class="test pass pending"><h2>%e</h2></li>',
-          test.title
-        );
-        appendToStack(el);
-        updateStats();
-      });
-
-      function appendToStack(el) {
-      // Don't call .appendChild if #mocha-report was already .shift()'ed off the stack.
-        if (stack[0]) {
-          stack[0].appendChild(el);
-        }
+      // <=IE7 stringifies to [Object Error]. Since it can be overloaded, we
+      // check for the result of the stringifying.
+      if (message === '[object Error]') {
+        message = test.err.message;
       }
 
-      function updateStats() {
-      // TODO: add to stats
-        var percent = ((stats.tests / runner.total) * 100) | 0;
-        if (progress) {
-          progress.update(percent).draw(ctx);
+      if (test.err.stack) {
+        var indexOfMessage = test.err.stack.indexOf(test.err.message);
+        if (indexOfMessage === -1) {
+          stackString = test.err.stack;
+        } else {
+          stackString = test.err.stack.slice(
+            test.err.message.length + indexOfMessage
+          );
         }
+      } else if (test.err.sourceURL && test.err.line !== undefined) {
+        // Safari doesn't give you a stack. Let's at least provide a source line.
+        stackString = '\n(' + test.err.sourceURL + ':' + test.err.line + ')';
+      }
 
-        // update stats
-        var ms = new Date() - stats.start;
-        text(passes, stats.passes);
-        text(failures, stats.failures);
-        text(duration, (ms / 1000).toFixed(2));
+      stackString = stackString || '';
+
+      if (test.err.htmlMessage && stackString) {
+        el.appendChild(
+          fragment(
+            '<div class="html-error">%s\n<pre class="error">%e</pre></div>',
+            test.err.htmlMessage,
+            stackString
+          )
+        );
+      } else if (test.err.htmlMessage) {
+        el.appendChild(
+          fragment('<div class="html-error">%s</div>', test.err.htmlMessage)
+        );
+      } else {
+        el.appendChild(
+          fragment('<pre class="error">%e%e</pre>', message, stackString)
+        );
+      }
+
+      self.addCodeToggle(el, test.body);
+      appendToStack(el);
+      updateStats();
+    });
+
+    runner.on(EVENT_TEST_PENDING, function (test) {
+      var el = fragment(
+        '<li class="test pass pending"><h2>%e</h2></li>',
+        test.title
+      );
+      appendToStack(el);
+      updateStats();
+    });
+
+    function appendToStack(el) {
+      // Don't call .appendChild if #mocha-report was already .shift()'ed off the stack.
+      if (stack[0]) {
+        stack[0].appendChild(el);
       }
     }
 
-    /**
+    function updateStats() {
+      // TODO: add to stats
+      var percent = ((stats.tests / runner.total) * 100) | 0;
+      if (progress) {
+        progress.update(percent).draw(ctx);
+      }
+
+      // update stats
+      var ms = new Date() - stats.start;
+      text(passes, stats.passes);
+      text(failures, stats.failures);
+      text(duration, (ms / 1000).toFixed(2));
+    }
+  }
+
+  /**
    * Makes a URL, preserving querystring ("search") parameters.
    *
    * @param {string} s
    * @return {string} A new URL.
    */
-    function makeUrl(s) {
-      var search = window.location.search;
+  function makeUrl(s) {
+    var search = window.location.search;
 
-      // Remove previous grep query parameter if present
-      if (search) {
-        search = search.replace(/[?&]grep=[^&\s]*/g, '').replace(/^&/, '?');
-      }
+    // Remove previous grep query parameter if present
+    if (search) {
+      search = search.replace(/[?&]grep=[^&\s]*/g, '').replace(/^&/, '?');
+    }
 
-      return (
-        window.location.pathname +
+    return (
+      window.location.pathname +
       (search ? search + '&' : '?') +
       'grep=' +
       encodeURIComponent(escapeRe(s))
-      );
-    }
+    );
+  }
 
-    /**
+  /**
    * Provide suite URL.
    *
    * @param {Object} [suite]
    */
-    HTML.prototype.suiteURL = function (suite) {
-      return makeUrl(suite.fullTitle());
-    };
+  HTML.prototype.suiteURL = function (suite) {
+    return makeUrl(suite.fullTitle());
+  };
 
-    /**
+  /**
    * Provide test URL.
    *
    * @param {Object} [test]
    */
-    HTML.prototype.testURL = function (test) {
-      return makeUrl(test.fullTitle());
-    };
+  HTML.prototype.testURL = function (test) {
+    return makeUrl(test.fullTitle());
+  };
 
-    /**
+  /**
    * Adds code toggle functionality for the provided test's list element.
    *
    * @param {HTMLLIElement} el
    * @param {string} contents
    */
-    HTML.prototype.addCodeToggle = function (el, contents) {
-      var h2 = el.getElementsByTagName('h2')[0];
+  HTML.prototype.addCodeToggle = function (el, contents) {
+    var h2 = el.getElementsByTagName('h2')[0];
 
-      on(h2, 'click', function () {
-        pre.style.display = pre.style.display === 'none' ? 'block' : 'none';
-      });
+    on(h2, 'click', function () {
+      pre.style.display = pre.style.display === 'none' ? 'block' : 'none';
+    });
 
-      var pre = fragment('<pre><code>%e</code></pre>', utils.clean(contents));
-      el.appendChild(pre);
-      pre.style.display = 'none';
-    };
+    var pre = fragment('<pre><code>%e</code></pre>', utils.clean(contents));
+    el.appendChild(pre);
+    pre.style.display = 'none';
+  };
 
-    /**
+  /**
    * Display error `msg`.
    *
    * @param {string} msg
    */
-    function error(msg) {
-      document.body.appendChild(fragment('<div id="mocha-error">%s</div>', msg));
-    }
+  function error(msg) {
+    document.body.appendChild(fragment('<div id="mocha-error">%s</div>', msg));
+  }
 
-    /**
+  /**
    * Return a DOM fragment from `html`.
    *
    * @param {string} html
    */
-    function fragment(html) {
-      var args = arguments;
-      var div = document.createElement('div');
-      var i = 1;
+  function fragment(html) {
+    var args = arguments;
+    var div = document.createElement('div');
+    var i = 1;
 
-      div.innerHTML = html.replace(/%([se])/g, function (_, type) {
-        switch (type) {
-          case 's':
-            return String(args[i++]);
-          case 'e':
-            return escape(args[i++]);
+    div.innerHTML = html.replace(/%([se])/g, function (_, type) {
+      switch (type) {
+        case 's':
+          return String(args[i++]);
+        case 'e':
+          return escape(args[i++]);
         // no default
-        }
-      });
+      }
+    });
 
-      return div.firstChild;
-    }
+    return div.firstChild;
+  }
 
-    /**
+  /**
    * Check for suites that do not have elements
    * with `classname`, and hide them.
    *
    * @param {text} classname
    */
-    function hideSuitesWithout(classname) {
-      var suites = document.getElementsByClassName('suite');
-      for (var i = 0; i < suites.length; i++) {
-        var els = suites[i].getElementsByClassName(classname);
-        if (!els.length) {
-          suites[i].className += ' hidden';
-        }
+  function hideSuitesWithout(classname) {
+    var suites = document.getElementsByClassName('suite');
+    for (var i = 0; i < suites.length; i++) {
+      var els = suites[i].getElementsByClassName(classname);
+      if (!els.length) {
+        suites[i].className += ' hidden';
       }
     }
+  }
 
-    /**
+  /**
    * Unhide .hidden suites.
    */
-    function unhide() {
-      var els = document.getElementsByClassName('suite hidden');
-      while (els.length > 0) {
-        els[0].className = els[0].className.replace('suite hidden', 'suite');
-      }
+  function unhide() {
+    var els = document.getElementsByClassName('suite hidden');
+    while (els.length > 0) {
+      els[0].className = els[0].className.replace('suite hidden', 'suite');
     }
+  }
 
-    /**
+  /**
    * Set an element's text contents.
    *
    * @param {HTMLElement} el
    * @param {string} contents
    */
-    function text(el, contents) {
-      if (el.textContent) {
-        el.textContent = contents;
-      } else {
-        el.innerText = contents;
-      }
+  function text(el, contents) {
+    if (el.textContent) {
+      el.textContent = contents;
+    } else {
+      el.innerText = contents;
     }
+  }
 
-    /**
+  /**
    * Listen on `event` with callback `fn`.
    */
-    function on(el, event, fn) {
-      if (el.addEventListener) {
-        el.addEventListener(event, fn, false);
-      } else {
-        el.attachEvent('on' + event, fn);
-      }
+  function on(el, event, fn) {
+    if (el.addEventListener) {
+      el.addEventListener(event, fn, false);
+    } else {
+      el.attachEvent('on' + event, fn);
     }
+  }
 
-    HTML.browserOnly = true;
+  HTML.browserOnly = true;
   }(html));
 
   var list = {exports: {}};
@@ -17042,29 +17042,29 @@
   /**
    * @module List
    */
-    /**
+  /**
    * Module dependencies.
    */
 
-    var Base = base$1.exports;
-    var inherits = utils$3.inherits;
-    var constants = runner.constants;
-    var EVENT_RUN_BEGIN = constants.EVENT_RUN_BEGIN;
-    var EVENT_RUN_END = constants.EVENT_RUN_END;
-    var EVENT_TEST_BEGIN = constants.EVENT_TEST_BEGIN;
-    var EVENT_TEST_FAIL = constants.EVENT_TEST_FAIL;
-    var EVENT_TEST_PASS = constants.EVENT_TEST_PASS;
-    var EVENT_TEST_PENDING = constants.EVENT_TEST_PENDING;
-    var color = Base.color;
-    var cursor = Base.cursor;
+  var Base = base$1.exports;
+  var inherits = utils$3.inherits;
+  var constants = runner.constants;
+  var EVENT_RUN_BEGIN = constants.EVENT_RUN_BEGIN;
+  var EVENT_RUN_END = constants.EVENT_RUN_END;
+  var EVENT_TEST_BEGIN = constants.EVENT_TEST_BEGIN;
+  var EVENT_TEST_FAIL = constants.EVENT_TEST_FAIL;
+  var EVENT_TEST_PASS = constants.EVENT_TEST_PASS;
+  var EVENT_TEST_PENDING = constants.EVENT_TEST_PENDING;
+  var color = Base.color;
+  var cursor = Base.cursor;
 
-    /**
+  /**
    * Expose `List`.
    */
 
-    module.exports = List;
+  module.exports = List;
 
-    /**
+  /**
    * Constructs a new `List` reporter instance.
    *
    * @public
@@ -17074,48 +17074,48 @@
    * @param {Runner} runner - Instance triggers reporter actions.
    * @param {Object} [options] - runner options
    */
-    function List(runner, options) {
-      Base.call(this, runner, options);
+  function List(runner, options) {
+    Base.call(this, runner, options);
 
-      var self = this;
-      var n = 0;
+    var self = this;
+    var n = 0;
 
-      runner.on(EVENT_RUN_BEGIN, function () {
-        Base.consoleLog();
-      });
+    runner.on(EVENT_RUN_BEGIN, function () {
+      Base.consoleLog();
+    });
 
-      runner.on(EVENT_TEST_BEGIN, function (test) {
-        process.stdout.write(color('pass', '    ' + test.fullTitle() + ': '));
-      });
+    runner.on(EVENT_TEST_BEGIN, function (test) {
+      process.stdout.write(color('pass', '    ' + test.fullTitle() + ': '));
+    });
 
-      runner.on(EVENT_TEST_PENDING, function (test) {
-        var fmt = color('checkmark', '  -') + color('pending', ' %s');
-        Base.consoleLog(fmt, test.fullTitle());
-      });
+    runner.on(EVENT_TEST_PENDING, function (test) {
+      var fmt = color('checkmark', '  -') + color('pending', ' %s');
+      Base.consoleLog(fmt, test.fullTitle());
+    });
 
-      runner.on(EVENT_TEST_PASS, function (test) {
-        var fmt =
+    runner.on(EVENT_TEST_PASS, function (test) {
+      var fmt =
         color('checkmark', '  ' + Base.symbols.ok) +
         color('pass', ' %s: ') +
         color(test.speed, '%dms');
-        cursor.CR();
-        Base.consoleLog(fmt, test.fullTitle(), test.duration);
-      });
+      cursor.CR();
+      Base.consoleLog(fmt, test.fullTitle(), test.duration);
+    });
 
-      runner.on(EVENT_TEST_FAIL, function (test) {
-        cursor.CR();
-        Base.consoleLog(color('fail', '  %d) %s'), ++n, test.fullTitle());
-      });
+    runner.on(EVENT_TEST_FAIL, function (test) {
+      cursor.CR();
+      Base.consoleLog(color('fail', '  %d) %s'), ++n, test.fullTitle());
+    });
 
-      runner.once(EVENT_RUN_END, self.epilogue.bind(self));
-    }
+    runner.once(EVENT_RUN_END, self.epilogue.bind(self));
+  }
 
-    /**
+  /**
    * Inherit from `Base.prototype`.
    */
-    inherits(List, Base);
+  inherits(List, Base);
 
-    List.description = 'like "spec" reporter but flat';
+  List.description = 'like "spec" reporter but flat';
   }(list));
 
   var min = {exports: {}};
@@ -17124,23 +17124,23 @@
   /**
    * @module Min
    */
-    /**
+  /**
    * Module dependencies.
    */
 
-    var Base = base$1.exports;
-    var inherits = utils$3.inherits;
-    var constants = runner.constants;
-    var EVENT_RUN_END = constants.EVENT_RUN_END;
-    var EVENT_RUN_BEGIN = constants.EVENT_RUN_BEGIN;
+  var Base = base$1.exports;
+  var inherits = utils$3.inherits;
+  var constants = runner.constants;
+  var EVENT_RUN_END = constants.EVENT_RUN_END;
+  var EVENT_RUN_BEGIN = constants.EVENT_RUN_BEGIN;
 
-    /**
+  /**
    * Expose `Min`.
    */
 
-    module.exports = Min;
+  module.exports = Min;
 
-    /**
+  /**
    * Constructs a new `Min` reporter instance.
    *
    * @description
@@ -17153,25 +17153,25 @@
    * @param {Runner} runner - Instance triggers reporter actions.
    * @param {Object} [options] - runner options
    */
-    function Min(runner, options) {
-      Base.call(this, runner, options);
+  function Min(runner, options) {
+    Base.call(this, runner, options);
 
-      runner.on(EVENT_RUN_BEGIN, function () {
+    runner.on(EVENT_RUN_BEGIN, function () {
       // clear screen
-        process.stdout.write('\u001b[2J');
-        // set cursor position
-        process.stdout.write('\u001b[1;3H');
-      });
+      process.stdout.write('\u001b[2J');
+      // set cursor position
+      process.stdout.write('\u001b[1;3H');
+    });
 
-      runner.once(EVENT_RUN_END, this.epilogue.bind(this));
-    }
+    runner.once(EVENT_RUN_END, this.epilogue.bind(this));
+  }
 
-    /**
+  /**
    * Inherit from `Base.prototype`.
    */
-    inherits(Min, Base);
+  inherits(Min, Base);
 
-    Min.description = 'essentially just a summary';
+  Min.description = 'essentially just a summary';
   }(min));
 
   var spec = {exports: {}};
@@ -17180,29 +17180,29 @@
   /**
    * @module Spec
    */
-    /**
+  /**
    * Module dependencies.
    */
 
-    var Base = base$1.exports;
-    var constants = runner.constants;
-    var EVENT_RUN_BEGIN = constants.EVENT_RUN_BEGIN;
-    var EVENT_RUN_END = constants.EVENT_RUN_END;
-    var EVENT_SUITE_BEGIN = constants.EVENT_SUITE_BEGIN;
-    var EVENT_SUITE_END = constants.EVENT_SUITE_END;
-    var EVENT_TEST_FAIL = constants.EVENT_TEST_FAIL;
-    var EVENT_TEST_PASS = constants.EVENT_TEST_PASS;
-    var EVENT_TEST_PENDING = constants.EVENT_TEST_PENDING;
-    var inherits = utils$3.inherits;
-    var color = Base.color;
+  var Base = base$1.exports;
+  var constants = runner.constants;
+  var EVENT_RUN_BEGIN = constants.EVENT_RUN_BEGIN;
+  var EVENT_RUN_END = constants.EVENT_RUN_END;
+  var EVENT_SUITE_BEGIN = constants.EVENT_SUITE_BEGIN;
+  var EVENT_SUITE_END = constants.EVENT_SUITE_END;
+  var EVENT_TEST_FAIL = constants.EVENT_TEST_FAIL;
+  var EVENT_TEST_PASS = constants.EVENT_TEST_PASS;
+  var EVENT_TEST_PENDING = constants.EVENT_TEST_PENDING;
+  var inherits = utils$3.inherits;
+  var color = Base.color;
 
-    /**
+  /**
    * Expose `Spec`.
    */
 
-    module.exports = Spec;
+  module.exports = Spec;
 
-    /**
+  /**
    * Constructs a new `Spec` reporter instance.
    *
    * @public
@@ -17212,69 +17212,69 @@
    * @param {Runner} runner - Instance triggers reporter actions.
    * @param {Object} [options] - runner options
    */
-    function Spec(runner, options) {
-      Base.call(this, runner, options);
+  function Spec(runner, options) {
+    Base.call(this, runner, options);
 
-      var self = this;
-      var indents = 0;
-      var n = 0;
+    var self = this;
+    var indents = 0;
+    var n = 0;
 
-      function indent() {
-        return Array(indents).join('  ');
-      }
+    function indent() {
+      return Array(indents).join('  ');
+    }
 
-      runner.on(EVENT_RUN_BEGIN, function () {
+    runner.on(EVENT_RUN_BEGIN, function () {
+      Base.consoleLog();
+    });
+
+    runner.on(EVENT_SUITE_BEGIN, function (suite) {
+      ++indents;
+      Base.consoleLog(color('suite', '%s%s'), indent(), suite.title);
+    });
+
+    runner.on(EVENT_SUITE_END, function () {
+      --indents;
+      if (indents === 1) {
         Base.consoleLog();
-      });
+      }
+    });
 
-      runner.on(EVENT_SUITE_BEGIN, function (suite) {
-        ++indents;
-        Base.consoleLog(color('suite', '%s%s'), indent(), suite.title);
-      });
+    runner.on(EVENT_TEST_PENDING, function (test) {
+      var fmt = indent() + color('pending', '  - %s');
+      Base.consoleLog(fmt, test.title);
+    });
 
-      runner.on(EVENT_SUITE_END, function () {
-        --indents;
-        if (indents === 1) {
-          Base.consoleLog();
-        }
-      });
-
-      runner.on(EVENT_TEST_PENDING, function (test) {
-        var fmt = indent() + color('pending', '  - %s');
-        Base.consoleLog(fmt, test.title);
-      });
-
-      runner.on(EVENT_TEST_PASS, function (test) {
-        var fmt;
-        if (test.speed === 'fast') {
-          fmt =
+    runner.on(EVENT_TEST_PASS, function (test) {
+      var fmt;
+      if (test.speed === 'fast') {
+        fmt =
           indent() +
           color('checkmark', '  ' + Base.symbols.ok) +
           color('pass', ' %s');
-          Base.consoleLog(fmt, test.title);
-        } else {
-          fmt =
+        Base.consoleLog(fmt, test.title);
+      } else {
+        fmt =
           indent() +
           color('checkmark', '  ' + Base.symbols.ok) +
           color('pass', ' %s') +
           color(test.speed, ' (%dms)');
-          Base.consoleLog(fmt, test.title, test.duration);
-        }
-      });
+        Base.consoleLog(fmt, test.title, test.duration);
+      }
+    });
 
-      runner.on(EVENT_TEST_FAIL, function (test) {
-        Base.consoleLog(indent() + color('fail', '  %d) %s'), ++n, test.title);
-      });
+    runner.on(EVENT_TEST_FAIL, function (test) {
+      Base.consoleLog(indent() + color('fail', '  %d) %s'), ++n, test.title);
+    });
 
-      runner.once(EVENT_RUN_END, self.epilogue.bind(self));
-    }
+    runner.once(EVENT_RUN_END, self.epilogue.bind(self));
+  }
 
-    /**
+  /**
    * Inherit from `Base.prototype`.
    */
-    inherits(Spec, Base);
+  inherits(Spec, Base);
 
-    Spec.description = 'hierarchical & verbose [default]';
+  Spec.description = 'hierarchical & verbose [default]';
   }(spec));
 
   var nyan = {exports: {}};
@@ -17283,26 +17283,26 @@
   /**
    * @module Nyan
    */
-    /**
+  /**
    * Module dependencies.
    */
 
-    var Base = base$1.exports;
-    var constants = runner.constants;
-    var inherits = utils$3.inherits;
-    var EVENT_RUN_BEGIN = constants.EVENT_RUN_BEGIN;
-    var EVENT_TEST_PENDING = constants.EVENT_TEST_PENDING;
-    var EVENT_TEST_PASS = constants.EVENT_TEST_PASS;
-    var EVENT_RUN_END = constants.EVENT_RUN_END;
-    var EVENT_TEST_FAIL = constants.EVENT_TEST_FAIL;
+  var Base = base$1.exports;
+  var constants = runner.constants;
+  var inherits = utils$3.inherits;
+  var EVENT_RUN_BEGIN = constants.EVENT_RUN_BEGIN;
+  var EVENT_TEST_PENDING = constants.EVENT_TEST_PENDING;
+  var EVENT_TEST_PASS = constants.EVENT_TEST_PASS;
+  var EVENT_RUN_END = constants.EVENT_RUN_END;
+  var EVENT_TEST_FAIL = constants.EVENT_TEST_FAIL;
 
-    /**
+  /**
    * Expose `Dot`.
    */
 
-    module.exports = NyanCat;
+  module.exports = NyanCat;
 
-    /**
+  /**
    * Constructs a new `Nyan` reporter instance.
    *
    * @public
@@ -17312,240 +17312,240 @@
    * @param {Runner} runner - Instance triggers reporter actions.
    * @param {Object} [options] - runner options
    */
-    function NyanCat(runner, options) {
-      Base.call(this, runner, options);
+  function NyanCat(runner, options) {
+    Base.call(this, runner, options);
 
-      var self = this;
-      var width = (Base.window.width * 0.75) | 0;
-      var nyanCatWidth = (this.nyanCatWidth = 11);
+    var self = this;
+    var width = (Base.window.width * 0.75) | 0;
+    var nyanCatWidth = (this.nyanCatWidth = 11);
 
-      this.colorIndex = 0;
-      this.numberOfLines = 4;
-      this.rainbowColors = self.generateColors();
-      this.scoreboardWidth = 5;
-      this.tick = 0;
-      this.trajectories = [[], [], [], []];
-      this.trajectoryWidthMax = width - nyanCatWidth;
+    this.colorIndex = 0;
+    this.numberOfLines = 4;
+    this.rainbowColors = self.generateColors();
+    this.scoreboardWidth = 5;
+    this.tick = 0;
+    this.trajectories = [[], [], [], []];
+    this.trajectoryWidthMax = width - nyanCatWidth;
 
-      runner.on(EVENT_RUN_BEGIN, function () {
-        Base.cursor.hide();
-        self.draw();
-      });
+    runner.on(EVENT_RUN_BEGIN, function () {
+      Base.cursor.hide();
+      self.draw();
+    });
 
-      runner.on(EVENT_TEST_PENDING, function () {
-        self.draw();
-      });
+    runner.on(EVENT_TEST_PENDING, function () {
+      self.draw();
+    });
 
-      runner.on(EVENT_TEST_PASS, function () {
-        self.draw();
-      });
+    runner.on(EVENT_TEST_PASS, function () {
+      self.draw();
+    });
 
-      runner.on(EVENT_TEST_FAIL, function () {
-        self.draw();
-      });
+    runner.on(EVENT_TEST_FAIL, function () {
+      self.draw();
+    });
 
-      runner.once(EVENT_RUN_END, function () {
-        Base.cursor.show();
-        for (var i = 0; i < self.numberOfLines; i++) {
-          process.stdout.write('\n');
-        }
-        self.epilogue();
-      });
-    }
+    runner.once(EVENT_RUN_END, function () {
+      Base.cursor.show();
+      for (var i = 0; i < self.numberOfLines; i++) {
+        process.stdout.write('\n');
+      }
+      self.epilogue();
+    });
+  }
 
-    /**
+  /**
    * Inherit from `Base.prototype`.
    */
-    inherits(NyanCat, Base);
+  inherits(NyanCat, Base);
 
-    /**
+  /**
    * Draw the nyan cat
    *
    * @private
    */
 
-    NyanCat.prototype.draw = function () {
-      this.appendRainbow();
-      this.drawScoreboard();
-      this.drawRainbow();
-      this.drawNyanCat();
-      this.tick = !this.tick;
-    };
+  NyanCat.prototype.draw = function () {
+    this.appendRainbow();
+    this.drawScoreboard();
+    this.drawRainbow();
+    this.drawNyanCat();
+    this.tick = !this.tick;
+  };
 
-    /**
+  /**
    * Draw the "scoreboard" showing the number
    * of passes, failures and pending tests.
    *
    * @private
    */
 
-    NyanCat.prototype.drawScoreboard = function () {
-      var stats = this.stats;
+  NyanCat.prototype.drawScoreboard = function () {
+    var stats = this.stats;
 
-      function draw(type, n) {
-        process.stdout.write(' ');
-        process.stdout.write(Base.color(type, n));
-        process.stdout.write('\n');
-      }
-
-      draw('green', stats.passes);
-      draw('fail', stats.failures);
-      draw('pending', stats.pending);
+    function draw(type, n) {
+      process.stdout.write(' ');
+      process.stdout.write(Base.color(type, n));
       process.stdout.write('\n');
+    }
 
-      this.cursorUp(this.numberOfLines);
-    };
+    draw('green', stats.passes);
+    draw('fail', stats.failures);
+    draw('pending', stats.pending);
+    process.stdout.write('\n');
 
-    /**
+    this.cursorUp(this.numberOfLines);
+  };
+
+  /**
    * Append the rainbow.
    *
    * @private
    */
 
-    NyanCat.prototype.appendRainbow = function () {
-      var segment = this.tick ? '_' : '-';
-      var rainbowified = this.rainbowify(segment);
+  NyanCat.prototype.appendRainbow = function () {
+    var segment = this.tick ? '_' : '-';
+    var rainbowified = this.rainbowify(segment);
 
-      for (var index = 0; index < this.numberOfLines; index++) {
-        var trajectory = this.trajectories[index];
-        if (trajectory.length >= this.trajectoryWidthMax) {
-          trajectory.shift();
-        }
-        trajectory.push(rainbowified);
+    for (var index = 0; index < this.numberOfLines; index++) {
+      var trajectory = this.trajectories[index];
+      if (trajectory.length >= this.trajectoryWidthMax) {
+        trajectory.shift();
       }
-    };
+      trajectory.push(rainbowified);
+    }
+  };
 
-    /**
+  /**
    * Draw the rainbow.
    *
    * @private
    */
 
-    NyanCat.prototype.drawRainbow = function () {
-      var self = this;
+  NyanCat.prototype.drawRainbow = function () {
+    var self = this;
 
-      this.trajectories.forEach(function (line) {
-        process.stdout.write('\u001b[' + self.scoreboardWidth + 'C');
-        process.stdout.write(line.join(''));
-        process.stdout.write('\n');
-      });
+    this.trajectories.forEach(function (line) {
+      process.stdout.write('\u001b[' + self.scoreboardWidth + 'C');
+      process.stdout.write(line.join(''));
+      process.stdout.write('\n');
+    });
 
-      this.cursorUp(this.numberOfLines);
-    };
+    this.cursorUp(this.numberOfLines);
+  };
 
-    /**
+  /**
    * Draw the nyan cat
    *
    * @private
    */
-    NyanCat.prototype.drawNyanCat = function () {
-      var self = this;
-      var startWidth = this.scoreboardWidth + this.trajectories[0].length;
-      var dist = '\u001b[' + startWidth + 'C';
-      var padding = '';
+  NyanCat.prototype.drawNyanCat = function () {
+    var self = this;
+    var startWidth = this.scoreboardWidth + this.trajectories[0].length;
+    var dist = '\u001b[' + startWidth + 'C';
+    var padding = '';
 
-      process.stdout.write(dist);
-      process.stdout.write('_,------,');
-      process.stdout.write('\n');
+    process.stdout.write(dist);
+    process.stdout.write('_,------,');
+    process.stdout.write('\n');
 
-      process.stdout.write(dist);
-      padding = self.tick ? '  ' : '   ';
-      process.stdout.write('_|' + padding + '/\\_/\\ ');
-      process.stdout.write('\n');
+    process.stdout.write(dist);
+    padding = self.tick ? '  ' : '   ';
+    process.stdout.write('_|' + padding + '/\\_/\\ ');
+    process.stdout.write('\n');
 
-      process.stdout.write(dist);
-      padding = self.tick ? '_' : '__';
-      var tail = self.tick ? '~' : '^';
-      process.stdout.write(tail + '|' + padding + this.face() + ' ');
-      process.stdout.write('\n');
+    process.stdout.write(dist);
+    padding = self.tick ? '_' : '__';
+    var tail = self.tick ? '~' : '^';
+    process.stdout.write(tail + '|' + padding + this.face() + ' ');
+    process.stdout.write('\n');
 
-      process.stdout.write(dist);
-      padding = self.tick ? ' ' : '  ';
-      process.stdout.write(padding + '""  "" ');
-      process.stdout.write('\n');
+    process.stdout.write(dist);
+    padding = self.tick ? ' ' : '  ';
+    process.stdout.write(padding + '""  "" ');
+    process.stdout.write('\n');
 
-      this.cursorUp(this.numberOfLines);
-    };
+    this.cursorUp(this.numberOfLines);
+  };
 
-    /**
+  /**
    * Draw nyan cat face.
    *
    * @private
    * @return {string}
    */
 
-    NyanCat.prototype.face = function () {
-      var stats = this.stats;
-      if (stats.failures) {
-        return '( x .x)';
-      } else if (stats.pending) {
-        return '( o .o)';
-      } else if (stats.passes) {
-        return '( ^ .^)';
-      }
-      return '( - .-)';
-    };
+  NyanCat.prototype.face = function () {
+    var stats = this.stats;
+    if (stats.failures) {
+      return '( x .x)';
+    } else if (stats.pending) {
+      return '( o .o)';
+    } else if (stats.passes) {
+      return '( ^ .^)';
+    }
+    return '( - .-)';
+  };
 
-    /**
+  /**
    * Move cursor up `n`.
    *
    * @private
    * @param {number} n
    */
 
-    NyanCat.prototype.cursorUp = function (n) {
-      process.stdout.write('\u001b[' + n + 'A');
-    };
+  NyanCat.prototype.cursorUp = function (n) {
+    process.stdout.write('\u001b[' + n + 'A');
+  };
 
-    /**
+  /**
    * Move cursor down `n`.
    *
    * @private
    * @param {number} n
    */
 
-    NyanCat.prototype.cursorDown = function (n) {
-      process.stdout.write('\u001b[' + n + 'B');
-    };
+  NyanCat.prototype.cursorDown = function (n) {
+    process.stdout.write('\u001b[' + n + 'B');
+  };
 
-    /**
+  /**
    * Generate rainbow colors.
    *
    * @private
    * @return {Array}
    */
-    NyanCat.prototype.generateColors = function () {
-      var colors = [];
+  NyanCat.prototype.generateColors = function () {
+    var colors = [];
 
-      for (var i = 0; i < 6 * 7; i++) {
-        var pi3 = Math.floor(Math.PI / 3);
-        var n = i * (1.0 / 6);
-        var r = Math.floor(3 * Math.sin(n) + 3);
-        var g = Math.floor(3 * Math.sin(n + 2 * pi3) + 3);
-        var b = Math.floor(3 * Math.sin(n + 4 * pi3) + 3);
-        colors.push(36 * r + 6 * g + b + 16);
-      }
+    for (var i = 0; i < 6 * 7; i++) {
+      var pi3 = Math.floor(Math.PI / 3);
+      var n = i * (1.0 / 6);
+      var r = Math.floor(3 * Math.sin(n) + 3);
+      var g = Math.floor(3 * Math.sin(n + 2 * pi3) + 3);
+      var b = Math.floor(3 * Math.sin(n + 4 * pi3) + 3);
+      colors.push(36 * r + 6 * g + b + 16);
+    }
 
-      return colors;
-    };
+    return colors;
+  };
 
-    /**
+  /**
    * Apply rainbow to the given `str`.
    *
    * @private
    * @param {string} str
    * @return {string}
    */
-    NyanCat.prototype.rainbowify = function (str) {
-      if (!Base.useColors) {
-        return str;
-      }
-      var color = this.rainbowColors[this.colorIndex % this.rainbowColors.length];
-      this.colorIndex += 1;
-      return '\u001b[38;5;' + color + 'm' + str + '\u001b[0m';
-    };
+  NyanCat.prototype.rainbowify = function (str) {
+    if (!Base.useColors) {
+      return str;
+    }
+    var color = this.rainbowColors[this.colorIndex % this.rainbowColors.length];
+    this.colorIndex += 1;
+    return '\u001b[38;5;' + color + 'm' + str + '\u001b[0m';
+  };
 
-    NyanCat.description = '"nyan cat"';
+  NyanCat.description = '"nyan cat"';
   }(nyan));
 
   var xunit = {exports: {}};
@@ -17554,37 +17554,37 @@
   /**
    * @module XUnit
    */
-    /**
+  /**
    * Module dependencies.
    */
 
-    var Base = base$1.exports;
-    var utils = utils$3;
-    var fs = require$$2;
-    var path = require$$1;
-    var errors = errors$2;
-    var createUnsupportedError = errors.createUnsupportedError;
-    var constants = runner.constants;
-    var EVENT_TEST_PASS = constants.EVENT_TEST_PASS;
-    var EVENT_TEST_FAIL = constants.EVENT_TEST_FAIL;
-    var EVENT_RUN_END = constants.EVENT_RUN_END;
-    var EVENT_TEST_PENDING = constants.EVENT_TEST_PENDING;
-    var STATE_FAILED = runnable.constants.STATE_FAILED;
-    var inherits = utils.inherits;
-    var escape = utils.escape;
+  var Base = base$1.exports;
+  var utils = utils$3;
+  var fs = require$$2;
+  var path = require$$1;
+  var errors = errors$2;
+  var createUnsupportedError = errors.createUnsupportedError;
+  var constants = runner.constants;
+  var EVENT_TEST_PASS = constants.EVENT_TEST_PASS;
+  var EVENT_TEST_FAIL = constants.EVENT_TEST_FAIL;
+  var EVENT_RUN_END = constants.EVENT_RUN_END;
+  var EVENT_TEST_PENDING = constants.EVENT_TEST_PENDING;
+  var STATE_FAILED = runnable.constants.STATE_FAILED;
+  var inherits = utils.inherits;
+  var escape = utils.escape;
 
-    /**
+  /**
    * Save timer references to avoid Sinon interfering (see GH-237).
    */
-    var Date = commonjsGlobal.Date;
+  var Date = commonjsGlobal.Date;
 
-    /**
+  /**
    * Expose `XUnit`.
    */
 
-    module.exports = XUnit;
+  module.exports = XUnit;
 
-    /**
+  /**
    * Constructs a new `XUnit` reporter instance.
    *
    * @public
@@ -17594,153 +17594,153 @@
    * @param {Runner} runner - Instance triggers reporter actions.
    * @param {Object} [options] - runner options
    */
-    function XUnit(runner, options) {
-      Base.call(this, runner, options);
+  function XUnit(runner, options) {
+    Base.call(this, runner, options);
 
-      var stats = this.stats;
-      var tests = [];
-      var self = this;
+    var stats = this.stats;
+    var tests = [];
+    var self = this;
 
-      // the name of the test suite, as it will appear in the resulting XML file
-      var suiteName;
+    // the name of the test suite, as it will appear in the resulting XML file
+    var suiteName;
 
-      // the default name of the test suite if none is provided
-      var DEFAULT_SUITE_NAME = 'Mocha Tests';
+    // the default name of the test suite if none is provided
+    var DEFAULT_SUITE_NAME = 'Mocha Tests';
 
-      if (options && options.reporterOptions) {
-        if (options.reporterOptions.output) {
-          if (!fs.createWriteStream) {
-            throw createUnsupportedError('file output not supported in browser');
-          }
-
-          fs.mkdirSync(path.dirname(options.reporterOptions.output), {
-            recursive: true
-          });
-          self.fileStream = fs.createWriteStream(options.reporterOptions.output);
+    if (options && options.reporterOptions) {
+      if (options.reporterOptions.output) {
+        if (!fs.createWriteStream) {
+          throw createUnsupportedError('file output not supported in browser');
         }
 
-        // get the suite name from the reporter options (if provided)
-        suiteName = options.reporterOptions.suiteName;
+        fs.mkdirSync(path.dirname(options.reporterOptions.output), {
+          recursive: true
+        });
+        self.fileStream = fs.createWriteStream(options.reporterOptions.output);
       }
 
-      // fall back to the default suite name
-      suiteName = suiteName || DEFAULT_SUITE_NAME;
-
-      runner.on(EVENT_TEST_PENDING, function (test) {
-        tests.push(test);
-      });
-
-      runner.on(EVENT_TEST_PASS, function (test) {
-        tests.push(test);
-      });
-
-      runner.on(EVENT_TEST_FAIL, function (test) {
-        tests.push(test);
-      });
-
-      runner.once(EVENT_RUN_END, function () {
-        self.write(
-          tag(
-            'testsuite',
-            {
-              name: suiteName,
-              tests: stats.tests,
-              failures: 0,
-              errors: stats.failures,
-              skipped: stats.tests - stats.failures - stats.passes,
-              timestamp: new Date().toUTCString(),
-              time: stats.duration / 1000 || 0
-            },
-            false
-          )
-        );
-
-        tests.forEach(function (t) {
-          self.test(t);
-        });
-
-        self.write('</testsuite>');
-      });
+      // get the suite name from the reporter options (if provided)
+      suiteName = options.reporterOptions.suiteName;
     }
 
-    /**
+    // fall back to the default suite name
+    suiteName = suiteName || DEFAULT_SUITE_NAME;
+
+    runner.on(EVENT_TEST_PENDING, function (test) {
+      tests.push(test);
+    });
+
+    runner.on(EVENT_TEST_PASS, function (test) {
+      tests.push(test);
+    });
+
+    runner.on(EVENT_TEST_FAIL, function (test) {
+      tests.push(test);
+    });
+
+    runner.once(EVENT_RUN_END, function () {
+      self.write(
+        tag(
+          'testsuite',
+          {
+            name: suiteName,
+            tests: stats.tests,
+            failures: 0,
+            errors: stats.failures,
+            skipped: stats.tests - stats.failures - stats.passes,
+            timestamp: new Date().toUTCString(),
+            time: stats.duration / 1000 || 0
+          },
+          false
+        )
+      );
+
+      tests.forEach(function (t) {
+        self.test(t);
+      });
+
+      self.write('</testsuite>');
+    });
+  }
+
+  /**
    * Inherit from `Base.prototype`.
    */
-    inherits(XUnit, Base);
+  inherits(XUnit, Base);
 
-    /**
+  /**
    * Override done to close the stream (if it's a file).
    *
    * @param failures
    * @param {Function} fn
    */
-    XUnit.prototype.done = function (failures, fn) {
-      if (this.fileStream) {
-        this.fileStream.end(function () {
-          fn(failures);
-        });
-      } else {
+  XUnit.prototype.done = function (failures, fn) {
+    if (this.fileStream) {
+      this.fileStream.end(function () {
         fn(failures);
-      }
-    };
+      });
+    } else {
+      fn(failures);
+    }
+  };
 
-    /**
+  /**
    * Write out the given line.
    *
    * @param {string} line
    */
-    XUnit.prototype.write = function (line) {
-      if (this.fileStream) {
-        this.fileStream.write(line + '\n');
-      } else if (typeof process === 'object' && process.stdout) {
-        process.stdout.write(line + '\n');
-      } else {
-        Base.consoleLog(line);
-      }
-    };
+  XUnit.prototype.write = function (line) {
+    if (this.fileStream) {
+      this.fileStream.write(line + '\n');
+    } else if (typeof process === 'object' && process.stdout) {
+      process.stdout.write(line + '\n');
+    } else {
+      Base.consoleLog(line);
+    }
+  };
 
-    /**
+  /**
    * Output tag for the given `test.`
    *
    * @param {Test} test
    */
-    XUnit.prototype.test = function (test) {
-      Base.useColors = false;
+  XUnit.prototype.test = function (test) {
+    Base.useColors = false;
 
-      var attrs = {
-        classname: test.parent.fullTitle(),
-        name: test.title,
-        file: test.file,
-        time: test.duration / 1000 || 0
-      };
+    var attrs = {
+      classname: test.parent.fullTitle(),
+      name: test.title,
+      file: test.file,
+      time: test.duration / 1000 || 0
+    };
 
-      if (test.state === STATE_FAILED) {
-        var err = test.err;
-        var diff =
+    if (test.state === STATE_FAILED) {
+      var err = test.err;
+      var diff =
         !Base.hideDiff && Base.showDiff(err)
           ? '\n' + Base.generateDiff(err.actual, err.expected)
           : '';
-        this.write(
+      this.write(
+        tag(
+          'testcase',
+          attrs,
+          false,
           tag(
-            'testcase',
-            attrs,
+            'failure',
+            {},
             false,
-            tag(
-              'failure',
-              {},
-              false,
-              escape(err.message) + escape(diff) + '\n' + escape(err.stack)
-            )
+            escape(err.message) + escape(diff) + '\n' + escape(err.stack)
           )
-        );
-      } else if (test.isPending()) {
-        this.write(tag('testcase', attrs, false, tag('skipped', {}, true)));
-      } else {
-        this.write(tag('testcase', attrs, true));
-      }
-    };
+        )
+      );
+    } else if (test.isPending()) {
+      this.write(tag('testcase', attrs, false, tag('skipped', {}, true)));
+    } else {
+      this.write(tag('testcase', attrs, true));
+    }
+  };
 
-    /**
+  /**
    * HTML tag helper.
    *
    * @param name
@@ -17749,25 +17749,25 @@
    * @param content
    * @return {string}
    */
-    function tag(name, attrs, close, content) {
-      var end = close ? '/>' : '>';
-      var pairs = [];
-      var tag;
+  function tag(name, attrs, close, content) {
+    var end = close ? '/>' : '>';
+    var pairs = [];
+    var tag;
 
-      for (var key in attrs) {
-        if (Object.prototype.hasOwnProperty.call(attrs, key)) {
-          pairs.push(key + '="' + escape(attrs[key]) + '"');
-        }
+    for (var key in attrs) {
+      if (Object.prototype.hasOwnProperty.call(attrs, key)) {
+        pairs.push(key + '="' + escape(attrs[key]) + '"');
       }
-
-      tag = '<' + name + (pairs.length ? ' ' + pairs.join(' ') : '') + end;
-      if (content) {
-        tag += content + '</' + name + end;
-      }
-      return tag;
     }
 
-    XUnit.description = 'XUnit-compatible XML output';
+    tag = '<' + name + (pairs.length ? ' ' + pairs.join(' ') : '') + end;
+    if (content) {
+      tag += content + '</' + name + end;
+    }
+    return tag;
+  }
+
+  XUnit.description = 'XUnit-compatible XML output';
   }(xunit));
 
   var markdown = {exports: {}};
@@ -17776,31 +17776,31 @@
   /**
    * @module Markdown
    */
-    /**
+  /**
    * Module dependencies.
    */
 
-    var Base = base$1.exports;
-    var utils = utils$3;
-    var constants = runner.constants;
-    var EVENT_RUN_END = constants.EVENT_RUN_END;
-    var EVENT_SUITE_BEGIN = constants.EVENT_SUITE_BEGIN;
-    var EVENT_SUITE_END = constants.EVENT_SUITE_END;
-    var EVENT_TEST_PASS = constants.EVENT_TEST_PASS;
+  var Base = base$1.exports;
+  var utils = utils$3;
+  var constants = runner.constants;
+  var EVENT_RUN_END = constants.EVENT_RUN_END;
+  var EVENT_SUITE_BEGIN = constants.EVENT_SUITE_BEGIN;
+  var EVENT_SUITE_END = constants.EVENT_SUITE_END;
+  var EVENT_TEST_PASS = constants.EVENT_TEST_PASS;
 
-    /**
+  /**
    * Constants
    */
 
-    var SUITE_PREFIX = '$';
+  var SUITE_PREFIX = '$';
 
-    /**
+  /**
    * Expose `Markdown`.
    */
 
-    module.exports = Markdown;
+  module.exports = Markdown;
 
-    /**
+  /**
    * Constructs a new `Markdown` reporter instance.
    *
    * @public
@@ -17810,80 +17810,80 @@
    * @param {Runner} runner - Instance triggers reporter actions.
    * @param {Object} [options] - runner options
    */
-    function Markdown(runner, options) {
-      Base.call(this, runner, options);
+  function Markdown(runner, options) {
+    Base.call(this, runner, options);
 
-      var level = 0;
-      var buf = '';
+    var level = 0;
+    var buf = '';
 
-      function title(str) {
-        return Array(level).join('#') + ' ' + str;
-      }
-
-      function mapTOC(suite, obj) {
-        var ret = obj;
-        var key = SUITE_PREFIX + suite.title;
-
-        obj = obj[key] = obj[key] || {suite};
-        suite.suites.forEach(function (suite) {
-          mapTOC(suite, obj);
-        });
-
-        return ret;
-      }
-
-      function stringifyTOC(obj, level) {
-        ++level;
-        var buf = '';
-        var link;
-        for (var key in obj) {
-          if (key === 'suite') {
-            continue;
-          }
-          if (key !== SUITE_PREFIX) {
-            link = ' - [' + key.substring(1) + ']';
-            link += '(#' + utils.slug(obj[key].suite.fullTitle()) + ')\n';
-            buf += Array(level).join('  ') + link;
-          }
-          buf += stringifyTOC(obj[key], level);
-        }
-        return buf;
-      }
-
-      function generateTOC(suite) {
-        var obj = mapTOC(suite, {});
-        return stringifyTOC(obj, 0);
-      }
-
-      generateTOC(runner.suite);
-
-      runner.on(EVENT_SUITE_BEGIN, function (suite) {
-        ++level;
-        var slug = utils.slug(suite.fullTitle());
-        buf += '<a name="' + slug + '"></a>' + '\n';
-        buf += title(suite.title) + '\n';
-      });
-
-      runner.on(EVENT_SUITE_END, function () {
-        --level;
-      });
-
-      runner.on(EVENT_TEST_PASS, function (test) {
-        var code = utils.clean(test.body);
-        buf += test.title + '.\n';
-        buf += '\n```js\n';
-        buf += code + '\n';
-        buf += '```\n\n';
-      });
-
-      runner.once(EVENT_RUN_END, function () {
-        process.stdout.write('# TOC\n');
-        process.stdout.write(generateTOC(runner.suite));
-        process.stdout.write(buf);
-      });
+    function title(str) {
+      return Array(level).join('#') + ' ' + str;
     }
 
-    Markdown.description = 'GitHub Flavored Markdown';
+    function mapTOC(suite, obj) {
+      var ret = obj;
+      var key = SUITE_PREFIX + suite.title;
+
+      obj = obj[key] = obj[key] || {suite};
+      suite.suites.forEach(function (suite) {
+        mapTOC(suite, obj);
+      });
+
+      return ret;
+    }
+
+    function stringifyTOC(obj, level) {
+      ++level;
+      var buf = '';
+      var link;
+      for (var key in obj) {
+        if (key === 'suite') {
+          continue;
+        }
+        if (key !== SUITE_PREFIX) {
+          link = ' - [' + key.substring(1) + ']';
+          link += '(#' + utils.slug(obj[key].suite.fullTitle()) + ')\n';
+          buf += Array(level).join('  ') + link;
+        }
+        buf += stringifyTOC(obj[key], level);
+      }
+      return buf;
+    }
+
+    function generateTOC(suite) {
+      var obj = mapTOC(suite, {});
+      return stringifyTOC(obj, 0);
+    }
+
+    generateTOC(runner.suite);
+
+    runner.on(EVENT_SUITE_BEGIN, function (suite) {
+      ++level;
+      var slug = utils.slug(suite.fullTitle());
+      buf += '<a name="' + slug + '"></a>' + '\n';
+      buf += title(suite.title) + '\n';
+    });
+
+    runner.on(EVENT_SUITE_END, function () {
+      --level;
+    });
+
+    runner.on(EVENT_TEST_PASS, function (test) {
+      var code = utils.clean(test.body);
+      buf += test.title + '.\n';
+      buf += '\n```js\n';
+      buf += code + '\n';
+      buf += '```\n\n';
+    });
+
+    runner.once(EVENT_RUN_END, function () {
+      process.stdout.write('# TOC\n');
+      process.stdout.write(generateTOC(runner.suite));
+      process.stdout.write(buf);
+    });
+  }
+
+  Markdown.description = 'GitHub Flavored Markdown';
   }(markdown));
 
   var progress = {exports: {}};
@@ -17892,32 +17892,32 @@
   /**
    * @module Progress
    */
-    /**
+  /**
    * Module dependencies.
    */
 
-    var Base = base$1.exports;
-    var constants = runner.constants;
-    var EVENT_RUN_BEGIN = constants.EVENT_RUN_BEGIN;
-    var EVENT_TEST_END = constants.EVENT_TEST_END;
-    var EVENT_RUN_END = constants.EVENT_RUN_END;
-    var inherits = utils$3.inherits;
-    var color = Base.color;
-    var cursor = Base.cursor;
+  var Base = base$1.exports;
+  var constants = runner.constants;
+  var EVENT_RUN_BEGIN = constants.EVENT_RUN_BEGIN;
+  var EVENT_TEST_END = constants.EVENT_TEST_END;
+  var EVENT_RUN_END = constants.EVENT_RUN_END;
+  var inherits = utils$3.inherits;
+  var color = Base.color;
+  var cursor = Base.cursor;
 
-    /**
+  /**
    * Expose `Progress`.
    */
 
-    module.exports = Progress;
+  module.exports = Progress;
 
-    /**
+  /**
    * General progress bar color.
    */
 
-    Base.colors.progress = 90;
+  Base.colors.progress = 90;
 
-    /**
+  /**
    * Constructs a new `Progress` reporter instance.
    *
    * @public
@@ -17927,71 +17927,71 @@
    * @param {Runner} runner - Instance triggers reporter actions.
    * @param {Object} [options] - runner options
    */
-    function Progress(runner, options) {
-      Base.call(this, runner, options);
+  function Progress(runner, options) {
+    Base.call(this, runner, options);
 
-      var self = this;
-      var width = (Base.window.width * 0.5) | 0;
-      var total = runner.total;
-      var complete = 0;
-      var lastN = -1;
+    var self = this;
+    var width = (Base.window.width * 0.5) | 0;
+    var total = runner.total;
+    var complete = 0;
+    var lastN = -1;
 
-      // default chars
-      options = options || {};
-      var reporterOptions = options.reporterOptions || {};
+    // default chars
+    options = options || {};
+    var reporterOptions = options.reporterOptions || {};
 
-      options.open = reporterOptions.open || '[';
-      options.complete = reporterOptions.complete || '▬';
-      options.incomplete = reporterOptions.incomplete || Base.symbols.dot;
-      options.close = reporterOptions.close || ']';
-      options.verbose = reporterOptions.verbose || false;
+    options.open = reporterOptions.open || '[';
+    options.complete = reporterOptions.complete || '▬';
+    options.incomplete = reporterOptions.incomplete || Base.symbols.dot;
+    options.close = reporterOptions.close || ']';
+    options.verbose = reporterOptions.verbose || false;
 
-      // tests started
-      runner.on(EVENT_RUN_BEGIN, function () {
-        process.stdout.write('\n');
-        cursor.hide();
-      });
+    // tests started
+    runner.on(EVENT_RUN_BEGIN, function () {
+      process.stdout.write('\n');
+      cursor.hide();
+    });
 
-      // tests complete
-      runner.on(EVENT_TEST_END, function () {
-        complete++;
+    // tests complete
+    runner.on(EVENT_TEST_END, function () {
+      complete++;
 
-        var percent = complete / total;
-        var n = (width * percent) | 0;
-        var i = width - n;
+      var percent = complete / total;
+      var n = (width * percent) | 0;
+      var i = width - n;
 
-        if (n === lastN && !options.verbose) {
+      if (n === lastN && !options.verbose) {
         // Don't re-render the line if it hasn't changed
-          return;
-        }
-        lastN = n;
+        return;
+      }
+      lastN = n;
 
-        cursor.CR();
-        process.stdout.write('\u001b[J');
-        process.stdout.write(color('progress', '  ' + options.open));
-        process.stdout.write(Array(n).join(options.complete));
-        process.stdout.write(Array(i).join(options.incomplete));
-        process.stdout.write(color('progress', options.close));
-        if (options.verbose) {
-          process.stdout.write(color('progress', ' ' + complete + ' of ' + total));
-        }
-      });
+      cursor.CR();
+      process.stdout.write('\u001b[J');
+      process.stdout.write(color('progress', '  ' + options.open));
+      process.stdout.write(Array(n).join(options.complete));
+      process.stdout.write(Array(i).join(options.incomplete));
+      process.stdout.write(color('progress', options.close));
+      if (options.verbose) {
+        process.stdout.write(color('progress', ' ' + complete + ' of ' + total));
+      }
+    });
 
-      // tests are complete, output some stats
-      // and the failures if any
-      runner.once(EVENT_RUN_END, function () {
-        cursor.show();
-        process.stdout.write('\n');
-        self.epilogue();
-      });
-    }
+    // tests are complete, output some stats
+    // and the failures if any
+    runner.once(EVENT_RUN_END, function () {
+      cursor.show();
+      process.stdout.write('\n');
+      self.epilogue();
+    });
+  }
 
-    /**
+  /**
    * Inherit from `Base.prototype`.
    */
-    inherits(Progress, Base);
+  inherits(Progress, Base);
 
-    Progress.description = 'a progress bar';
+  Progress.description = 'a progress bar';
   }(progress));
 
   var landing = {exports: {}};
@@ -18000,46 +18000,46 @@
   /**
    * @module Landing
    */
-    /**
+  /**
    * Module dependencies.
    */
 
-    var Base = base$1.exports;
-    var inherits = utils$3.inherits;
-    var constants = runner.constants;
-    var EVENT_RUN_BEGIN = constants.EVENT_RUN_BEGIN;
-    var EVENT_RUN_END = constants.EVENT_RUN_END;
-    var EVENT_TEST_END = constants.EVENT_TEST_END;
-    var STATE_FAILED = runnable.constants.STATE_FAILED;
+  var Base = base$1.exports;
+  var inherits = utils$3.inherits;
+  var constants = runner.constants;
+  var EVENT_RUN_BEGIN = constants.EVENT_RUN_BEGIN;
+  var EVENT_RUN_END = constants.EVENT_RUN_END;
+  var EVENT_TEST_END = constants.EVENT_TEST_END;
+  var STATE_FAILED = runnable.constants.STATE_FAILED;
 
-    var cursor = Base.cursor;
-    var color = Base.color;
+  var cursor = Base.cursor;
+  var color = Base.color;
 
-    /**
+  /**
    * Expose `Landing`.
    */
 
-    module.exports = Landing;
+  module.exports = Landing;
 
-    /**
+  /**
    * Airplane color.
    */
 
-    Base.colors.plane = 0;
+  Base.colors.plane = 0;
 
-    /**
+  /**
    * Airplane crash color.
    */
 
-    Base.colors['plane crash'] = 31;
+  Base.colors['plane crash'] = 31;
 
-    /**
+  /**
    * Runway color.
    */
 
-    Base.colors.runway = 90;
+  Base.colors.runway = 90;
 
-    /**
+  /**
    * Constructs a new `Landing` reporter instance.
    *
    * @public
@@ -18049,69 +18049,69 @@
    * @param {Runner} runner - Instance triggers reporter actions.
    * @param {Object} [options] - runner options
    */
-    function Landing(runner, options) {
-      Base.call(this, runner, options);
+  function Landing(runner, options) {
+    Base.call(this, runner, options);
 
-      var self = this;
-      var width = (Base.window.width * 0.75) | 0;
-      var stream = process.stdout;
+    var self = this;
+    var width = (Base.window.width * 0.75) | 0;
+    var stream = process.stdout;
 
-      var plane = color('plane', '✈');
-      var crashed = -1;
-      var n = 0;
-      var total = 0;
+    var plane = color('plane', '✈');
+    var crashed = -1;
+    var n = 0;
+    var total = 0;
 
-      function runway() {
-        var buf = Array(width).join('-');
-        return '  ' + color('runway', buf);
-      }
-
-      runner.on(EVENT_RUN_BEGIN, function () {
-        stream.write('\n\n\n  ');
-        cursor.hide();
-      });
-
-      runner.on(EVENT_TEST_END, function (test) {
-      // check if the plane crashed
-        var col = crashed === -1 ? ((width * ++n) / ++total) | 0 : crashed;
-        // show the crash
-        if (test.state === STATE_FAILED) {
-          plane = color('plane crash', '✈');
-          crashed = col;
-        }
-
-        // render landing strip
-        stream.write('\u001b[' + (width + 1) + 'D\u001b[2A');
-        stream.write(runway());
-        stream.write('\n  ');
-        stream.write(color('runway', Array(col).join('⋅')));
-        stream.write(plane);
-        stream.write(color('runway', Array(width - col).join('⋅') + '\n'));
-        stream.write(runway());
-        stream.write('\u001b[0m');
-      });
-
-      runner.once(EVENT_RUN_END, function () {
-        cursor.show();
-        process.stdout.write('\n');
-        self.epilogue();
-      });
-
-      // if cursor is hidden when we ctrl-C, then it will remain hidden unless...
-      process.once('SIGINT', function () {
-        cursor.show();
-        nextTick$1(function () {
-          process.kill(process.pid, 'SIGINT');
-        });
-      });
+    function runway() {
+      var buf = Array(width).join('-');
+      return '  ' + color('runway', buf);
     }
 
-    /**
+    runner.on(EVENT_RUN_BEGIN, function () {
+      stream.write('\n\n\n  ');
+      cursor.hide();
+    });
+
+    runner.on(EVENT_TEST_END, function (test) {
+      // check if the plane crashed
+      var col = crashed === -1 ? ((width * ++n) / ++total) | 0 : crashed;
+      // show the crash
+      if (test.state === STATE_FAILED) {
+        plane = color('plane crash', '✈');
+        crashed = col;
+      }
+
+      // render landing strip
+      stream.write('\u001b[' + (width + 1) + 'D\u001b[2A');
+      stream.write(runway());
+      stream.write('\n  ');
+      stream.write(color('runway', Array(col).join('⋅')));
+      stream.write(plane);
+      stream.write(color('runway', Array(width - col).join('⋅') + '\n'));
+      stream.write(runway());
+      stream.write('\u001b[0m');
+    });
+
+    runner.once(EVENT_RUN_END, function () {
+      cursor.show();
+      process.stdout.write('\n');
+      self.epilogue();
+    });
+
+    // if cursor is hidden when we ctrl-C, then it will remain hidden unless...
+    process.once('SIGINT', function () {
+      cursor.show();
+      nextTick$1(function () {
+        process.kill(process.pid, 'SIGINT');
+      });
+    });
+  }
+
+  /**
    * Inherit from `Base.prototype`.
    */
-    inherits(Landing, Base);
+  inherits(Landing, Base);
 
-    Landing.description = 'Unicode landing strip';
+  Landing.description = 'Unicode landing strip';
   }(landing));
 
   var jsonStream = {exports: {}};
@@ -18120,24 +18120,24 @@
   /**
    * @module JSONStream
    */
-    /**
+  /**
    * Module dependencies.
    */
 
-    var Base = base$1.exports;
-    var constants = runner.constants;
-    var EVENT_TEST_PASS = constants.EVENT_TEST_PASS;
-    var EVENT_TEST_FAIL = constants.EVENT_TEST_FAIL;
-    var EVENT_RUN_BEGIN = constants.EVENT_RUN_BEGIN;
-    var EVENT_RUN_END = constants.EVENT_RUN_END;
+  var Base = base$1.exports;
+  var constants = runner.constants;
+  var EVENT_TEST_PASS = constants.EVENT_TEST_PASS;
+  var EVENT_TEST_FAIL = constants.EVENT_TEST_FAIL;
+  var EVENT_RUN_BEGIN = constants.EVENT_RUN_BEGIN;
+  var EVENT_RUN_END = constants.EVENT_RUN_END;
 
-    /**
+  /**
    * Expose `JSONStream`.
    */
 
-    module.exports = JSONStream;
+  module.exports = JSONStream;
 
-    /**
+  /**
    * Constructs a new `JSONStream` reporter instance.
    *
    * @public
@@ -18147,48 +18147,48 @@
    * @param {Runner} runner - Instance triggers reporter actions.
    * @param {Object} [options] - runner options
    */
-    function JSONStream(runner, options) {
-      Base.call(this, runner, options);
+  function JSONStream(runner, options) {
+    Base.call(this, runner, options);
 
-      var self = this;
-      var total = runner.total;
+    var self = this;
+    var total = runner.total;
 
-      runner.once(EVENT_RUN_BEGIN, function () {
-        writeEvent(['start', {total}]);
-      });
+    runner.once(EVENT_RUN_BEGIN, function () {
+      writeEvent(['start', {total}]);
+    });
 
-      runner.on(EVENT_TEST_PASS, function (test) {
-        writeEvent(['pass', clean(test)]);
-      });
+    runner.on(EVENT_TEST_PASS, function (test) {
+      writeEvent(['pass', clean(test)]);
+    });
 
-      runner.on(EVENT_TEST_FAIL, function (test, err) {
-        test = clean(test);
-        test.err = err.message;
-        test.stack = err.stack || null;
-        writeEvent(['fail', test]);
-      });
+    runner.on(EVENT_TEST_FAIL, function (test, err) {
+      test = clean(test);
+      test.err = err.message;
+      test.stack = err.stack || null;
+      writeEvent(['fail', test]);
+    });
 
-      runner.once(EVENT_RUN_END, function () {
-        writeEvent(['end', self.stats]);
-      });
-    }
+    runner.once(EVENT_RUN_END, function () {
+      writeEvent(['end', self.stats]);
+    });
+  }
 
-    /**
+  /**
    * Mocha event to be written to the output stream.
    * @typedef {Array} JSONStream~MochaEvent
    */
 
-    /**
+  /**
    * Writes Mocha event to reporter output stream.
    *
    * @private
    * @param {JSONStream~MochaEvent} event - Mocha event to be output.
    */
-    function writeEvent(event) {
-      process.stdout.write(JSON.stringify(event) + '\n');
-    }
+  function writeEvent(event) {
+    process.stdout.write(JSON.stringify(event) + '\n');
+  }
 
-    /**
+  /**
    * Returns an object literal representation of `test`
    * free of cyclic properties, etc.
    *
@@ -18196,39 +18196,39 @@
    * @param {Test} test - Instance used as data source.
    * @return {Object} object containing pared-down test instance data
    */
-    function clean(test) {
-      return {
-        title: test.title,
-        fullTitle: test.fullTitle(),
-        file: test.file,
-        duration: test.duration,
-        currentRetry: test.currentRetry(),
-        speed: test.speed
-      };
-    }
+  function clean(test) {
+    return {
+      title: test.title,
+      fullTitle: test.fullTitle(),
+      file: test.file,
+      duration: test.duration,
+      currentRetry: test.currentRetry(),
+      speed: test.speed
+    };
+  }
 
-    JSONStream.description = 'newline delimited JSON events';
+  JSONStream.description = 'newline delimited JSON events';
   }(jsonStream));
 
   (function (exports) {
 
-    // Alias exports to a their normalized format Mocha#reporter to prevent a need
-    // for dynamic (try/catch) requires, which Browserify doesn't handle.
-    exports.Base = exports.base = base$1.exports;
-    exports.Dot = exports.dot = dot.exports;
-    exports.Doc = exports.doc = doc.exports;
-    exports.TAP = exports.tap = tap.exports;
-    exports.JSON = exports.json = json.exports;
-    exports.HTML = exports.html = html.exports;
-    exports.List = exports.list = list.exports;
-    exports.Min = exports.min = min.exports;
-    exports.Spec = exports.spec = spec.exports;
-    exports.Nyan = exports.nyan = nyan.exports;
-    exports.XUnit = exports.xunit = xunit.exports;
-    exports.Markdown = exports.markdown = markdown.exports;
-    exports.Progress = exports.progress = progress.exports;
-    exports.Landing = exports.landing = landing.exports;
-    exports.JSONStream = exports['json-stream'] = jsonStream.exports;
+  // Alias exports to a their normalized format Mocha#reporter to prevent a need
+  // for dynamic (try/catch) requires, which Browserify doesn't handle.
+  exports.Base = exports.base = base$1.exports;
+  exports.Dot = exports.dot = dot.exports;
+  exports.Doc = exports.doc = doc.exports;
+  exports.TAP = exports.tap = tap.exports;
+  exports.JSON = exports.json = json.exports;
+  exports.HTML = exports.html = html.exports;
+  exports.List = exports.list = list.exports;
+  exports.Min = exports.min = min.exports;
+  exports.Spec = exports.spec = spec.exports;
+  exports.Nyan = exports.nyan = nyan.exports;
+  exports.XUnit = exports.xunit = xunit.exports;
+  exports.Markdown = exports.markdown = markdown.exports;
+  exports.Progress = exports.progress = progress.exports;
+  exports.Landing = exports.landing = landing.exports;
+  exports.JSONStream = exports['json-stream'] = jsonStream.exports;
   }(reporters));
 
   var diff = true;
@@ -18252,7 +18252,7 @@
   	"watch-ignore": [
   	"node_modules",
   	".git"
-    ]
+  ]
   };
 
   /**
@@ -19131,150 +19131,150 @@
 
   (function (module, exports) {
 
-    /*!
+  /*!
    * mocha
    * Copyright(c) 2011 TJ Holowaychuk <tj@vision-media.ca>
    * MIT Licensed
    */
 
-    var escapeRe = escapeStringRegexp;
-    var path = require$$1;
-    var builtinReporters = reporters;
-    var utils = utils$3;
-    var mocharc = require$$4;
-    var Suite = suite.exports;
-    var esmUtils = require$$18;
-    var createStatsCollector = statsCollector;
-    const {
-      createInvalidReporterError,
-      createInvalidInterfaceError,
-      createMochaInstanceAlreadyDisposedError,
-      createMochaInstanceAlreadyRunningError,
-      createUnsupportedError
-    } = errors$2;
-    const {EVENT_FILE_PRE_REQUIRE, EVENT_FILE_POST_REQUIRE, EVENT_FILE_REQUIRE} =
+  var escapeRe = escapeStringRegexp;
+  var path = require$$1;
+  var builtinReporters = reporters;
+  var utils = utils$3;
+  var mocharc = require$$4;
+  var Suite = suite.exports;
+  var esmUtils = require$$18;
+  var createStatsCollector = statsCollector;
+  const {
+    createInvalidReporterError,
+    createInvalidInterfaceError,
+    createMochaInstanceAlreadyDisposedError,
+    createMochaInstanceAlreadyRunningError,
+    createUnsupportedError
+  } = errors$2;
+  const {EVENT_FILE_PRE_REQUIRE, EVENT_FILE_POST_REQUIRE, EVENT_FILE_REQUIRE} =
     Suite.constants;
-    var debug = browser.exports('mocha:mocha');
+  var debug = browser.exports('mocha:mocha');
 
-    exports = module.exports = Mocha;
+  exports = module.exports = Mocha;
 
-    /**
+  /**
    * A Mocha instance is a finite state machine.
    * These are the states it can be in.
    * @private
    */
-    var mochaStates = utils.defineConstants({
+  var mochaStates = utils.defineConstants({
     /**
      * Initial state of the mocha instance
      * @private
      */
-      INIT: 'init',
-      /**
+    INIT: 'init',
+    /**
      * Mocha instance is running tests
      * @private
      */
-      RUNNING: 'running',
-      /**
+    RUNNING: 'running',
+    /**
      * Mocha instance is done running tests and references to test functions and hooks are cleaned.
      * You can reset this state by unloading the test files.
      * @private
      */
-      REFERENCES_CLEANED: 'referencesCleaned',
-      /**
+    REFERENCES_CLEANED: 'referencesCleaned',
+    /**
      * Mocha instance is disposed and can no longer be used.
      * @private
      */
-      DISPOSED: 'disposed'
-    });
+    DISPOSED: 'disposed'
+  });
 
-    /**
+  /**
    * To require local UIs and reporters when running in node.
    */
 
-    if (!utils.isBrowser() && typeof module.paths !== 'undefined') {
-      var cwd = utils.cwd();
-      module.paths.push(cwd, path.join(cwd, 'node_modules'));
-    }
+  if (!utils.isBrowser() && typeof module.paths !== 'undefined') {
+    var cwd = utils.cwd();
+    module.paths.push(cwd, path.join(cwd, 'node_modules'));
+  }
 
-    /**
+  /**
    * Expose internals.
    * @private
    */
 
-    exports.utils = utils;
-    exports.interfaces = interfaces;
-    /**
+  exports.utils = utils;
+  exports.interfaces = interfaces;
+  /**
    * @public
    * @memberof Mocha
    */
-    exports.reporters = builtinReporters;
-    exports.Runnable = runnable;
-    exports.Context = context;
-    /**
+  exports.reporters = builtinReporters;
+  exports.Runnable = runnable;
+  exports.Context = context;
+  /**
    *
    * @memberof Mocha
    */
-    exports.Runner = runner;
-    exports.Suite = Suite;
-    exports.Hook = hook;
-    exports.Test = test;
+  exports.Runner = runner;
+  exports.Suite = Suite;
+  exports.Hook = hook;
+  exports.Test = test;
 
-    let currentContext;
-    exports.afterEach = function (...args) {
-      return (currentContext.afterEach || currentContext.teardown).apply(
-        this,
-        args
-      );
-    };
-    exports.after = function (...args) {
-      return (currentContext.after || currentContext.suiteTeardown).apply(
-        this,
-        args
-      );
-    };
-    exports.beforeEach = function (...args) {
-      return (currentContext.beforeEach || currentContext.setup).apply(this, args);
-    };
-    exports.before = function (...args) {
-      return (currentContext.before || currentContext.suiteSetup).apply(this, args);
-    };
-    exports.describe = function (...args) {
-      return (currentContext.describe || currentContext.suite).apply(this, args);
-    };
-    exports.describe.only = function (...args) {
-      return (currentContext.describe || currentContext.suite).only.apply(
-        this,
-        args
-      );
-    };
-    exports.describe.skip = function (...args) {
-      return (currentContext.describe || currentContext.suite).skip.apply(
-        this,
-        args
-      );
-    };
-    exports.it = function (...args) {
-      return (currentContext.it || currentContext.test).apply(this, args);
-    };
-    exports.it.only = function (...args) {
-      return (currentContext.it || currentContext.test).only.apply(this, args);
-    };
-    exports.it.skip = function (...args) {
-      return (currentContext.it || currentContext.test).skip.apply(this, args);
-    };
-    exports.xdescribe = exports.describe.skip;
-    exports.xit = exports.it.skip;
-    exports.setup = exports.beforeEach;
-    exports.suiteSetup = exports.before;
-    exports.suiteTeardown = exports.after;
-    exports.suite = exports.describe;
-    exports.teardown = exports.afterEach;
-    exports.test = exports.it;
-    exports.run = function (...args) {
-      return currentContext.run.apply(this, args);
-    };
+  let currentContext;
+  exports.afterEach = function (...args) {
+    return (currentContext.afterEach || currentContext.teardown).apply(
+      this,
+      args
+    );
+  };
+  exports.after = function (...args) {
+    return (currentContext.after || currentContext.suiteTeardown).apply(
+      this,
+      args
+    );
+  };
+  exports.beforeEach = function (...args) {
+    return (currentContext.beforeEach || currentContext.setup).apply(this, args);
+  };
+  exports.before = function (...args) {
+    return (currentContext.before || currentContext.suiteSetup).apply(this, args);
+  };
+  exports.describe = function (...args) {
+    return (currentContext.describe || currentContext.suite).apply(this, args);
+  };
+  exports.describe.only = function (...args) {
+    return (currentContext.describe || currentContext.suite).only.apply(
+      this,
+      args
+    );
+  };
+  exports.describe.skip = function (...args) {
+    return (currentContext.describe || currentContext.suite).skip.apply(
+      this,
+      args
+    );
+  };
+  exports.it = function (...args) {
+    return (currentContext.it || currentContext.test).apply(this, args);
+  };
+  exports.it.only = function (...args) {
+    return (currentContext.it || currentContext.test).only.apply(this, args);
+  };
+  exports.it.skip = function (...args) {
+    return (currentContext.it || currentContext.test).skip.apply(this, args);
+  };
+  exports.xdescribe = exports.describe.skip;
+  exports.xit = exports.it.skip;
+  exports.setup = exports.beforeEach;
+  exports.suiteSetup = exports.before;
+  exports.suiteTeardown = exports.after;
+  exports.suite = exports.describe;
+  exports.teardown = exports.afterEach;
+  exports.test = exports.it;
+  exports.run = function (...args) {
+    return currentContext.run.apply(this, args);
+  };
 
-    /**
+  /**
    * Constructs a new Mocha instance with `options`.
    *
    * @public
@@ -19310,99 +19310,99 @@
    * @param {string[]} [options.require] - Pathname of `rootHooks` plugin for parallel runs.
    * @param {boolean} [options.isWorker] - Should be `true` if `Mocha` process is running in a worker process.
    */
-    function Mocha(options = {}) {
-      options = {...mocharc, ...options};
-      this.files = [];
-      this.options = options;
-      // root suite
-      this.suite = new exports.Suite('', new exports.Context(), true);
-      this._cleanReferencesAfterRun = true;
-      this._state = mochaStates.INIT;
+  function Mocha(options = {}) {
+    options = {...mocharc, ...options};
+    this.files = [];
+    this.options = options;
+    // root suite
+    this.suite = new exports.Suite('', new exports.Context(), true);
+    this._cleanReferencesAfterRun = true;
+    this._state = mochaStates.INIT;
 
-      this.grep(options.grep)
-        .fgrep(options.fgrep)
-        .ui(options.ui)
-        .reporter(
-          options.reporter,
-          options.reporterOption || options.reporterOptions // for backwards compatibility
-        )
-        .slow(options.slow)
-        .global(options.global);
+    this.grep(options.grep)
+      .fgrep(options.fgrep)
+      .ui(options.ui)
+      .reporter(
+        options.reporter,
+        options.reporterOption || options.reporterOptions // for backwards compatibility
+      )
+      .slow(options.slow)
+      .global(options.global);
 
-      // this guard exists because Suite#timeout does not consider `undefined` to be valid input
-      if (typeof options.timeout !== 'undefined') {
-        this.timeout(options.timeout === false ? 0 : options.timeout);
+    // this guard exists because Suite#timeout does not consider `undefined` to be valid input
+    if (typeof options.timeout !== 'undefined') {
+      this.timeout(options.timeout === false ? 0 : options.timeout);
+    }
+
+    if ('retries' in options) {
+      this.retries(options.retries);
+    }
+
+    [
+      'allowUncaught',
+      'asyncOnly',
+      'bail',
+      'checkLeaks',
+      'color',
+      'delay',
+      'diff',
+      'dryRun',
+      'failZero',
+      'forbidOnly',
+      'forbidPending',
+      'fullTrace',
+      'inlineDiffs',
+      'invert'
+    ].forEach(function (opt) {
+      if (options[opt]) {
+        this[opt]();
       }
+    }, this);
 
-      if ('retries' in options) {
-        this.retries(options.retries);
-      }
+    if (options.rootHooks) {
+      this.rootHooks(options.rootHooks);
+    }
 
-      [
-        'allowUncaught',
-        'asyncOnly',
-        'bail',
-        'checkLeaks',
-        'color',
-        'delay',
-        'diff',
-        'dryRun',
-        'failZero',
-        'forbidOnly',
-        'forbidPending',
-        'fullTrace',
-        'inlineDiffs',
-        'invert'
-      ].forEach(function (opt) {
-        if (options[opt]) {
-          this[opt]();
-        }
-      }, this);
-
-      if (options.rootHooks) {
-        this.rootHooks(options.rootHooks);
-      }
-
-      /**
+    /**
      * The class which we'll instantiate in {@link Mocha#run}.  Defaults to
      * {@link Runner} in serial mode; changes in parallel mode.
      * @memberof Mocha
      * @private
      */
-      this._runnerClass = exports.Runner;
+    this._runnerClass = exports.Runner;
 
-      /**
+    /**
      * Whether or not to call {@link Mocha#loadFiles} implicitly when calling
      * {@link Mocha#run}.  If this is `true`, then it's up to the consumer to call
      * {@link Mocha#loadFiles} _or_ {@link Mocha#loadFilesAsync}.
      * @private
      * @memberof Mocha
      */
-      this._lazyLoadFiles = false;
+    this._lazyLoadFiles = false;
 
-      /**
+    /**
      * It's useful for a Mocha instance to know if it's running in a worker process.
      * We could derive this via other means, but it's helpful to have a flag to refer to.
      * @memberof Mocha
      * @private
      */
-      this.isWorker = Boolean(options.isWorker);
+    this.isWorker = Boolean(options.isWorker);
 
-      this.globalSetup(options.globalSetup)
-        .globalTeardown(options.globalTeardown)
-        .enableGlobalSetup(options.enableGlobalSetup)
-        .enableGlobalTeardown(options.enableGlobalTeardown);
+    this.globalSetup(options.globalSetup)
+      .globalTeardown(options.globalTeardown)
+      .enableGlobalSetup(options.enableGlobalSetup)
+      .enableGlobalTeardown(options.enableGlobalTeardown);
 
-      if (
-        options.parallel &&
+    if (
+      options.parallel &&
       (typeof options.jobs === 'undefined' || options.jobs > 1)
-      ) {
-        debug('attempting to enable parallel mode');
-        this.parallelMode(true);
-      }
+    ) {
+      debug('attempting to enable parallel mode');
+      this.parallelMode(true);
     }
+  }
 
-    /**
+  /**
    * Enables or disables bailing on the first failure.
    *
    * @public
@@ -19411,12 +19411,12 @@
    * @returns {Mocha} this
    * @chainable
    */
-    Mocha.prototype.bail = function (bail) {
-      this.suite.bail(bail !== false);
-      return this;
-    };
+  Mocha.prototype.bail = function (bail) {
+    this.suite.bail(bail !== false);
+    return this;
+  };
 
-    /**
+  /**
    * @summary
    * Adds `file` to be loaded for execution.
    *
@@ -19429,12 +19429,12 @@
    * @returns {Mocha} this
    * @chainable
    */
-    Mocha.prototype.addFile = function (file) {
-      this.files.push(file);
-      return this;
-    };
+  Mocha.prototype.addFile = function (file) {
+    this.files.push(file);
+    return this;
+  };
 
-    /**
+  /**
    * Sets reporter to `reporter`, defaults to "spec".
    *
    * @public
@@ -19450,43 +19450,43 @@
    * // Use XUnit reporter and direct its output to file
    * mocha.reporter('xunit', { output: '/path/to/testspec.xunit.xml' });
    */
-    Mocha.prototype.reporter = function (reporterName, reporterOptions) {
-      if (typeof reporterName === 'function') {
-        this._reporter = reporterName;
-      } else {
-        reporterName = reporterName || 'spec';
-        var reporter;
-        // Try to load a built-in reporter.
-        if (builtinReporters[reporterName]) {
-          reporter = builtinReporters[reporterName];
-        }
-        // Try to load reporters from process.cwd() and node_modules
-        if (!reporter) {
-          let foundReporter;
+  Mocha.prototype.reporter = function (reporterName, reporterOptions) {
+    if (typeof reporterName === 'function') {
+      this._reporter = reporterName;
+    } else {
+      reporterName = reporterName || 'spec';
+      var reporter;
+      // Try to load a built-in reporter.
+      if (builtinReporters[reporterName]) {
+        reporter = builtinReporters[reporterName];
+      }
+      // Try to load reporters from process.cwd() and node_modules
+      if (!reporter) {
+        let foundReporter;
+        try {
+          foundReporter = require.resolve(reporterName);
+          reporter = commonjsRequire(foundReporter);
+        } catch (err) {
+          if (foundReporter) {
+            throw createInvalidReporterError(err.message, foundReporter);
+          }
+          // Try to load reporters from a cwd-relative path
           try {
-            foundReporter = require.resolve(reporterName);
-            reporter = commonjsRequire(foundReporter);
-          } catch (err) {
-            if (foundReporter) {
-              throw createInvalidReporterError(err.message, foundReporter);
-            }
-            // Try to load reporters from a cwd-relative path
-            try {
-              reporter = commonjsRequire(path.resolve(reporterName));
-            } catch (e) {
-              throw createInvalidReporterError(e.message, reporterName);
-            }
+            reporter = commonjsRequire(path.resolve(reporterName));
+          } catch (e) {
+            throw createInvalidReporterError(e.message, reporterName);
           }
         }
-        this._reporter = reporter;
       }
-      this.options.reporterOption = reporterOptions;
-      // alias option name is used in built-in reporters xunit/tap/progress
-      this.options.reporterOptions = reporterOptions;
-      return this;
-    };
+      this._reporter = reporter;
+    }
+    this.options.reporterOption = reporterOptions;
+    // alias option name is used in built-in reporters xunit/tap/progress
+    this.options.reporterOptions = reporterOptions;
+    return this;
+  };
 
-    /**
+  /**
    * Sets test UI `name`, defaults to "bdd".
    *
    * @public
@@ -19497,31 +19497,31 @@
    * @chainable
    * @throws {Error} if requested interface cannot be loaded
    */
-    Mocha.prototype.ui = function (ui) {
-      var bindInterface;
-      if (typeof ui === 'function') {
-        bindInterface = ui;
-      } else {
-        ui = ui || 'bdd';
-        bindInterface = exports.interfaces[ui];
-        if (!bindInterface) {
-          try {
-            bindInterface = commonjsRequire(ui);
-          } catch (err) {
-            throw createInvalidInterfaceError(`invalid interface '${ui}'`, ui);
-          }
+  Mocha.prototype.ui = function (ui) {
+    var bindInterface;
+    if (typeof ui === 'function') {
+      bindInterface = ui;
+    } else {
+      ui = ui || 'bdd';
+      bindInterface = exports.interfaces[ui];
+      if (!bindInterface) {
+        try {
+          bindInterface = commonjsRequire(ui);
+        } catch (err) {
+          throw createInvalidInterfaceError(`invalid interface '${ui}'`, ui);
         }
       }
-      bindInterface(this.suite);
+    }
+    bindInterface(this.suite);
 
-      this.suite.on(EVENT_FILE_PRE_REQUIRE, function (context) {
-        currentContext = context;
-      });
+    this.suite.on(EVENT_FILE_PRE_REQUIRE, function (context) {
+      currentContext = context;
+    });
 
-      return this;
-    };
+    return this;
+  };
 
-    /**
+  /**
    * Loads `files` prior to execution. Does not support ES Modules.
    *
    * @description
@@ -19536,19 +19536,19 @@
    * @see {@link Mocha#loadFilesAsync}
    * @param {Function} [fn] - Callback invoked upon completion.
    */
-    Mocha.prototype.loadFiles = function (fn) {
-      var self = this;
-      var suite = this.suite;
-      this.files.forEach(function (file) {
-        file = path.resolve(file);
-        suite.emit(EVENT_FILE_PRE_REQUIRE, commonjsGlobal, file, self);
-        suite.emit(EVENT_FILE_REQUIRE, commonjsRequire(file), file, self);
-        suite.emit(EVENT_FILE_POST_REQUIRE, commonjsGlobal, file, self);
-      });
-      fn && fn();
-    };
+  Mocha.prototype.loadFiles = function (fn) {
+    var self = this;
+    var suite = this.suite;
+    this.files.forEach(function (file) {
+      file = path.resolve(file);
+      suite.emit(EVENT_FILE_PRE_REQUIRE, commonjsGlobal, file, self);
+      suite.emit(EVENT_FILE_REQUIRE, commonjsRequire(file), file, self);
+      suite.emit(EVENT_FILE_POST_REQUIRE, commonjsGlobal, file, self);
+    });
+    fn && fn();
+  };
 
-    /**
+  /**
    * Loads `files` prior to execution. Supports Node ES Modules.
    *
    * @description
@@ -19570,25 +19570,25 @@
    *   .then(() => mocha.run(failures => process.exitCode = failures ? 1 : 0))
    *   .catch(() => process.exitCode = 1);
    */
-    Mocha.prototype.loadFilesAsync = function ({esmDecorator} = {}) {
-      var self = this;
-      var suite = this.suite;
-      this.lazyLoadFiles(true);
+  Mocha.prototype.loadFilesAsync = function ({esmDecorator} = {}) {
+    var self = this;
+    var suite = this.suite;
+    this.lazyLoadFiles(true);
 
-      return esmUtils.loadFilesAsync(
-        this.files,
-        function (file) {
-          suite.emit(EVENT_FILE_PRE_REQUIRE, commonjsGlobal, file, self);
-        },
-        function (file, resultModule) {
-          suite.emit(EVENT_FILE_REQUIRE, resultModule, file, self);
-          suite.emit(EVENT_FILE_POST_REQUIRE, commonjsGlobal, file, self);
-        },
-        esmDecorator
-      );
-    };
+    return esmUtils.loadFilesAsync(
+      this.files,
+      function (file) {
+        suite.emit(EVENT_FILE_PRE_REQUIRE, commonjsGlobal, file, self);
+      },
+      function (file, resultModule) {
+        suite.emit(EVENT_FILE_REQUIRE, resultModule, file, self);
+        suite.emit(EVENT_FILE_POST_REQUIRE, commonjsGlobal, file, self);
+      },
+      esmDecorator
+    );
+  };
 
-    /**
+  /**
    * Removes a previously loaded file from Node's `require` cache.
    *
    * @private
@@ -19596,16 +19596,16 @@
    * @see {@link Mocha#unloadFiles}
    * @param {string} file - Pathname of file to be unloaded.
    */
-    Mocha.unloadFile = function (file) {
-      if (utils.isBrowser()) {
-        throw createUnsupportedError(
-          'unloadFile() is only supported in a Node.js environment'
-        );
-      }
-      return require$$18.unloadFile(file);
-    };
+  Mocha.unloadFile = function (file) {
+    if (utils.isBrowser()) {
+      throw createUnsupportedError(
+        'unloadFile() is only supported in a Node.js environment'
+      );
+    }
+    return require$$18.unloadFile(file);
+  };
 
-    /**
+  /**
    * Unloads `files` from Node's `require` cache.
    *
    * @description
@@ -19620,23 +19620,23 @@
    * @returns {Mocha} this
    * @chainable
    */
-    Mocha.prototype.unloadFiles = function () {
-      if (this._state === mochaStates.DISPOSED) {
-        throw createMochaInstanceAlreadyDisposedError(
-          'Mocha instance is already disposed, it cannot be used again.',
-          this._cleanReferencesAfterRun,
-          this
-        );
-      }
+  Mocha.prototype.unloadFiles = function () {
+    if (this._state === mochaStates.DISPOSED) {
+      throw createMochaInstanceAlreadyDisposedError(
+        'Mocha instance is already disposed, it cannot be used again.',
+        this._cleanReferencesAfterRun,
+        this
+      );
+    }
 
-      this.files.forEach(function (file) {
-        Mocha.unloadFile(file);
-      });
-      this._state = mochaStates.INIT;
-      return this;
-    };
+    this.files.forEach(function (file) {
+      Mocha.unloadFile(file);
+    });
+    this._state = mochaStates.INIT;
+    return this;
+  };
 
-    /**
+  /**
    * Sets `grep` filter after escaping RegExp special characters.
    *
    * @public
@@ -19649,14 +19649,14 @@
    * // Select tests whose full title begins with `"foo"` followed by a period
    * mocha.fgrep('foo.');
    */
-    Mocha.prototype.fgrep = function (str) {
-      if (!str) {
-        return this;
-      }
-      return this.grep(new RegExp(escapeRe(str)));
-    };
+  Mocha.prototype.fgrep = function (str) {
+    if (!str) {
+      return this;
+    }
+    return this.grep(new RegExp(escapeRe(str)));
+  };
 
-    /**
+  /**
    * @summary
    * Sets `grep` filter used to select specific tests for execution.
    *
@@ -19690,18 +19690,18 @@
    * // Given embedded test `it('only-this-test')`...
    * mocha.grep('/^only-this-test$/');    // NO! Use `.only()` to do this!
    */
-    Mocha.prototype.grep = function (re) {
-      if (utils.isString(re)) {
+  Mocha.prototype.grep = function (re) {
+    if (utils.isString(re)) {
       // extract args if it's regex-like, i.e: [string, pattern, flag]
-        var arg = re.match(/^\/(.*)\/([gimy]{0,4})$|.*/);
-        this.options.grep = new RegExp(arg[1] || arg[0], arg[2]);
-      } else {
-        this.options.grep = re;
-      }
-      return this;
-    };
+      var arg = re.match(/^\/(.*)\/([gimy]{0,4})$|.*/);
+      this.options.grep = new RegExp(arg[1] || arg[0], arg[2]);
+    } else {
+      this.options.grep = re;
+    }
+    return this;
+  };
 
-    /**
+  /**
    * Inverts `grep` matches.
    *
    * @public
@@ -19713,12 +19713,12 @@
    * // Select tests whose full title does *not* contain `"match"`, ignoring case
    * mocha.grep(/match/i).invert();
    */
-    Mocha.prototype.invert = function () {
-      this.options.invert = true;
-      return this;
-    };
+  Mocha.prototype.invert = function () {
+    this.options.invert = true;
+    return this;
+  };
 
-    /**
+  /**
    * Enables or disables checking for global variables leaked while running tests.
    *
    * @public
@@ -19727,12 +19727,12 @@
    * @return {Mocha} this
    * @chainable
    */
-    Mocha.prototype.checkLeaks = function (checkLeaks) {
-      this.options.checkLeaks = checkLeaks !== false;
-      return this;
-    };
+  Mocha.prototype.checkLeaks = function (checkLeaks) {
+    this.options.checkLeaks = checkLeaks !== false;
+    return this;
+  };
 
-    /**
+  /**
    * Enables or disables whether or not to dispose after each test run.
    * Disable this to ensure you can run the test suite multiple times.
    * If disabled, be sure to dispose mocha when you're done to prevent memory leaks.
@@ -19742,29 +19742,29 @@
    * @return {Mocha} this
    * @chainable
    */
-    Mocha.prototype.cleanReferencesAfterRun = function (cleanReferencesAfterRun) {
-      this._cleanReferencesAfterRun = cleanReferencesAfterRun !== false;
-      return this;
-    };
+  Mocha.prototype.cleanReferencesAfterRun = function (cleanReferencesAfterRun) {
+    this._cleanReferencesAfterRun = cleanReferencesAfterRun !== false;
+    return this;
+  };
 
-    /**
+  /**
    * Manually dispose this mocha instance. Mark this instance as `disposed` and unable to run more tests.
    * It also removes function references to tests functions and hooks, so variables trapped in closures can be cleaned by the garbage collector.
    * @public
    */
-    Mocha.prototype.dispose = function () {
-      if (this._state === mochaStates.RUNNING) {
-        throw createMochaInstanceAlreadyRunningError(
-          'Cannot dispose while the mocha instance is still running tests.'
-        );
-      }
-      this.unloadFiles();
-      this._previousRunner && this._previousRunner.dispose();
-      this.suite.dispose();
-      this._state = mochaStates.DISPOSED;
-    };
+  Mocha.prototype.dispose = function () {
+    if (this._state === mochaStates.RUNNING) {
+      throw createMochaInstanceAlreadyRunningError(
+        'Cannot dispose while the mocha instance is still running tests.'
+      );
+    }
+    this.unloadFiles();
+    this._previousRunner && this._previousRunner.dispose();
+    this.suite.dispose();
+    this._state = mochaStates.DISPOSED;
+  };
 
-    /**
+  /**
    * Displays full stack trace upon test failure.
    *
    * @public
@@ -19773,12 +19773,12 @@
    * @return {Mocha} this
    * @chainable
    */
-    Mocha.prototype.fullTrace = function (fullTrace) {
-      this.options.fullTrace = fullTrace !== false;
-      return this;
-    };
+  Mocha.prototype.fullTrace = function (fullTrace) {
+    this.options.fullTrace = fullTrace !== false;
+    return this;
+  };
 
-    /**
+  /**
    * Specifies whitelist of variable names to be expected in global scope.
    *
    * @public
@@ -19792,19 +19792,19 @@
    * // Specify variables to be expected in global scope
    * mocha.global(['jQuery', 'MyLib']);
    */
-    Mocha.prototype.global = function (global) {
-      this.options.global = (this.options.global || [])
-        .concat(global)
-        .filter(Boolean)
-        .filter(function (elt, idx, arr) {
-          return arr.indexOf(elt) === idx;
-        });
-      return this;
-    };
-    // for backwards compatibility, 'globals' is an alias of 'global'
-    Mocha.prototype.globals = Mocha.prototype.global;
+  Mocha.prototype.global = function (global) {
+    this.options.global = (this.options.global || [])
+      .concat(global)
+      .filter(Boolean)
+      .filter(function (elt, idx, arr) {
+        return arr.indexOf(elt) === idx;
+      });
+    return this;
+  };
+  // for backwards compatibility, 'globals' is an alias of 'global'
+  Mocha.prototype.globals = Mocha.prototype.global;
 
-    /**
+  /**
    * Enables or disables TTY color output by screen-oriented reporters.
    *
    * @public
@@ -19813,12 +19813,12 @@
    * @return {Mocha} this
    * @chainable
    */
-    Mocha.prototype.color = function (color) {
-      this.options.color = color !== false;
-      return this;
-    };
+  Mocha.prototype.color = function (color) {
+    this.options.color = color !== false;
+    return this;
+  };
 
-    /**
+  /**
    * Enables or disables reporter to use inline diffs (rather than +/-)
    * in test failure output.
    *
@@ -19828,12 +19828,12 @@
    * @return {Mocha} this
    * @chainable
    */
-    Mocha.prototype.inlineDiffs = function (inlineDiffs) {
-      this.options.inlineDiffs = inlineDiffs !== false;
-      return this;
-    };
+  Mocha.prototype.inlineDiffs = function (inlineDiffs) {
+    this.options.inlineDiffs = inlineDiffs !== false;
+    return this;
+  };
 
-    /**
+  /**
    * Enables or disables reporter to include diff in test failure output.
    *
    * @public
@@ -19842,12 +19842,12 @@
    * @return {Mocha} this
    * @chainable
    */
-    Mocha.prototype.diff = function (diff) {
-      this.options.diff = diff !== false;
-      return this;
-    };
+  Mocha.prototype.diff = function (diff) {
+    this.options.diff = diff !== false;
+    return this;
+  };
 
-    /**
+  /**
    * @summary
    * Sets timeout threshold value.
    *
@@ -19870,12 +19870,12 @@
    * // Same as above but using string argument
    * mocha.timeout('1s');
    */
-    Mocha.prototype.timeout = function (msecs) {
-      this.suite.timeout(msecs);
-      return this;
-    };
+  Mocha.prototype.timeout = function (msecs) {
+    this.suite.timeout(msecs);
+    return this;
+  };
 
-    /**
+  /**
    * Sets the number of times to retry failed tests.
    *
    * @public
@@ -19889,12 +19889,12 @@
    * // Allow any failed test to retry one more time
    * mocha.retries(1);
    */
-    Mocha.prototype.retries = function (retry) {
-      this.suite.retries(retry);
-      return this;
-    };
+  Mocha.prototype.retries = function (retry) {
+    this.suite.retries(retry);
+    return this;
+  };
 
-    /**
+  /**
    * Sets slowness threshold value.
    *
    * @public
@@ -19911,12 +19911,12 @@
    * // Same as above but using string argument
    * mocha.slow('0.5s');
    */
-    Mocha.prototype.slow = function (msecs) {
-      this.suite.slow(msecs);
-      return this;
-    };
+  Mocha.prototype.slow = function (msecs) {
+    this.suite.slow(msecs);
+    return this;
+  };
 
-    /**
+  /**
    * Forces all tests to either accept a `done` callback or return a promise.
    *
    * @public
@@ -19925,24 +19925,24 @@
    * @return {Mocha} this
    * @chainable
    */
-    Mocha.prototype.asyncOnly = function (asyncOnly) {
-      this.options.asyncOnly = asyncOnly !== false;
-      return this;
-    };
+  Mocha.prototype.asyncOnly = function (asyncOnly) {
+    this.options.asyncOnly = asyncOnly !== false;
+    return this;
+  };
 
-    /**
+  /**
    * Disables syntax highlighting (in browser).
    *
    * @public
    * @return {Mocha} this
    * @chainable
    */
-    Mocha.prototype.noHighlighting = function () {
-      this.options.noHighlighting = true;
-      return this;
-    };
+  Mocha.prototype.noHighlighting = function () {
+    this.options.noHighlighting = true;
+    return this;
+  };
 
-    /**
+  /**
    * Enables or disables uncaught errors to propagate.
    *
    * @public
@@ -19951,12 +19951,12 @@
    * @return {Mocha} this
    * @chainable
    */
-    Mocha.prototype.allowUncaught = function (allowUncaught) {
-      this.options.allowUncaught = allowUncaught !== false;
-      return this;
-    };
+  Mocha.prototype.allowUncaught = function (allowUncaught) {
+    this.options.allowUncaught = allowUncaught !== false;
+    return this;
+  };
 
-    /**
+  /**
    * @summary
    * Delays root suite execution.
    *
@@ -19968,12 +19968,12 @@
    * @returns {Mocha} this
    * @chainable
    */
-    Mocha.prototype.delay = function delay() {
-      this.options.delay = true;
-      return this;
-    };
+  Mocha.prototype.delay = function delay() {
+    this.options.delay = true;
+    return this;
+  };
 
-    /**
+  /**
    * Enables or disables running tests in dry-run mode.
    *
    * @public
@@ -19982,12 +19982,12 @@
    * @return {Mocha} this
    * @chainable
    */
-    Mocha.prototype.dryRun = function (dryRun) {
-      this.options.dryRun = dryRun !== false;
-      return this;
-    };
+  Mocha.prototype.dryRun = function (dryRun) {
+    this.options.dryRun = dryRun !== false;
+    return this;
+  };
 
-    /**
+  /**
    * Fails test run if no tests encountered with exit-code 1.
    *
    * @public
@@ -19996,12 +19996,12 @@
    * @return {Mocha} this
    * @chainable
    */
-    Mocha.prototype.failZero = function (failZero) {
-      this.options.failZero = failZero !== false;
-      return this;
-    };
+  Mocha.prototype.failZero = function (failZero) {
+    this.options.failZero = failZero !== false;
+    return this;
+  };
 
-    /**
+  /**
    * Causes tests marked `only` to fail the suite.
    *
    * @public
@@ -20010,12 +20010,12 @@
    * @returns {Mocha} this
    * @chainable
    */
-    Mocha.prototype.forbidOnly = function (forbidOnly) {
-      this.options.forbidOnly = forbidOnly !== false;
-      return this;
-    };
+  Mocha.prototype.forbidOnly = function (forbidOnly) {
+    this.options.forbidOnly = forbidOnly !== false;
+    return this;
+  };
 
-    /**
+  /**
    * Causes pending tests and tests marked `skip` to fail the suite.
    *
    * @public
@@ -20024,49 +20024,49 @@
    * @returns {Mocha} this
    * @chainable
    */
-    Mocha.prototype.forbidPending = function (forbidPending) {
-      this.options.forbidPending = forbidPending !== false;
-      return this;
-    };
+  Mocha.prototype.forbidPending = function (forbidPending) {
+    this.options.forbidPending = forbidPending !== false;
+    return this;
+  };
 
-    /**
+  /**
    * Throws an error if mocha is in the wrong state to be able to transition to a "running" state.
    * @private
    */
-    Mocha.prototype._guardRunningStateTransition = function () {
-      if (this._state === mochaStates.RUNNING) {
-        throw createMochaInstanceAlreadyRunningError(
-          'Mocha instance is currently running tests, cannot start a next test run until this one is done',
-          this
-        );
-      }
-      if (
-        this._state === mochaStates.DISPOSED ||
+  Mocha.prototype._guardRunningStateTransition = function () {
+    if (this._state === mochaStates.RUNNING) {
+      throw createMochaInstanceAlreadyRunningError(
+        'Mocha instance is currently running tests, cannot start a next test run until this one is done',
+        this
+      );
+    }
+    if (
+      this._state === mochaStates.DISPOSED ||
       this._state === mochaStates.REFERENCES_CLEANED
-      ) {
-        throw createMochaInstanceAlreadyDisposedError(
-          'Mocha instance is already disposed, cannot start a new test run. Please create a new mocha instance. Be sure to set disable `cleanReferencesAfterRun` when you want to reuse the same mocha instance for multiple test runs.',
-          this._cleanReferencesAfterRun,
-          this
-        );
-      }
-    };
+    ) {
+      throw createMochaInstanceAlreadyDisposedError(
+        'Mocha instance is already disposed, cannot start a new test run. Please create a new mocha instance. Be sure to set disable `cleanReferencesAfterRun` when you want to reuse the same mocha instance for multiple test runs.',
+        this._cleanReferencesAfterRun,
+        this
+      );
+    }
+  };
 
-    /**
+  /**
    * Mocha version as specified by "package.json".
    *
    * @name Mocha#version
    * @type string
    * @readonly
    */
-    Object.defineProperty(Mocha.prototype, 'version', {
-      value: require$$17.version,
-      configurable: false,
-      enumerable: true,
-      writable: false
-    });
+  Object.defineProperty(Mocha.prototype, 'version', {
+    value: require$$17.version,
+    configurable: false,
+    enumerable: true,
+    writable: false
+  });
 
-    /**
+  /**
    * Callback to be invoked when test execution is complete.
    *
    * @private
@@ -20074,7 +20074,7 @@
    * @param {number} failures - Number of failures that occurred.
    */
 
-    /**
+  /**
    * Runs root suite and invokes `fn()` when complete.
    *
    * @description
@@ -20092,114 +20092,114 @@
    * // exit with non-zero status if there were test failures
    * mocha.run(failures => process.exitCode = failures ? 1 : 0);
    */
-    Mocha.prototype.run = function (fn) {
-      this._guardRunningStateTransition();
-      this._state = mochaStates.RUNNING;
-      if (this._previousRunner) {
-        this._previousRunner.dispose();
-        this.suite.reset();
-      }
-      if (this.files.length && !this._lazyLoadFiles) {
-        this.loadFiles();
-      }
-      var suite = this.suite;
-      var options = this.options;
-      options.files = this.files;
-      const runner = new this._runnerClass(suite, {
-        cleanReferencesAfterRun: this._cleanReferencesAfterRun,
-        delay: options.delay,
-        dryRun: options.dryRun,
-        failZero: options.failZero
-      });
-      createStatsCollector(runner);
-      var reporter = new this._reporter(runner, options);
-      runner.checkLeaks = options.checkLeaks === true;
-      runner.fullStackTrace = options.fullTrace;
-      runner.asyncOnly = options.asyncOnly;
-      runner.allowUncaught = options.allowUncaught;
-      runner.forbidOnly = options.forbidOnly;
-      runner.forbidPending = options.forbidPending;
-      if (options.grep) {
-        runner.grep(options.grep, options.invert);
-      }
-      if (options.global) {
-        runner.globals(options.global);
-      }
-      if (options.color !== undefined) {
-        exports.reporters.Base.useColors = options.color;
-      }
-      exports.reporters.Base.inlineDiffs = options.inlineDiffs;
-      exports.reporters.Base.hideDiff = !options.diff;
+  Mocha.prototype.run = function (fn) {
+    this._guardRunningStateTransition();
+    this._state = mochaStates.RUNNING;
+    if (this._previousRunner) {
+      this._previousRunner.dispose();
+      this.suite.reset();
+    }
+    if (this.files.length && !this._lazyLoadFiles) {
+      this.loadFiles();
+    }
+    var suite = this.suite;
+    var options = this.options;
+    options.files = this.files;
+    const runner = new this._runnerClass(suite, {
+      cleanReferencesAfterRun: this._cleanReferencesAfterRun,
+      delay: options.delay,
+      dryRun: options.dryRun,
+      failZero: options.failZero
+    });
+    createStatsCollector(runner);
+    var reporter = new this._reporter(runner, options);
+    runner.checkLeaks = options.checkLeaks === true;
+    runner.fullStackTrace = options.fullTrace;
+    runner.asyncOnly = options.asyncOnly;
+    runner.allowUncaught = options.allowUncaught;
+    runner.forbidOnly = options.forbidOnly;
+    runner.forbidPending = options.forbidPending;
+    if (options.grep) {
+      runner.grep(options.grep, options.invert);
+    }
+    if (options.global) {
+      runner.globals(options.global);
+    }
+    if (options.color !== undefined) {
+      exports.reporters.Base.useColors = options.color;
+    }
+    exports.reporters.Base.inlineDiffs = options.inlineDiffs;
+    exports.reporters.Base.hideDiff = !options.diff;
 
-      const done = failures => {
-        this._previousRunner = runner;
-        this._state = this._cleanReferencesAfterRun
-          ? mochaStates.REFERENCES_CLEANED
-          : mochaStates.INIT;
-        fn = fn || utils.noop;
-        if (typeof reporter.done === 'function') {
-          reporter.done(failures, fn);
-        } else {
-          fn(failures);
-        }
-      };
+    const done = failures => {
+      this._previousRunner = runner;
+      this._state = this._cleanReferencesAfterRun
+        ? mochaStates.REFERENCES_CLEANED
+        : mochaStates.INIT;
+      fn = fn || utils.noop;
+      if (typeof reporter.done === 'function') {
+        reporter.done(failures, fn);
+      } else {
+        fn(failures);
+      }
+    };
 
-      const runAsync = async runner => {
-        const context =
+    const runAsync = async runner => {
+      const context =
         this.options.enableGlobalSetup && this.hasGlobalSetupFixtures()
           ? await this.runGlobalSetup(runner)
           : {};
-        const failureCount = await runner.runAsync({
-          files: this.files,
-          options
-        });
-        if (this.options.enableGlobalTeardown && this.hasGlobalTeardownFixtures()) {
-          await this.runGlobalTeardown(runner, {context});
-        }
-        return failureCount;
-      };
-
-      // no "catch" here is intentional. errors coming out of
-      // Runner#run are considered uncaught/unhandled and caught
-      // by the `process` event listeners.
-      // also: returning anything other than `runner` would be a breaking
-      // change
-      runAsync(runner).then(done);
-
-      return runner;
+      const failureCount = await runner.runAsync({
+        files: this.files,
+        options
+      });
+      if (this.options.enableGlobalTeardown && this.hasGlobalTeardownFixtures()) {
+        await this.runGlobalTeardown(runner, {context});
+      }
+      return failureCount;
     };
 
-    /**
+    // no "catch" here is intentional. errors coming out of
+    // Runner#run are considered uncaught/unhandled and caught
+    // by the `process` event listeners.
+    // also: returning anything other than `runner` would be a breaking
+    // change
+    runAsync(runner).then(done);
+
+    return runner;
+  };
+
+  /**
    * Assigns hooks to the root suite
    * @param {MochaRootHookObject} [hooks] - Hooks to assign to root suite
    * @chainable
    */
-    Mocha.prototype.rootHooks = function rootHooks({
-      beforeAll = [],
-      beforeEach = [],
-      afterAll = [],
-      afterEach = []
-    } = {}) {
-      beforeAll = utils.castArray(beforeAll);
-      beforeEach = utils.castArray(beforeEach);
-      afterAll = utils.castArray(afterAll);
-      afterEach = utils.castArray(afterEach);
-      beforeAll.forEach(hook => {
-        this.suite.beforeAll(hook);
-      });
-      beforeEach.forEach(hook => {
-        this.suite.beforeEach(hook);
-      });
-      afterAll.forEach(hook => {
-        this.suite.afterAll(hook);
-      });
-      afterEach.forEach(hook => {
-        this.suite.afterEach(hook);
-      });
-      return this;
-    };
+  Mocha.prototype.rootHooks = function rootHooks({
+    beforeAll = [],
+    beforeEach = [],
+    afterAll = [],
+    afterEach = []
+  } = {}) {
+    beforeAll = utils.castArray(beforeAll);
+    beforeEach = utils.castArray(beforeEach);
+    afterAll = utils.castArray(afterAll);
+    afterEach = utils.castArray(afterEach);
+    beforeAll.forEach(hook => {
+      this.suite.beforeAll(hook);
+    });
+    beforeEach.forEach(hook => {
+      this.suite.beforeEach(hook);
+    });
+    afterAll.forEach(hook => {
+      this.suite.afterAll(hook);
+    });
+    afterEach.forEach(hook => {
+      this.suite.afterEach(hook);
+    });
+    return this;
+  };
 
-    /**
+  /**
    * Toggles parallel mode.
    *
    * Must be run before calling {@link Mocha#run}. Changes the `Runner` class to
@@ -20214,36 +20214,36 @@
    * @chainable
    * @public
    */
-    Mocha.prototype.parallelMode = function parallelMode(enable = true) {
-      if (utils.isBrowser()) {
-        throw createUnsupportedError('parallel mode is only supported in Node.js');
-      }
-      const parallel = Boolean(enable);
-      if (
-        parallel === this.options.parallel &&
+  Mocha.prototype.parallelMode = function parallelMode(enable = true) {
+    if (utils.isBrowser()) {
+      throw createUnsupportedError('parallel mode is only supported in Node.js');
+    }
+    const parallel = Boolean(enable);
+    if (
+      parallel === this.options.parallel &&
       this._lazyLoadFiles &&
       this._runnerClass !== exports.Runner
-      ) {
-        return this;
-      }
-      if (this._state !== mochaStates.INIT) {
-        throw createUnsupportedError(
-          'cannot change parallel mode after having called run()'
-        );
-      }
-      this.options.parallel = parallel;
+    ) {
+      return this;
+    }
+    if (this._state !== mochaStates.INIT) {
+      throw createUnsupportedError(
+        'cannot change parallel mode after having called run()'
+      );
+    }
+    this.options.parallel = parallel;
 
-      // swap Runner class
-      this._runnerClass = parallel
-        ? require$$18
-        : exports.Runner;
+    // swap Runner class
+    this._runnerClass = parallel
+      ? require$$18
+      : exports.Runner;
 
-      // lazyLoadFiles may have been set `true` otherwise (for ESM loading),
-      // so keep `true` if so.
-      return this.lazyLoadFiles(this._lazyLoadFiles || parallel);
-    };
+    // lazyLoadFiles may have been set `true` otherwise (for ESM loading),
+    // so keep `true` if so.
+    return this.lazyLoadFiles(this._lazyLoadFiles || parallel);
+  };
 
-    /**
+  /**
    * Disables implicit call to {@link Mocha#loadFiles} in {@link Mocha#run}. This
    * setting is used by watch mode, parallel mode, and for loading ESM files.
    * @todo This should throw if we've already loaded files; such behavior
@@ -20253,13 +20253,13 @@
    * @chainable
    * @public
    */
-    Mocha.prototype.lazyLoadFiles = function lazyLoadFiles(enable) {
-      this._lazyLoadFiles = enable === true;
-      debug('set lazy load to %s', enable);
-      return this;
-    };
+  Mocha.prototype.lazyLoadFiles = function lazyLoadFiles(enable) {
+    this._lazyLoadFiles = enable === true;
+    debug('set lazy load to %s', enable);
+    return this;
+  };
 
-    /**
+  /**
    * Configures one or more global setup fixtures.
    *
    * If given no parameters, _unsets_ any previously-set fixtures.
@@ -20268,14 +20268,14 @@
    * @param {MochaGlobalFixture|MochaGlobalFixture[]} [setupFns] - Global setup fixture(s)
    * @returns {Mocha}
    */
-    Mocha.prototype.globalSetup = function globalSetup(setupFns = []) {
-      setupFns = utils.castArray(setupFns);
-      this.options.globalSetup = setupFns;
-      debug('configured %d global setup functions', setupFns.length);
-      return this;
-    };
+  Mocha.prototype.globalSetup = function globalSetup(setupFns = []) {
+    setupFns = utils.castArray(setupFns);
+    this.options.globalSetup = setupFns;
+    debug('configured %d global setup functions', setupFns.length);
+    return this;
+  };
 
-    /**
+  /**
    * Configures one or more global teardown fixtures.
    *
    * If given no parameters, _unsets_ any previously-set fixtures.
@@ -20284,14 +20284,14 @@
    * @param {MochaGlobalFixture|MochaGlobalFixture[]} [teardownFns] - Global teardown fixture(s)
    * @returns {Mocha}
    */
-    Mocha.prototype.globalTeardown = function globalTeardown(teardownFns = []) {
-      teardownFns = utils.castArray(teardownFns);
-      this.options.globalTeardown = teardownFns;
-      debug('configured %d global teardown functions', teardownFns.length);
-      return this;
-    };
+  Mocha.prototype.globalTeardown = function globalTeardown(teardownFns = []) {
+    teardownFns = utils.castArray(teardownFns);
+    this.options.globalTeardown = teardownFns;
+    debug('configured %d global teardown functions', teardownFns.length);
+    return this;
+  };
 
-    /**
+  /**
    * Run any global setup fixtures sequentially, if any.
    *
    * This is _automatically called_ by {@link Mocha#run} _unless_ the `runGlobalSetup` option is `false`; see {@link Mocha#enableGlobalSetup}.
@@ -20301,17 +20301,17 @@
    * @public
    * @returns {Promise<object>} Context object
    */
-    Mocha.prototype.runGlobalSetup = async function runGlobalSetup(context = {}) {
-      const {globalSetup} = this.options;
-      if (globalSetup && globalSetup.length) {
-        debug('run(): global setup starting');
-        await this._runGlobalFixtures(globalSetup, context);
-        debug('run(): global setup complete');
-      }
-      return context;
-    };
+  Mocha.prototype.runGlobalSetup = async function runGlobalSetup(context = {}) {
+    const {globalSetup} = this.options;
+    if (globalSetup && globalSetup.length) {
+      debug('run(): global setup starting');
+      await this._runGlobalFixtures(globalSetup, context);
+      debug('run(): global setup complete');
+    }
+    return context;
+  };
 
-    /**
+  /**
    * Run any global teardown fixtures sequentially, if any.
    *
    * This is _automatically called_ by {@link Mocha#run} _unless_ the `runGlobalTeardown` option is `false`; see {@link Mocha#enableGlobalTeardown}.
@@ -20321,36 +20321,36 @@
    * @public
    * @returns {Promise<object>} Context object
    */
-    Mocha.prototype.runGlobalTeardown = async function runGlobalTeardown(
-      context = {}
-    ) {
-      const {globalTeardown} = this.options;
-      if (globalTeardown && globalTeardown.length) {
-        debug('run(): global teardown starting');
-        await this._runGlobalFixtures(globalTeardown, context);
-      }
-      debug('run(): global teardown complete');
-      return context;
-    };
+  Mocha.prototype.runGlobalTeardown = async function runGlobalTeardown(
+    context = {}
+  ) {
+    const {globalTeardown} = this.options;
+    if (globalTeardown && globalTeardown.length) {
+      debug('run(): global teardown starting');
+      await this._runGlobalFixtures(globalTeardown, context);
+    }
+    debug('run(): global teardown complete');
+    return context;
+  };
 
-    /**
+  /**
    * Run global fixtures sequentially with context `context`
    * @private
    * @param {MochaGlobalFixture[]} [fixtureFns] - Fixtures to run
    * @param {object} [context] - context object
    * @returns {Promise<object>} context object
    */
-    Mocha.prototype._runGlobalFixtures = async function _runGlobalFixtures(
-      fixtureFns = [],
-      context = {}
-    ) {
-      for await (const fixtureFn of fixtureFns) {
-        await fixtureFn.call(context);
-      }
-      return context;
-    };
+  Mocha.prototype._runGlobalFixtures = async function _runGlobalFixtures(
+    fixtureFns = [],
+    context = {}
+  ) {
+    for await (const fixtureFn of fixtureFns) {
+      await fixtureFn.call(context);
+    }
+    return context;
+  };
 
-    /**
+  /**
    * Toggle execution of any global setup fixture(s)
    *
    * @chainable
@@ -20358,12 +20358,12 @@
    * @param {boolean } [enabled=true] - If `false`, do not run global setup fixture
    * @returns {Mocha}
    */
-    Mocha.prototype.enableGlobalSetup = function enableGlobalSetup(enabled = true) {
-      this.options.enableGlobalSetup = Boolean(enabled);
-      return this;
-    };
+  Mocha.prototype.enableGlobalSetup = function enableGlobalSetup(enabled = true) {
+    this.options.enableGlobalSetup = Boolean(enabled);
+    return this;
+  };
 
-    /**
+  /**
    * Toggle execution of any global teardown fixture(s)
    *
    * @chainable
@@ -20371,33 +20371,33 @@
    * @param {boolean } [enabled=true] - If `false`, do not run global teardown fixture
    * @returns {Mocha}
    */
-    Mocha.prototype.enableGlobalTeardown = function enableGlobalTeardown(
-      enabled = true
-    ) {
-      this.options.enableGlobalTeardown = Boolean(enabled);
-      return this;
-    };
+  Mocha.prototype.enableGlobalTeardown = function enableGlobalTeardown(
+    enabled = true
+  ) {
+    this.options.enableGlobalTeardown = Boolean(enabled);
+    return this;
+  };
 
-    /**
+  /**
    * Returns `true` if one or more global setup fixtures have been supplied.
    * @public
    * @returns {boolean}
    */
-    Mocha.prototype.hasGlobalSetupFixtures = function hasGlobalSetupFixtures() {
-      return Boolean(this.options.globalSetup.length);
-    };
+  Mocha.prototype.hasGlobalSetupFixtures = function hasGlobalSetupFixtures() {
+    return Boolean(this.options.globalSetup.length);
+  };
 
-    /**
+  /**
    * Returns `true` if one or more global teardown fixtures have been supplied.
    * @public
    * @returns {boolean}
    */
-    Mocha.prototype.hasGlobalTeardownFixtures =
+  Mocha.prototype.hasGlobalTeardownFixtures =
     function hasGlobalTeardownFixtures() {
       return Boolean(this.options.globalTeardown.length);
     };
 
-    /**
+  /**
    * An alternative way to define root hooks that works with parallel runs.
    * @typedef {Object} MochaRootHookObject
    * @property {Function|Function[]} [beforeAll] - "Before all" hook(s)
@@ -20406,20 +20406,20 @@
    * @property {Function|Function[]} [afterEach] - "After each" hook(s)
    */
 
-    /**
+  /**
    * An function that returns a {@link MochaRootHookObject}, either sync or async.
      @callback MochaRootHookFunction
    * @returns {MochaRootHookObject|Promise<MochaRootHookObject>}
    */
 
-    /**
+  /**
    * A function that's invoked _once_ which is either sync or async.
    * Can be a "teardown" or "setup".  These will all share the same context.
    * @callback MochaGlobalFixture
    * @returns {void|Promise<void>}
    */
 
-    /**
+  /**
    * An object making up all necessary parts of a plugin loader and aggregator
    * @typedef {Object} PluginDefinition
    * @property {string} exportName - Named export to use
@@ -20428,7 +20428,7 @@
    * @property {PluginFinalizer} [finalize] - Finalizer/aggregator function
    */
 
-    /**
+  /**
    * A (sync) function to assert a user-supplied plugin implementation is valid.
    *
    * Defined in a {@link PluginDefinition}.
