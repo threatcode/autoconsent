@@ -1,5 +1,5 @@
 {
-  "name": "@threatcode/autoconsent",
+  "name": "@threatmap/autoconsent",
   "version": "10.7.0",
   "description": "",
   "main": "dist/autoconsent.cjs.js",
@@ -39,7 +39,7 @@
     "@types/mocha": "^10.0.1",
     "@typescript-eslint/eslint-plugin": "^7.0.1",
     "@typescript-eslint/parser": "^7.0.1",
-    "asana": "^1.0.2",
+    "asana": "^3.0.6",
     "auto": "^11.0.1",
     "bulma": "^0.9.4",
     "chai": "^5.0.0",
@@ -52,7 +52,7 @@
     "ts-node": "^10.9.2",
     "tslib": "^2.4.0",
     "typescript": "^5.1.6",
-    "web-ext": "^7.3.0"
+    "web-ext": "^7.2.0"
   },
   "repository": "threatcode/autoconsent",
   "auto": {

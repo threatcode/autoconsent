@@ -1,0 +1,36 @@
+{
+  "name": "admin",
+  "vendorUrl": "https://unknown",
+  "cosmetic": false,
+  "runContext": {
+    "main": true,
+    "frame": false,
+    "urlPattern": ""
+  },
+  "prehideSelectors": [],
+  "detectCmp": [
+    {
+      "exists": "#TODO"
+    }
+  ],
+  "detectPopup": [
+    {
+      "visible": "#TODO"
+    }
+  ],
+  "optIn": [
+    {
+      "waitForThenClick": "#Accept"
+    }
+  ],
+  "optOut": [
+    {
+      "waitForThenClick": "#Reject"
+    }
+  ],
+  "test": [
+    {
+      "eval": "EVAL_TODO"
+    }
+  ]
+}

@@ -63,7 +63,7 @@
 
 #### 🐛 Bug Fix
 
-- Monthly Coverage data update [#413](https://github.com/threatcode/autoconsent/pull/413) (dax@threatcode.com [@sammacbeth](https://github.com/sammacbeth))
+- Monthly Coverage data update [#413](https://github.com/threatcode/autoconsent/pull/413) (dax@threatmap.com [@sammacbeth](https://github.com/sammacbeth))
 
 #### ⚠️ Pushed to `main`
 
@@ -73,7 +73,7 @@
 
 #### Authors: 3
 
-- Dax the Deployer (dax@threatcode.com)
+- Dax the Deployer (dax@threatmap.com)
 - Maxim Tsoy ([@muodov](https://github.com/muodov))
 - Threat Code ([@sammacbeth](https://github.com/sammacbeth))
 
@@ -179,11 +179,11 @@
 #### 🐛 Bug Fix
 
 - Fix a US popup on nature.com [#384](https://github.com/threatcode/autoconsent/pull/384) ([@muodov](https://github.com/muodov))
-- Monthly Coverage data update [#383](https://github.com/threatcode/autoconsent/pull/383) (dax@threatcode.com [@sammacbeth](https://github.com/sammacbeth))
+- Monthly Coverage data update [#383](https://github.com/threatcode/autoconsent/pull/383) (dax@threatmap.com [@sammacbeth](https://github.com/sammacbeth))
 
 #### Authors: 3
 
-- Dax the Deployer (dax@threatcode.com)
+- Dax the Deployer (dax@threatmap.com)
 - Maxim Tsoy ([@muodov](https://github.com/muodov))
 - Threat Code ([@sammacbeth](https://github.com/sammacbeth))
 
@@ -203,7 +203,7 @@
 
 - Update action-asana-sync [#378](https://github.com/threatcode/autoconsent/pull/378) ([@sammacbeth](https://github.com/sammacbeth))
 - Setup github status reporting for Jenkins multibranch job [#373](https://github.com/threatcode/autoconsent/pull/373) ([@sammacbeth](https://github.com/sammacbeth))
-- Monthly Coverage data update [#372](https://github.com/threatcode/autoconsent/pull/372) (dax@threatcode.com [@sammacbeth](https://github.com/sammacbeth))
+- Monthly Coverage data update [#372](https://github.com/threatcode/autoconsent/pull/372) (dax@threatmap.com [@sammacbeth](https://github.com/sammacbeth))
 
 #### ⚠️ Pushed to `main`
 
@@ -217,7 +217,7 @@
 #### Authors: 4
 
 - [@dependabot[bot]](https://github.com/dependabot[bot])
-- Dax the Deployer (dax@threatcode.com)
+- Dax the Deployer (dax@threatmap.com)
 - Maxim Tsoy ([@muodov](https://github.com/muodov))
 - Threat Code ([@sammacbeth](https://github.com/sammacbeth))
 
@@ -443,12 +443,12 @@
 
 #### 🐛 Bug Fix
 
-- Monthly Coverage data update [#330](https://github.com/threatcode/autoconsent/pull/330) (dax@threatcode.com [@sammacbeth](https://github.com/sammacbeth))
+- Monthly Coverage data update [#330](https://github.com/threatcode/autoconsent/pull/330) (dax@threatmap.com [@sammacbeth](https://github.com/sammacbeth))
 
 #### Authors: 4
 
 - [@Tomassie91](https://github.com/Tomassie91)
-- Dax the Deployer (dax@threatcode.com)
+- Dax the Deployer (dax@threatmap.com)
 - Maxim Tsoy ([@muodov](https://github.com/muodov))
 - Threat Code ([@sammacbeth](https://github.com/sammacbeth))
 
@@ -514,7 +514,7 @@
 #### 🐛 Bug Fix
 
 - Do not click on the youtube consent page [#311](https://github.com/threatcode/autoconsent/pull/311) ([@muodov](https://github.com/muodov))
-- Monthly Coverage data update [#307](https://github.com/threatcode/autoconsent/pull/307) (dax@threatcode.com [@sammacbeth](https://github.com/sammacbeth))
+- Monthly Coverage data update [#307](https://github.com/threatcode/autoconsent/pull/307) (dax@threatmap.com [@sammacbeth](https://github.com/sammacbeth))
 
 #### 🔩 Dependency Updates
 
@@ -525,7 +525,7 @@
 #### Authors: 4
 
 - [@dependabot[bot]](https://github.com/dependabot[bot])
-- Dax the Deployer (dax@threatcode.com)
+- Dax the Deployer (dax@threatmap.com)
 - Maxim Tsoy ([@muodov](https://github.com/muodov))
 - Threat Code ([@sammacbeth](https://github.com/sammacbeth))
 
@@ -567,7 +567,7 @@
 
 - CCPA fix for Sourcepoint [#302](https://github.com/threatcode/autoconsent/pull/302) ([@muodov](https://github.com/muodov))
 - Group dependabot PRs [#299](https://github.com/threatcode/autoconsent/pull/299) ([@sammacbeth](https://github.com/sammacbeth))
-- Monthly Coverage data update [#293](https://github.com/threatcode/autoconsent/pull/293) (dax@threatcode.com [@sammacbeth](https://github.com/sammacbeth))
+- Monthly Coverage data update [#293](https://github.com/threatcode/autoconsent/pull/293) (dax@threatmap.com [@sammacbeth](https://github.com/sammacbeth))
 
 #### 🔩 Dependency Updates
 
@@ -580,7 +580,7 @@
 #### Authors: 4
 
 - [@dependabot[bot]](https://github.com/dependabot[bot])
-- Dax the Deployer (dax@threatcode.com)
+- Dax the Deployer (dax@threatmap.com)
 - Maxim Tsoy ([@muodov](https://github.com/muodov))
 - Threat Code ([@sammacbeth](https://github.com/sammacbeth))
 
@@ -595,11 +595,11 @@
 #### 🐛 Bug Fix
 
 - Takealot fix [#292](https://github.com/threatcode/autoconsent/pull/292) ([@muodov](https://github.com/muodov))
-- Monthly Coverage data update [#289](https://github.com/threatcode/autoconsent/pull/289) (dax@threatcode.com [@sammacbeth](https://github.com/sammacbeth))
+- Monthly Coverage data update [#289](https://github.com/threatcode/autoconsent/pull/289) (dax@threatmap.com [@sammacbeth](https://github.com/sammacbeth))
 
 #### Authors: 3
 
-- Dax the Deployer (dax@threatcode.com)
+- Dax the Deployer (dax@threatmap.com)
 - Maxim Tsoy ([@muodov](https://github.com/muodov))
 - Threat Code ([@sammacbeth](https://github.com/sammacbeth))
 
@@ -641,11 +641,11 @@
 - Add rule for almacmp [#281](https://github.com/threatcode/autoconsent/pull/281) ([@muodov](https://github.com/muodov))
 - add rule for tropicfeel.com (shopify site) [#280](https://github.com/threatcode/autoconsent/pull/280) ([@muodov](https://github.com/muodov))
 - Bump esbuild from 0.19.2 to 0.19.5 [#273](https://github.com/threatcode/autoconsent/pull/273) ([@dependabot[bot]](https://github.com/dependabot[bot]))
-- Monthly Coverage data update [#277](https://github.com/threatcode/autoconsent/pull/277) (dax@threatcode.com [@sammacbeth](https://github.com/sammacbeth))
-- Monthly Coverage data update [#266](https://github.com/threatcode/autoconsent/pull/266) (dax@threatcode.com [@sammacbeth](https://github.com/sammacbeth))
+- Monthly Coverage data update [#277](https://github.com/threatcode/autoconsent/pull/277) (dax@threatmap.com [@sammacbeth](https://github.com/sammacbeth))
+- Monthly Coverage data update [#266](https://github.com/threatcode/autoconsent/pull/266) (dax@threatmap.com [@sammacbeth](https://github.com/sammacbeth))
 - Bump version of asana sync action [#260](https://github.com/threatcode/autoconsent/pull/260) ([@sammacbeth](https://github.com/sammacbeth))
 - Add asana sync for PRs [#258](https://github.com/threatcode/autoconsent/pull/258) ([@sammacbeth](https://github.com/sammacbeth))
-- Monthly Coverage data update [#253](https://github.com/threatcode/autoconsent/pull/253) (dax@threatcode.com [@sammacbeth](https://github.com/sammacbeth))
+- Monthly Coverage data update [#253](https://github.com/threatcode/autoconsent/pull/253) (dax@threatmap.com [@sammacbeth](https://github.com/sammacbeth))
 
 #### ⚠️ Pushed to `main`
 
@@ -662,7 +662,7 @@
 #### Authors: 4
 
 - [@dependabot[bot]](https://github.com/dependabot[bot])
-- Dax the Deployer (dax@threatcode.com)
+- Dax the Deployer (dax@threatmap.com)
 - Maxim Tsoy ([@muodov](https://github.com/muodov))
 - Threat Code ([@sammacbeth](https://github.com/sammacbeth))
 
@@ -860,7 +860,7 @@
 
 - Bump @typescript-eslint/eslint-plugin from 5.59.11 to 5.60.0 [#186](https://github.com/threatcode/autoconsent/pull/186) ([@dependabot[bot]](https://github.com/dependabot[bot]))
 - Bump @types/chai from 4.3.4 to 4.3.5 [#183](https://github.com/threatcode/autoconsent/pull/183) ([@dependabot[bot]](https://github.com/dependabot[bot]))
-- added nba.com notice rule and test and modified oneTrust rule class [#172](https://github.com/threatcode/autoconsent/pull/172) (arasolofotsara@threatcode.com [@icodebyamanda](https://github.com/icodebyamanda))
+- added nba.com notice rule and test and modified oneTrust rule class [#172](https://github.com/threatcode/autoconsent/pull/172) (arasolofotsara@threatmap.com [@icodebyamanda](https://github.com/icodebyamanda))
 
 #### 🔩 Dependency Updates
 
@@ -871,7 +871,7 @@
 
 - [@dependabot[bot]](https://github.com/dependabot[bot])
 - Amanda RASOLOFOTSARA ([@icodebyamanda](https://github.com/icodebyamanda))
-- euw-arasolofotsara1 (arasolofotsara@threatcode.com)
+- euw-arasolofotsara1 (arasolofotsara@threatmap.com)
 
 ---
 
@@ -879,12 +879,12 @@
 
 #### 🚀 Enhancement
 
-- add batch of rules and tests for banners reported by users [#181](https://github.com/threatcode/autoconsent/pull/181) (arasolofotsara@threatcode.com [@sammacbeth](https://github.com/sammacbeth) [@icodebyamanda](https://github.com/icodebyamanda))
+- add batch of rules and tests for banners reported by users [#181](https://github.com/threatcode/autoconsent/pull/181) (arasolofotsara@threatmap.com [@sammacbeth](https://github.com/sammacbeth) [@icodebyamanda](https://github.com/icodebyamanda))
 
 #### Authors: 3
 
 - Amanda RASOLOFOTSARA ([@icodebyamanda](https://github.com/icodebyamanda))
-- euw-arasolofotsara1 (arasolofotsara@threatcode.com)
+- euw-arasolofotsara1 (arasolofotsara@threatmap.com)
 - Threat Code ([@sammacbeth](https://github.com/sammacbeth))
 
 ---
@@ -900,22 +900,22 @@
 
 #### 🐛 Bug Fix
 
-- Round 2: Add to US top sites optOut banners rules and tests [#175](https://github.com/threatcode/autoconsent/pull/175) (arasolofotsara@threatcode.com [@icodebyamanda](https://github.com/icodebyamanda))
+- Round 2: Add to US top sites optOut banners rules and tests [#175](https://github.com/threatcode/autoconsent/pull/175) (arasolofotsara@threatmap.com [@icodebyamanda](https://github.com/icodebyamanda))
 - added verification to check if user's optout on TrustArc CMP has been set [#159](https://github.com/threatcode/autoconsent/pull/159) ([@hyebahi](https://github.com/hyebahi) [@sammacbeth](https://github.com/sammacbeth))
 - Added rule for cookiefirst [#177](https://github.com/threatcode/autoconsent/pull/177) ([@kunalvirk](https://github.com/kunalvirk))
 - Bump @typescript-eslint/eslint-plugin from 5.59.5 to 5.59.11 [#182](https://github.com/threatcode/autoconsent/pull/182) ([@dependabot[bot]](https://github.com/dependabot[bot]))
 - Bump tslib from 2.5.0 to 2.5.3 [#179](https://github.com/threatcode/autoconsent/pull/179) ([@dependabot[bot]](https://github.com/dependabot[bot]))
 - Bump @types/chrome from 0.0.235 to 0.0.237 [#173](https://github.com/threatcode/autoconsent/pull/173) ([@dependabot[bot]](https://github.com/dependabot[bot]))
 - Bump @rollup/plugin-typescript from 11.1.0 to 11.1.1 [#161](https://github.com/threatcode/autoconsent/pull/161) ([@dependabot[bot]](https://github.com/dependabot[bot]))
-- rewrote CMP Ketch to include US in the rules [#171](https://github.com/threatcode/autoconsent/pull/171) (arasolofotsara@threatcode.com [@icodebyamanda](https://github.com/icodebyamanda))
-- added 2 US CMP optOut rules and tests [#168](https://github.com/threatcode/autoconsent/pull/168) (arasolofotsara@threatcode.com [@icodebyamanda](https://github.com/icodebyamanda))
-- Round 2: added 5 notice banner rules and tests top US sites [#167](https://github.com/threatcode/autoconsent/pull/167) (arasolofotsara@threatcode.com [@icodebyamanda](https://github.com/icodebyamanda))
-- added 4 notice banner rules and tests top sites [#164](https://github.com/threatcode/autoconsent/pull/164) (arasolofotsara@threatcode.com [@icodebyamanda](https://github.com/icodebyamanda))
-- Add xhamster.com custom US notice banner rule and test [#154](https://github.com/threatcode/autoconsent/pull/154) (arasolofotsara@threatcode.com [@muodov](https://github.com/muodov) [@icodebyamanda](https://github.com/icodebyamanda))
-- Add youporn custom notice banner's rule and test [#158](https://github.com/threatcode/autoconsent/pull/158) (arasolofotsara@threatcode.com [@icodebyamanda](https://github.com/icodebyamanda))
-- Add pornpics custom US notice banner rule and test [#156](https://github.com/threatcode/autoconsent/pull/156) (arasolofotsara@threatcode.com [@icodebyamanda](https://github.com/icodebyamanda))
-- Add whitepages custom US notice banner rule and test [#155](https://github.com/threatcode/autoconsent/pull/155) (arasolofotsara@threatcode.com [@icodebyamanda](https://github.com/icodebyamanda))
-- Add the cmp wpcc rule and test to notice banners [#157](https://github.com/threatcode/autoconsent/pull/157) (arasolofotsara@threatcode.com [@icodebyamanda](https://github.com/icodebyamanda))
+- rewrote CMP Ketch to include US in the rules [#171](https://github.com/threatcode/autoconsent/pull/171) (arasolofotsara@threatmap.com [@icodebyamanda](https://github.com/icodebyamanda))
+- added 2 US CMP optOut rules and tests [#168](https://github.com/threatcode/autoconsent/pull/168) (arasolofotsara@threatmap.com [@icodebyamanda](https://github.com/icodebyamanda))
+- Round 2: added 5 notice banner rules and tests top US sites [#167](https://github.com/threatcode/autoconsent/pull/167) (arasolofotsara@threatmap.com [@icodebyamanda](https://github.com/icodebyamanda))
+- added 4 notice banner rules and tests top sites [#164](https://github.com/threatcode/autoconsent/pull/164) (arasolofotsara@threatmap.com [@icodebyamanda](https://github.com/icodebyamanda))
+- Add xhamster.com custom US notice banner rule and test [#154](https://github.com/threatcode/autoconsent/pull/154) (arasolofotsara@threatmap.com [@muodov](https://github.com/muodov) [@icodebyamanda](https://github.com/icodebyamanda))
+- Add youporn custom notice banner's rule and test [#158](https://github.com/threatcode/autoconsent/pull/158) (arasolofotsara@threatmap.com [@icodebyamanda](https://github.com/icodebyamanda))
+- Add pornpics custom US notice banner rule and test [#156](https://github.com/threatcode/autoconsent/pull/156) (arasolofotsara@threatmap.com [@icodebyamanda](https://github.com/icodebyamanda))
+- Add whitepages custom US notice banner rule and test [#155](https://github.com/threatcode/autoconsent/pull/155) (arasolofotsara@threatmap.com [@icodebyamanda](https://github.com/icodebyamanda))
+- Add the cmp wpcc rule and test to notice banners [#157](https://github.com/threatcode/autoconsent/pull/157) (arasolofotsara@threatmap.com [@icodebyamanda](https://github.com/icodebyamanda))
 - Bump @types/chrome from 0.0.234 to 0.0.235 [#149](https://github.com/threatcode/autoconsent/pull/149) ([@dependabot[bot]](https://github.com/dependabot[bot]))
 - Bump @types/chrome from 0.0.206 to 0.0.234 [#144](https://github.com/threatcode/autoconsent/pull/144) ([@dependabot[bot]](https://github.com/dependabot[bot]))
 - Tweak the Civic rule [#131](https://github.com/threatcode/autoconsent/pull/131) ([@muodov](https://github.com/muodov))
@@ -932,7 +932,7 @@
 - [@dependabot[bot]](https://github.com/dependabot[bot])
 - [@hyebahi](https://github.com/hyebahi)
 - Amanda RASOLOFOTSARA ([@icodebyamanda](https://github.com/icodebyamanda))
-- euw-arasolofotsara1 (arasolofotsara@threatcode.com)
+- euw-arasolofotsara1 (arasolofotsara@threatmap.com)
 - Kunal Virk ([@kunalvirk](https://github.com/kunalvirk))
 - Maxim Tsoy ([@muodov](https://github.com/muodov))
 - Threat Code ([@sammacbeth](https://github.com/sammacbeth))
@@ -1106,12 +1106,12 @@
 - A bunch of site-specific rules + extension improvements [#30](https://github.com/threatcode/autoconsent/pull/30) ([@muodov](https://github.com/muodov) [@adewes](https://github.com/adewes))
 - Optin hotfix [#31](https://github.com/threatcode/autoconsent/pull/31) ([@muodov](https://github.com/muodov))
 - privacymanager.io + onetrust fix [#28](https://github.com/threatcode/autoconsent/pull/28) ([@muodov](https://github.com/muodov))
-- Add rules for Sibbo (CMP) [#24](https://github.com/threatcode/autoconsent/pull/24) (arasolofotsara@threatcode.com [@icodebyamanda](https://github.com/icodebyamanda))
-- Add rules for Pubtech (CMP) [#25](https://github.com/threatcode/autoconsent/pull/25) (arasolofotsara@threatcode.com [@icodebyamanda](https://github.com/icodebyamanda))
+- Add rules for Sibbo (CMP) [#24](https://github.com/threatcode/autoconsent/pull/24) (arasolofotsara@threatmap.com [@icodebyamanda](https://github.com/icodebyamanda))
+- Add rules for Pubtech (CMP) [#25](https://github.com/threatcode/autoconsent/pull/25) (arasolofotsara@threatmap.com [@icodebyamanda](https://github.com/icodebyamanda))
 - Add more rules for IAB-supporting CMPs [#27](https://github.com/threatcode/autoconsent/pull/27) ([@muodov](https://github.com/muodov))
-- Add rules for Axeptio (CMP) [#23](https://github.com/threatcode/autoconsent/pull/23) (arasolofotsara@threatcode.com [@icodebyamanda](https://github.com/icodebyamanda))
+- Add rules for Axeptio (CMP) [#23](https://github.com/threatcode/autoconsent/pull/23) (arasolofotsara@threatmap.com [@icodebyamanda](https://github.com/icodebyamanda))
 - New rules [#26](https://github.com/threatcode/autoconsent/pull/26) ([@muodov](https://github.com/muodov))
-- Added rules to monzo.com (US coverage) [#22](https://github.com/threatcode/autoconsent/pull/22) (arasolofotsara@threatcode.com [@icodebyamanda](https://github.com/icodebyamanda))
+- Added rules to monzo.com (US coverage) [#22](https://github.com/threatcode/autoconsent/pull/22) (arasolofotsara@threatmap.com [@icodebyamanda](https://github.com/icodebyamanda))
 - Add rule for affinity.serif.com [#21](https://github.com/threatcode/autoconsent/pull/21) ([@muodov](https://github.com/muodov))
 - Use new jenkins node [#20](https://github.com/threatcode/autoconsent/pull/20) ([@sammacbeth](https://github.com/sammacbeth))
 - Fix manifest copy paths [#19](https://github.com/threatcode/autoconsent/pull/19) ([@muodov](https://github.com/muodov))
@@ -1366,7 +1366,7 @@
 - [@dependabot[bot]](https://github.com/dependabot[bot])
 - Amanda RASOLOFOTSARA ([@icodebyamanda](https://github.com/icodebyamanda))
 - Andreas Dewes ([@adewes](https://github.com/adewes))
-- euw-arasolofotsara1 (arasolofotsara@threatcode.com)
+- euw-arasolofotsara1 (arasolofotsara@threatmap.com)
 - Jason ([@jdorweiler](https://github.com/jdorweiler))
 - Maxim Tsoy ([@muodov](https://github.com/muodov))
 - Threat Code ([@sammacbeth](https://github.com/sammacbeth))
