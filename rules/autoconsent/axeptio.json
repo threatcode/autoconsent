@@ -1,0 +1,41 @@
+{
+    "name": "axeptio",
+    "prehideSelectors": [".axeptio_widget"],
+    "detectCmp": 
+    [
+        { 
+            "exists": ".axeptio_widget" 
+        }
+    ],
+    "detectPopup": 
+    [
+        { 
+            "visible": ".axeptio_widget" 
+        }
+    ],
+    "optIn": 
+    [
+        {
+            "waitFor": ".axeptio-widget--open" 
+        },
+        {
+            "click": "button#axeptio_btn_acceptAll"
+        }
+    ],
+    "optOut": 
+    [
+
+        {
+            "waitFor": ".axeptio-widget--open" 
+        },
+        {
+            "click": "button#axeptio_btn_dismiss"
+        }
+    ],
+    "test": 
+    [
+        {
+            "eval": "EVAL_AXEPTIO_0"
+        }
+    ]
+  }
